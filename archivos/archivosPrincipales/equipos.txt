@@ -1,0 +1,5 @@
+SE01;Servidor Principal;HP;DL380G9;166.82.1.10,166.82.1.11,166.82.1.12,166.82.1.13,200.10.240.251;4;1G;SS;COM;true;
+PC01;PC para alumno;;;166.82.100.100;1;1G;L0;COM;false;
+SWH1;Switch 1;Intellinet;;;8;100M;SS;SW;true;
+SWH2;Switch 2;HP Aruba;1930 48G 4SFP/SFP+;166.82.100.10;48;1G;SS;SW;false;
+SWH3;Switch 3;;;;4;10M;SS;AP;false;

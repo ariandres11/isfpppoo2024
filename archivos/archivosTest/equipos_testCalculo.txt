@@ -1,0 +1,5 @@
+PC01;PC para alumno;;;166.82.100.100;1;1G;L0;COM;true;
+SWH1;Switch 1;Intellinet;;;8;100M;SS;SW;false;
+SWH2;Switch 2;HP Aruba;1930 48G 4SFP/SFP+;166.82.100.10;48;1G;SS;SW;true;
+SWH3;Switch 3;HP Aruba;1930 48G 4SFP/SFP+;166.82.100.10;48;1G;SS;SW;false;
+SW4;;;;;4;100M;SS;AP;true;
