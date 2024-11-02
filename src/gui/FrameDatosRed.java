@@ -321,7 +321,7 @@ public class FrameDatosRed extends JDialog {
                             }
                         }
 
-                        coordinador.getRed().agregarEquipo(equipoNuevo);
+                        coordinador.agregarEquipo(equipoNuevo);
                         JOptionPane.showMessageDialog(this,"Equipo agregado exitosamente.");
 
                     });
@@ -459,7 +459,7 @@ public class FrameDatosRed extends JDialog {
 
                         Conexion conexion = new Conexion(equipo1, equipo2, cable1, puerto1, puerto2, false );
 
-                        coordinador.getRed().agregarConexion(conexion);
+                        coordinador.agregarConexion(conexion);
                         JOptionPane.showMessageDialog(this,"Conexión agregada exitosamente.");
 
                         this.dispose();
@@ -503,7 +503,7 @@ public class FrameDatosRed extends JDialog {
 
                         Ubicacion ubicacion = new Ubicacion(codigoUbicacion,descripcionUbicacion);
 
-                        coordinador.getRed().agregarUbicacion(ubicacion);
+                        coordinador.agregarUbicacion(ubicacion);
                         JOptionPane.showMessageDialog(JDAgregarUbicacion,"Ubicacion agregada exitosamente.");
                         JDAgregarUbicacion.dispose();
                     });
@@ -681,7 +681,7 @@ public class FrameDatosRed extends JDialog {
                                     }
                                 }
 
-                                coordinador.getRed().borrarEquipo(equipo);
+                                coordinador.borrarEquipo(equipo);
                                 JOptionPane.showMessageDialog(JDEliminarEquipo,"Equipo eliminado exitosamente.");
                                 JDEliminarEquipo.dispose();
                             });
@@ -732,7 +732,7 @@ public class FrameDatosRed extends JDialog {
                                 JBEliminarConexion.addActionListener(e8 -> {
                                     Conexion conexion = (Conexion) coordinador.listarConexiones().toArray()[JCBConexiones.getSelectedIndex()];
 
-                                    coordinador.getRed().borrarConexion(conexion);
+                                    coordinador.borrarConexion(conexion);
                                     JOptionPane.showMessageDialog(JDEliminarConexion,"Conexion eliminada exitosamente.");
                                     JDEliminarConexion.dispose();
                                 });
@@ -760,7 +760,7 @@ public class FrameDatosRed extends JDialog {
                             JLabel JLCodigoUbicacion = new JLabel("Codigo: ");
 
                             JComboBox<String> JCBEliminarUbicacion = new JComboBox<String>();
-                            for (Ubicacion ubicacion : coordinador.getRed().getUbicaciones()) {
+                            for (Ubicacion ubicacion : coordinador.listarUbicaciones()) {
                                 JCBEliminarUbicacion.addItem(ubicacion.getCodigo());
                             }
 
@@ -768,14 +768,14 @@ public class FrameDatosRed extends JDialog {
                             JBEliminarUbicacion.addActionListener(e2 -> {
                                 Ubicacion ubicacion = null;
 
-                                for (Ubicacion ubicacion1 : coordinador.getRed().getUbicaciones()) {
+                                for (Ubicacion ubicacion1 : coordinador.listarUbicaciones()) {
                                     if( ubicacion1.getCodigo() == JCBEliminarUbicacion.getSelectedItem()) {
                                         ubicacion = ubicacion1;
                                         break;
                                     }
                                 }
 
-                                coordinador.getRed().borrarUbicacion(ubicacion);
+                                coordinador.borrarUbicacion(ubicacion);
                                 JOptionPane.showMessageDialog(JDEliminarUbicacion,"Ubicacion eliminada exitosamente.");
                                 JDEliminarUbicacion.dispose();
                             });

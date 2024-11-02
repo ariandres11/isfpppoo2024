@@ -57,13 +57,13 @@ public class PanelMenu extends JPanel {
             if (e.getSource() == JBConexiones) {
                 Equipo equipoOrigen = interfaz.elegirEquipo(coordinador.listarEquipos(), " origen");
                 Equipo equipoDestino = interfaz.elegirEquipo(coordinador.listarEquipos(), " destino");
-                coordinador.getCalculo().cargarDatos(coordinador.listarConexiones(), coordinador.listarEquipos());
+                coordinador.cargarDatos();
                 ArrayList<Conexion> recorrido = (ArrayList<Conexion>) coordinador.calcularMasRapido(equipoOrigen, equipoDestino);
                 interfaz.mostrarConexiones(recorrido);
             } else if (e.getSource() == JBPingEquipo) {
                 Equipo equipo = interfaz.elegirEquipo(coordinador.listarEquipos(), "l que se quiere saber el ping");
-                coordinador.getCalculo().cargarDatos(coordinador.listarConexiones(), coordinador.listarEquipos());
-                interfaz.resultadoPingEquipo(coordinador.getCalculo().ping(equipo));
+                coordinador.cargarDatos();
+                interfaz.resultadoPingEquipo(coordinador.ping(equipo));
                 // Implementar funcionalidad para hacer ping a un equipo
             } else if (e.getSource() == JBPingIP) {
                 interfaz.mostrarSeleccionDeIPs();

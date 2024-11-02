@@ -23,18 +23,15 @@ public class AplicacionConsultas {
      * estableciendo las relaciones entre ellos.
      */
     public void iniciar() {
+        // Se establecen las relaciones entre el coordinador y las demás partes de la app
         this.red = Red.getRed();
         this.calculo = new Calculo();
-
         this.coordinador = new Coordinador();
-
-        coordinador.setCalculo(calculo);
-        coordinador.setRed(red);
-        this.interfaz = new Interfaz(coordinador);
+        this.interfaz = new Interfaz();
         coordinador.setInterfaz(interfaz);
-
-        // Se establecen las relaciones entre el coordinador y las demás partes de la app
+        coordinador.setCalculo(calculo);
         calculo.setCoordinador(coordinador);
+        coordinador.setRed(red);
 
         //Debug para confirmar que el coordinador pasa las conexiones y equipos correctamente
         logger.debug("Conexiones: " + coordinador.listarConexiones().size() + " Equipos: " + coordinador.listarEquipos().size());

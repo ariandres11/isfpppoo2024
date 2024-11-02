@@ -31,7 +31,10 @@ public class Interfaz extends JFrame {
      * Constructor de la clase Interfaz.
      * Inicializa la ventana con título, tamaño y operación de cierre.
      */
-    public Interfaz(Coordinador coordinador) {
+    public  Interfaz() {
+    }
+
+    public void iniciar(Coordinador coordinador) {
         this.coordinador = coordinador;
         this.setTitle("Red de Computadoras");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -41,10 +44,8 @@ public class Interfaz extends JFrame {
         this.setVisible(true);
         //Por defecto el rol del usuario es user
         coordinador.setRoleStrategy(new UserRoleStrategy());
-
         mostrarMenu();
         agregarPanelSuperior();
-
     }
 
     /**
@@ -190,7 +191,7 @@ public class Interfaz extends JFrame {
      */
     public void mostrarMenu() {
         if (panelMenu == null) {
-            panelMenu = new PanelMenu(this, coordinador.getRoleContext());
+            panelMenu = coordinador.crearPanelMenu();
             add(panelMenu, BorderLayout.SOUTH);
         }
         panelMenu.setSize(800, 200);
@@ -199,7 +200,7 @@ public class Interfaz extends JFrame {
     }
 
     public void agregarPanelSuperior() {
-        panelOpcionesSuperior = new PanelOpcionesSuperior(this, coordinador.getRoleContext());
+        panelOpcionesSuperior = coordinador.crearPanelOpcionesSuperior();
         add(panelOpcionesSuperior, BorderLayout.NORTH);
         this.revalidate();
         this.repaint();
