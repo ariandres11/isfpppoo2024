@@ -54,6 +54,10 @@ public class Conexion {
         this.equipo1 = equipo1;
     }
 
+    public String getEquipo1Codigo() { return equipo1.getCodigo(); }
+
+    public String getEquipo1Descripcion() { return equipo1.getDescripcion(); }
+
     public Equipo getEquipo2() { return equipo2; }
 
     public void setEquipo2(Equipo equipo2) throws EquipoRepetidoException{
@@ -62,6 +66,10 @@ public class Conexion {
 
         this.equipo2 = equipo2;
     }
+
+    public String getEquipo2Codigo() { return equipo2.getCodigo(); }
+
+    public String getEquipo2Descripcion() { return equipo2.getDescripcion(); }
 
     public TipoPuerto getTipoPuertoEquipo1() {
         return tipoPuertoEquipo1;
@@ -86,6 +94,10 @@ public class Conexion {
     public void setTipoCable(TipoCable tipoCable) {
         this.tipoCable = tipoCable;
     }
+
+    public String getTipoCableCodigo() { return tipoCable.getCodigo(); }
+
+    public String getTipoCableDescripcion() { return tipoCable.getDescripcion(); }
 
     public boolean isEstado() {
         return estado;

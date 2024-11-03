@@ -2,7 +2,6 @@ package gui;
 
 import controlador.Coordinador;
 import modelo.*;
-import org.jgrapht.alg.util.Pair;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -67,118 +66,148 @@ public class FrameDatosRed extends JDialog {
     }
 
     private void crearTablas () {
-        ArrayList<Equipo> arrayEquipos = (ArrayList<Equipo>) coordinador.listarEquipos();
-        ArrayList<Conexion> arrayConexiones = (ArrayList<Conexion>) coordinador.listarConexiones();
-        ArrayList<Ubicacion> arrayUbicaciones = (ArrayList<Ubicacion>) coordinador.listarUbicaciones();
-        ArrayList<TipoEquipo> arrayTiposEquipo = (ArrayList<TipoEquipo>) coordinador.listarTipoEquipos();
-        ArrayList<TipoPuerto> arrayTiposPuerto = (ArrayList<TipoPuerto>) coordinador.listarTipoPuertos();
-        ArrayList<TipoCable> arrayTiposCable = (ArrayList<TipoCable>) coordinador.listarTipoCables();
-
         // Tabla equipos
+        JTEquipos = new JTable();
+        actualizarTablaEquipos();
+
+        //Tabla conexiones
+        JTConexiones = new JTable();
+        actualizarTablaConexiones();
+
+        //Tabla ubicaciones
+        JTUbicaciones = new JTable();
+        actualizarTablaUbicaciones();
+
+        //Tabla tipos de equipo
+        JTTipoEquipo = new JTable();
+        actualizarTablaTipoEquipos();
+
+        //Tabla tipos de puerto
+        JTTipoPuerto = new JTable();
+        actualizarTablaTipoPuertos();
+
+        //Tabla tipos de cable
+        JTTipoCable = new JTable();
+        actualizarTablaTipoCables();
+    }
+
+    public void actualizarTablaEquipos() {
+        ArrayList<Equipo> arrayEquipos = (ArrayList<Equipo>) coordinador.listarEquipos();
+
         DefaultTableModel modelo = new DefaultTableModel();
         modelo.addColumn("codigo");
         modelo.addColumn("descripcion");
         modelo.addColumn("marca");
         modelo.addColumn("modelo");
-        modelo.addRow(new String[] {"Código", "Descripción", "Marca", "Modelo"});
+        modelo.addColumn("estado");
+        modelo.addRow(new String[] {"Código", "Descripción", "Marca", "Modelo", "Estado"});
 
-        Object[] fila = new Object[4];
+        Object[] fila = new Object[modelo.getColumnCount()];
         for (Equipo equipo : arrayEquipos) {
             fila[0] = equipo.getCodigo();
             fila[1] = equipo.getDescripcion();
             fila[2] = equipo.getMarca();
             fila[3] = equipo.getModelo();
+            fila[4] = equipo.isEstado();
             modelo.addRow(fila);
         }
-
-        JTEquipos = new JTable();
         JTEquipos.setModel(modelo);
+    }
 
-        //Tabla conexiones
+    public void actualizarTablaConexiones() {
+        ArrayList<Conexion> arrayConexiones = (ArrayList<Conexion>) coordinador.listarConexiones();
+
+        DefaultTableModel modelo = new DefaultTableModel();
         modelo = new DefaultTableModel();
         modelo.addColumn("Equipo 1");
         modelo.addColumn("Equipo 2");
         modelo.addColumn("Cable");
-        modelo.addRow(new String[] {"Equipo 1","Equipo 2","Cable"});
+        modelo.addColumn("estado");
+        modelo.addRow(new String[] {"Equipo 1","Equipo 2","Cable", "Estado"});
 
-        fila = new Object[3];
+        Object[] fila = new Object[modelo.getColumnCount()];
         for (Conexion conexion : arrayConexiones) {
             fila[0] = conexion.getEquipo1().getCodigo();
             fila[1] = conexion.getEquipo2().getCodigo();
             fila[2] = conexion.getTipoCable().getCodigo();
+            fila[3] = conexion.isEstado();
             modelo.addRow(fila);
         }
-
-        JTConexiones = new JTable();
         JTConexiones.setModel(modelo);
+    }
 
-        //Tabla ubicaciones
+    public void actualizarTablaUbicaciones() {
+        ArrayList<Ubicacion> arrayUbicaciones = (ArrayList<Ubicacion>) coordinador.listarUbicaciones();
+
+        DefaultTableModel modelo = new DefaultTableModel();
         modelo = new DefaultTableModel();
         modelo.addColumn("codigo");
         modelo.addColumn("descripcion");
         modelo.addRow(new String[] {"Código","Descripción"});
 
-        fila = new Object[2];
+        Object[] fila = new Object[modelo.getColumnCount()];
         for (Ubicacion ubicacion : arrayUbicaciones) {
             fila[0] = ubicacion.getCodigo();
             fila[1] = ubicacion.getDescripcion();
             modelo.addRow(fila);
         }
-
-        JTUbicaciones = new JTable();
         JTUbicaciones.setModel(modelo);
-        
-        //Tabla tipos de equipo
-        modelo = new DefaultTableModel();
-        modelo.addColumn("codigo");
-        modelo.addColumn("descripcion");
-        modelo.addRow(new String[] {"Código","Descripción"});
+    }
 
-        fila = new Object[2];
-        for(TipoEquipo tipoEq : arrayTiposEquipo){
-            fila[0] = tipoEq.getCodigo();
-            fila[1] = tipoEq.getDescripcion();
-            modelo.addRow(fila);
-        }
+    public void actualizarTablaTipoPuertos() {
+        ArrayList<TipoPuerto> arrayTiposPuerto = (ArrayList<TipoPuerto>) coordinador.listarTipoPuertos();
 
-        JTTipoEquipo = new JTable();
-        JTTipoEquipo.setModel(modelo);
-
-        //Tabla tipos de puerto
-
-        modelo = new DefaultTableModel();
-        modelo.addColumn("codigo");
-        modelo.addColumn("descripcion");
-        modelo.addRow(new String[] {"Código","Descripción"});
-
-        fila = new Object[2];
-
-        for(TipoPuerto tipoPuerto : arrayTiposPuerto){
-            fila[0] = tipoPuerto.getCodigo();
-            fila[1] = tipoPuerto.getDescripcion();
-            modelo.addRow(fila);
-        }
-
-        JTTipoPuerto = new JTable();
-        JTTipoPuerto.setModel(modelo);
-
-        //Tabla tipos de cable
-
+        DefaultTableModel modelo = new DefaultTableModel();
         modelo = new DefaultTableModel();
         modelo.addColumn("codigo");
         modelo.addColumn("descripcion");
         modelo.addColumn("velocidad");
-        modelo.addRow(new String[] {"Código","Descripción", "Velocidad Mbps"});
+        modelo.addRow(new String[] {"Código","Descripción", "Velocidad(Mbps)"});
 
-        fila = new Object[3];
+        Object[] fila = new Object[modelo.getColumnCount()];
+        for(TipoPuerto tipoPuerto : arrayTiposPuerto){
+            fila[0] = tipoPuerto.getCodigo();
+            fila[1] = tipoPuerto.getDescripcion();
+            fila[2] = tipoPuerto.getVelocidad();
+            modelo.addRow(fila);
+        }
+        JTTipoPuerto.setModel(modelo);
+    }
+
+    public void actualizarTablaTipoEquipos() {
+        ArrayList<TipoEquipo> arrayTiposEquipo = (ArrayList<TipoEquipo>) coordinador.listarTipoEquipos();
+
+        DefaultTableModel modelo = new DefaultTableModel();
+        modelo.addColumn("codigo");
+        modelo.addColumn("descripcion");
+        modelo.addRow(new String[] {"Código","Descripción"});
+
+        Object[] fila = new Object[modelo.getColumnCount()];
+        for(TipoEquipo tipoEquipo : arrayTiposEquipo){
+            fila[0] = tipoEquipo.getCodigo();
+            fila[1] = tipoEquipo.getDescripcion();
+            modelo.addRow(fila);
+        }
+        JTTipoEquipo.setModel(modelo);
+    }
+
+    public void actualizarTablaTipoCables() {
+        ArrayList<TipoCable> arrayTiposCable = (ArrayList<TipoCable>) coordinador.listarTipoCables();
+
+        DefaultTableModel modelo = new DefaultTableModel();
+        modelo = new DefaultTableModel();
+        modelo.addColumn("codigo");
+        modelo.addColumn("descripcion");
+        modelo.addColumn("velocidad");
+        modelo.addRow(new String[] {"Código","Descripción", "Velocidad(Mbps)"});
+
+        Object[] fila = new Object[modelo.getColumnCount()];
         for(TipoCable tipoCable : arrayTiposCable){
             fila[0] = tipoCable.getCodigo();
             fila[1] = tipoCable.getDescripcion();
             fila[2] = tipoCable.getVelocidad();
             modelo.addRow(fila);
         }
-
-        JTTipoCable = new JTable();
         JTTipoCable.setModel(modelo);
     }
 
@@ -203,7 +232,8 @@ public class FrameDatosRed extends JDialog {
                     setTitle("Agregar Equipo");
 
                     List<String> direccionesIP = new ArrayList<String>();
-                    List<Pair<TipoPuerto,Integer>> puertos = new ArrayList<Pair<TipoPuerto,Integer>>();
+                    List<TipoPuerto> tipoPuertos = new ArrayList<TipoPuerto>();
+                    List<Integer> puertosCantidad = new ArrayList<Integer>();
 
                     JLabel JLCodigo = new JLabel("Codigo (*):");
                     JLabel JLDescripcion = new JLabel("Descripción:");
@@ -261,19 +291,15 @@ public class FrameDatosRed extends JDialog {
 
                         TipoPuerto tipoPuerto = new TipoPuerto();
 
-                        for (TipoPuerto puerto : coordinador.listarTipoPuertos()) {
-                            if (puerto.getCodigo() == JCBPuertos.getItemAt(JCBPuertos.getSelectedIndex())) {
-                                tipoPuerto = puerto;
-                                break;
-                            }
-                        }
+                        tipoPuerto = coordinador.buscarTipoPuerto(JCBPuertos.getItemAt(
+                                                                    JCBPuertos.getSelectedIndex()));
 
-                        puertos.add(new Pair<TipoPuerto, Integer>
-                                (tipoPuerto, Integer.parseInt(JTFPuertoCantidad.getText())));
+                        tipoPuertos.add(tipoPuerto);
+                        puertosCantidad.add(Integer.parseInt(JTFPuertoCantidad.getText()));
 
                         JTFPuertosAgregados.setText(JTFPuertosAgregados.getText() +
                                 JCBPuertos.getItemAt(JCBPuertos.getSelectedIndex()) +
-                                " " + JTFPuertoCantidad.getText() + ", ");
+                                "," + JTFPuertoCantidad.getText() + ";");
                     });
 
                     JBAgregarDireccionIP.addActionListener(e5 -> {
@@ -293,37 +319,26 @@ public class FrameDatosRed extends JDialog {
                         TipoEquipo tipoEquipo = null;
                         boolean estadoEquipo;
 
-                        for (Ubicacion ubicacion : coordinador.listarUbicaciones()) {
-                            if (ubicacion.getCodigo() == JCBUbicacion.getItemAt(JCBUbicacion.getSelectedIndex())) {
-                                ubicacionEquipo = ubicacion;
-                                break;
-                            }
-                        }
+                        ubicacionEquipo = coordinador.buscarUbicacion(JCBUbicacion.getItemAt(JCBUbicacion.getSelectedIndex()));
 
-                        for (TipoEquipo equipo : coordinador.listarTipoEquipos()) {
-                            if (equipo.getCodigo() == JCBTipoEquipo.getItemAt(JCBTipoEquipo.getSelectedIndex())) {
-                                tipoEquipo = equipo;
-                                break;
-                            }
-                        }
+                        tipoEquipo = coordinador.buscarTipoEquipo(JCBTipoEquipo.getItemAt(JCBTipoEquipo.getSelectedIndex()));
 
                         estadoEquipo = JTBEstado.isSelected();
 
                         Equipo equipoNuevo = new Equipo(codigoEquipo, descripcionEquipo, marcaEquipo, modeloEquipo,
-                                puertos.getFirst().getSecond(), puertos.getFirst().getFirst(),
+                                puertosCantidad.getFirst(), tipoPuertos.getFirst(),
                                 ubicacionEquipo, tipoEquipo, estadoEquipo);
 
 
-                        if(puertos.size() > 1) {
-                            for (Pair<TipoPuerto, Integer> puertoPar : puertos) {
-                                if(puertos.indexOf(puertoPar) != 0)
-                                    equipoNuevo.agregarPuerto(puertoPar.getSecond(), puertoPar.getFirst());
+                        if(tipoPuertos.size() > 1) {
+                            for (int i=1 ; i < tipoPuertos.size() ; i++) {
+                                equipoNuevo.agregarPuerto(puertosCantidad.get(i), tipoPuertos.get(i));
                             }
                         }
 
                         coordinador.agregarEquipo(equipoNuevo);
+                        actualizarTablaEquipos();
                         JOptionPane.showMessageDialog(this,"Equipo agregado exitosamente.");
-
                     });
 
                     JPanel JPAgregarEquipo = new JPanel();
@@ -434,32 +449,16 @@ public class FrameDatosRed extends JDialog {
                         TipoPuerto puerto2 = new TipoPuerto();
                         TipoCable cable1 = new TipoCable();
 
-                        for (Equipo equipo : coordinador.listarEquipos()) {
-                            if(equipo.getCodigo() == codigoEquipo1) {
-                                equipo1 = equipo;
-                            } else if (equipo.getCodigo() == codigoEquipo2) {
-                                equipo2 = equipo;
-                            }
-                        }
-
-                        for (TipoPuerto puerto : coordinador.listarTipoPuertos()) {
-                            if (puerto.getCodigo() == codigoPuerto1) {
-                                puerto1 = puerto;
-                            } else if (puerto.getCodigo() == codigoPuerto2) {
-                                puerto2 = puerto;
-                            }
-                        }
-
-                        for (TipoCable cable : coordinador.listarTipoCables()) {
-                            if (cable.getCodigo() == codigoTipoCable) {
-                                cable1 = cable;
-                                break;
-                            }
-                        }
+                        equipo1 = coordinador.buscarEquipo(codigoEquipo1);
+                        equipo2 = coordinador.buscarEquipo(codigoEquipo2);
+                        puerto1 = coordinador.buscarTipoPuerto(codigoPuerto1);
+                        puerto2 = coordinador.buscarTipoPuerto(codigoPuerto2);
+                        cable1 = coordinador.buscarTipoCable(codigoTipoCable);
 
                         Conexion conexion = new Conexion(equipo1, equipo2, cable1, puerto1, puerto2, false );
 
                         coordinador.agregarConexion(conexion);
+                        actualizarTablaConexiones();
                         JOptionPane.showMessageDialog(this,"Conexión agregada exitosamente.");
 
                         this.dispose();
@@ -639,6 +638,7 @@ public class FrameDatosRed extends JDialog {
                     switch(tituloTabla) {
 
                         case "Equipos":
+                            /*
                             JDialog JDEliminarEquipo = new JDialog();
                             JDEliminarEquipo.setSize(300,300);
                             JDEliminarEquipo.setResizable(false);
@@ -653,13 +653,8 @@ public class FrameDatosRed extends JDialog {
                             JComboBox<String> JCBEquipo = new JComboBox<String>();
                             JCBEquipo.addItemListener(e9 -> {
                                 Equipo equipoInfo = null;
+                                equipoInfo = coordinador.buscarEquipo(JCBEquipo.getItemAt(JCBEquipo.getSelectedIndex()));
 
-                                for (Equipo equipo : coordinador.listarEquipos()) {
-                                    if(equipo.getCodigo() == JCBEquipo.getItemAt(JCBEquipo.getSelectedIndex())) {
-                                        equipoInfo = equipo;
-                                        break;
-                                    }
-                                }
                                 JLDescripcion.setText("descripcion: " + equipoInfo.getDescripcion());
                                 JLMarca.setText("marca: " + equipoInfo.getMarca());
                                 JLModelo.setText("modelo: " + equipoInfo.getModelo());
@@ -674,14 +669,10 @@ public class FrameDatosRed extends JDialog {
                             JButton JBEliminarEquipo = new JButton("Eliminar");
                             JBEliminarEquipo.addActionListener(e10 -> {
                                 Equipo equipo = null;
-                                for (Equipo equipo1 : coordinador.listarEquipos()) {
-                                    if(equipo1.getCodigo() == JCBEquipo.getItemAt(JCBEquipo.getSelectedIndex())) {
-                                        equipo = equipo1;
-                                        break;
-                                    }
-                                }
+                                equipo = coordinador.buscarEquipo(JCBEquipo.getItemAt(JCBEquipo.getSelectedIndex()));
 
                                 coordinador.borrarEquipo(equipo);
+                                actualizarTablaEquipos();
                                 JOptionPane.showMessageDialog(JDEliminarEquipo,"Equipo eliminado exitosamente.");
                                 JDEliminarEquipo.dispose();
                             });
@@ -698,6 +689,19 @@ public class FrameDatosRed extends JDialog {
                             JDEliminarEquipo.add(JPEliminarEquipo);
                             JDEliminarEquipo.setModalityType(ModalityType.APPLICATION_MODAL);
                             JDEliminarEquipo.setVisible(true);
+                            */
+
+                            int filaEquipo = JTEquipos.getSelectedRow();
+                            if( filaEquipo != -1) {
+                                String codigoEquipo = JTEquipos.getModel().getValueAt(filaEquipo, 0).toString();
+
+                                Equipo equipo = coordinador.buscarEquipo(codigoEquipo);
+
+                                coordinador.borrarEquipo(equipo);
+                                actualizarTablaEquipos();
+                                JOptionPane.showMessageDialog(this,"Equipo eliminado exitosamente.");
+                            }
+
                             break;
                         case "Conexiones":
                                 JDialog JDEliminarConexion = new JDialog();
@@ -715,12 +719,12 @@ public class FrameDatosRed extends JDialog {
 
                                     Conexion conexionInfo = (Conexion) coordinador.listarConexiones().toArray()[JCBConexiones.getSelectedIndex()];
 
-                                    JLEquipo1.setText("Equipo1: " + conexionInfo.getEquipo1().getCodigo() + ", " +
-                                            conexionInfo.getEquipo1().getDescripcion());
-                                    JLEquipo2.setText("Equipo2: " + conexionInfo.getEquipo2().getCodigo() + ", " +
-                                            conexionInfo.getEquipo2().getDescripcion());
-                                    JLCable.setText("Cable: " + conexionInfo.getTipoCable().getCodigo() + ", " +
-                                            conexionInfo.getTipoCable().getDescripcion());
+                                    JLEquipo1.setText("Equipo1: " + conexionInfo.getEquipo1Codigo() + ", " +
+                                            conexionInfo.getEquipo1Descripcion());
+                                    JLEquipo2.setText("Equipo2: " + conexionInfo.getEquipo2Codigo() + ", " +
+                                            conexionInfo.getEquipo2Descripcion());
+                                    JLCable.setText("Cable: " + conexionInfo.getTipoCableCodigo() + ", " +
+                                            conexionInfo.getTipoCableDescripcion());
 
                                 });
 
@@ -733,6 +737,7 @@ public class FrameDatosRed extends JDialog {
                                     Conexion conexion = (Conexion) coordinador.listarConexiones().toArray()[JCBConexiones.getSelectedIndex()];
 
                                     coordinador.borrarConexion(conexion);
+                                    actualizarTablaConexiones();
                                     JOptionPane.showMessageDialog(JDEliminarConexion,"Conexion eliminada exitosamente.");
                                     JDEliminarConexion.dispose();
                                 });
@@ -751,7 +756,7 @@ public class FrameDatosRed extends JDialog {
                                 JDEliminarConexion.setVisible(true);
                                 break;
                         case "Ubicaciones":
-                            //JOptionPane.showMessageDialog(this,"Eliminar Ubicacion.", mensajeTitulo, mensajeModo);
+                            /*
                             JDialog JDEliminarUbicacion = new JDialog();
                             JDEliminarUbicacion.setSize(300,100);
                             JDEliminarUbicacion.setResizable(false);
@@ -768,14 +773,11 @@ public class FrameDatosRed extends JDialog {
                             JBEliminarUbicacion.addActionListener(e2 -> {
                                 Ubicacion ubicacion = null;
 
-                                for (Ubicacion ubicacion1 : coordinador.listarUbicaciones()) {
-                                    if( ubicacion1.getCodigo() == JCBEliminarUbicacion.getSelectedItem()) {
-                                        ubicacion = ubicacion1;
-                                        break;
-                                    }
-                                }
+                                ubicacion = coordinador.buscarUbicacion(JCBEliminarUbicacion.getItemAt(
+                                                                        JCBEliminarUbicacion.getSelectedIndex()));
 
                                 coordinador.borrarUbicacion(ubicacion);
+                                actualizarTablaUbicaciones();
                                 JOptionPane.showMessageDialog(JDEliminarUbicacion,"Ubicacion eliminada exitosamente.");
                                 JDEliminarUbicacion.dispose();
                             });
@@ -788,12 +790,49 @@ public class FrameDatosRed extends JDialog {
                             JDEliminarUbicacion.add(JPEliminarUbicacion);
                             JDEliminarUbicacion.setModalityType(ModalityType.APPLICATION_MODAL);
                             JDEliminarUbicacion.setVisible(true);
+                            */
+
+                            int filaUbicacion = JTUbicaciones.getSelectedRow();
+                            if( filaUbicacion != -1) {
+                                String codigoUbicacion = JTEquipos.getModel().getValueAt(filaUbicacion, 0).toString();
+
+                                Ubicacion ubicacion = coordinador.buscarUbicacion(codigoUbicacion);
+
+                                coordinador.borrarUbicacion(ubicacion);
+                                actualizarTablaUbicaciones();
+                                JOptionPane.showMessageDialog(this,"Ubicacion eliminada exitosamente.");
+                            }
+
                             break;
                         case "Tipos de Equipo":
+
+                            int filaTipoEquipo = JTTipoEquipo.getSelectedRow();
+                            if( filaTipoEquipo != -1) {
+                                String codigoTipoEquipo = JTTipoEquipo.getModel().getValueAt(filaTipoEquipo, 0).toString();
+
+                                TipoEquipo tipoEquipo = coordinador.buscarTipoEquipo(codigoTipoEquipo);
+
+                                //coordinador.borrarTipoEquipo(tipoEquipo);
+                                actualizarTablaTipoEquipos();
+                                JOptionPane.showMessageDialog(this,"Tipo de Equipo eliminado exitosamente.");
+                            }
+
                             break;
                         case "Tipos de Puerto":
+
+                            int filaTipoPuerto = JTTipoPuerto.getSelectedRow();
+                            if( filaTipoPuerto != -1) {
+
+                            }
+
                             break;
                         case "Tipos de Cable":
+
+                            int filaTipoCable =  JTTipoCable.getSelectedRow();
+                            if( filaTipoCable!= -1) {
+
+                            }
+
                             break;
                     }
 
@@ -806,9 +845,4 @@ public class FrameDatosRed extends JDialog {
         this.add(JPBotones, BorderLayout.SOUTH);
     }
 
-    /* prueba
-    public static void main(String[] args) {
-        FrameDatosRed datos = new FrameDatosRed();
-    }
-    */
 }

@@ -18,16 +18,6 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="module-library" exported="">
-      <library>
-        <CLASSES>
-          <root url="file://$MODULE_DIR$/../../POO/jgrapht-1.5.2/lib" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-        <jarDirectory url="file://$MODULE_DIR$/../../POO/jgrapht-1.5.2/lib" recursive="false" />
-      </library>
-    </orderEntry>
     <orderEntry type="module-library">
       <library name="JUnit4">
         <CLASSES>
@@ -54,14 +44,7 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="module-library" exported="">
-      <library>
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../POO/EJemplos-ISFPP/subte-7-BD/postgresql-9.4.1208.jre6.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
+    <orderEntry type="library" name="postgresql-9.4.1208.jre6" level="project" />
+    <orderEntry type="library" name="java" level="project" />
   </component>
 </module>

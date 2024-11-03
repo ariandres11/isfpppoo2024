@@ -75,6 +75,22 @@ public class Coordinador {
         return calculo.listarIps(red.getEquipos());
     }
 
+
+    public Equipo buscarEquipo(String codigoEquipo) { return red.buscarEquipo(codigoEquipo); }
+
+    public Conexion buscarConexion(String codigoEquipo1, String codigoEquipo2, String codigoTipoCable) {
+        return red.buscarConexion(codigoEquipo1, codigoEquipo2, codigoTipoCable);
+    }
+
+    public Ubicacion buscarUbicacion(String codigoUbicacion) { return red.buscarUbicacion(codigoUbicacion); }
+
+    public TipoEquipo buscarTipoEquipo(String codigoTipoEquipo) { return red.buscarTipoEquipo(codigoTipoEquipo); }
+
+    public TipoPuerto buscarTipoPuerto(String codigoTipoPuerto) { return red.buscarTipoPuerto(codigoTipoPuerto); }
+
+    public TipoCable buscarTipoCable(String codigoTipoCable) { return red.buscarTipoCable(codigoTipoCable); }
+
+
     public List<Conexion> calcularMasRapido(Equipo equipo1, Equipo equipo2) {
         return calculo.masRapido(equipo1, equipo2);
     }
