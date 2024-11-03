@@ -8,18 +8,20 @@ import negocio.roles.concrete_role_strategies.AdminRoleStrategy;
 import negocio.roles.concrete_role_strategies.UserRoleStrategy;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class PanelOpcionesSuperior extends JPanel{
+public class PanelOpcionesSuperior extends JPanel {
 
     private Interfaz interfaz;
     private Coordinador coordinador;
     private RoleContext roleContext;
     private Logger logger = Logger.getLogger(PanelOpcionesSuperior.class);
 
-    JButton JBCambiarRol = new JButton("Cambiar rol");
-    JButton JBDatosRed = new JButton("Administrar datos de Red");
+    private JButton JBCambiarRol = new JButton("Cambiar rol");
+    private JButton JBDatosRed = new JButton("Administrar datos de Red");
+    private JLabel JLTitulo = new JLabel("Red de computadoras");
 
     public PanelOpcionesSuperior(Interfaz interfaz, RoleContext roleContext) {
         this.interfaz = interfaz;
@@ -29,8 +31,19 @@ public class PanelOpcionesSuperior extends JPanel{
         JBCambiarRol.addActionListener(new ManejadorBotonesSuperiores());
         JBDatosRed.addActionListener(new ManejadorBotonesSuperiores());
 
-        this.add(JBCambiarRol);
-        this.add(JBDatosRed);
+        setLayout(new BorderLayout());
+
+        // Primer panel (Título)
+        JPanel panelSup = new JPanel();
+        JLTitulo.setFont(new Font("Arial", Font.BOLD, 40));
+        panelSup.add(JLTitulo);
+        this.add(panelSup, BorderLayout.NORTH);
+
+        // Segundo panel (Botones)
+        JPanel panelInf = new JPanel();
+        panelInf.add(JBCambiarRol);
+        panelInf.add(JBDatosRed);
+        this.add(panelInf, BorderLayout.CENTER);
         JBDatosRed.setVisible(false);
 
         //roleContext.mostrarOpciones(this);
@@ -50,11 +63,11 @@ public class PanelOpcionesSuperior extends JPanel{
         this.JBDatosRed.setEnabled(false);
         revalidate();
         repaint();
-    }
 
-    /**
-     * Clase interna que maneja los eventos de acción de los botones del menú.
-     */
+    }
+        /**
+         * Clase interna que maneja los eventos de acción de los botones del menú.
+         */
     private class ManejadorBotonesSuperiores implements ActionListener {
 
         @Override

@@ -7,7 +7,9 @@ import modelo.TipoPuerto;
 import org.apache.log4j.Logger;
 import org.jgrapht.Graph;
 import org.jgrapht.GraphPath;
+import org.jgrapht.alg.connectivity.ConnectivityInspector;
 import org.jgrapht.alg.shortestpath.DijkstraShortestPath;
+import org.jgrapht.alg.spanning.KruskalMinimumSpanningTree;
 import org.jgrapht.graph.DefaultUndirectedWeightedGraph;
 
 import java.net.InetAddress;
@@ -93,9 +95,15 @@ public class Calculo {
                     }
                 }
             } else {
-                logger.info("El equipo 1, el equipo 2, o ambos son nulos ");
+                logger.debug("El equipo 1, el equipo 2, o ambos son nulos ");
             }
-            logger.info(conexion);
+            //logger.debug(conexion);
+        }
+        //Agregar equipos aislados
+        for (Equipo equipo : equipos) {
+            if(!grafoNoDirigido.containsVertex(equipo)){
+                grafoNoDirigido.addVertex(mapaEquipos.get(equipo.getCodigo()));
+            }
         }
     }
 
@@ -160,14 +168,6 @@ public class Calculo {
             }
         }
 
-        if (!equipo1TieneConexiones) {
-            coordinador.advertencia("El equipo " + equipo1.getCodigo() + " no tiene conexiones posibles. ");
-        }else if(!equipo2TieneConexiones){
-            coordinador.advertencia("El equipo " + equipo1.getCodigo() + " no tiene conexiones posibles. ");
-        }else if(!equipo1TieneConexiones && !equipo2TieneConexiones){
-            coordinador.advertencia("Ninguno de los equipos seleccionados tiene una conexión asociada. ");
-        }
-
         // Encontrar el camino más corto con el algoritmo de Dijkstra
         DijkstraShortestPath<Equipo, Conexion> dijkstraAlg = new DijkstraShortestPath<>(rapido);
         GraphPath<Equipo, Conexion> path = dijkstraAlg.getPath(equipo1, equipo2);
@@ -176,7 +176,8 @@ public class Calculo {
         if (path != null) {
             caminoMasRapido.addAll(path.getEdgeList());
         } else {
-            logger.info("No hay camino entre " + equipo1 + " y " + equipo2);
+            coordinador.advertencia("No hay camino entre " + equipo1.getCodigo() + " y " + equipo2.getCodigo());
+            logger.info("No hay camino entre " + equipo1.getCodigo() + " y " + equipo2.getCodigo());
         }
 
         // Verificar las conexiones en el camino más rápido
@@ -189,6 +190,54 @@ public class Calculo {
         imprimirGrafos();
         return caminoMasRapido;
     }
+
+    /**
+     * Encuentra y devuelve todos los equipos alcanzables desde un equipo dado.
+     *
+     * @param equipo El equipo desde el cual empezar la búsqueda.
+     * @return Un conjunto de equipos alcanzables.
+     * @throws IllegalArgumentException si el equipo no está presente en el grafo.
+     */
+    public List<Conexion> encontrarEquiposAlcanzables(Equipo equipo) {
+        cargarDatos(coordinador.listarConexiones(), coordinador.listarEquipos());
+
+        if (!grafoNoDirigido.containsVertex(equipo)) {
+            logger.error("El equipo " + equipo.getCodigo() + " no está dentro del grafo.");
+            throw new IllegalArgumentException("El grafo debe contener el vértice inicial.");
+        }
+
+        // Usar ConnectivityInspector de JGraphT para encontrar los componentes conectados
+        ConnectivityInspector<Equipo, Conexion> inspector = new ConnectivityInspector<>(grafoNoDirigido);
+        Set<Equipo> equiposAlcanzables = inspector.connectedSetOf(equipo);
+
+        //Ahora, del set obtener todas las conexiones
+        List<Conexion> conexionesAlcanzables = new ArrayList<>();
+        for (Equipo equipoAlcanzable : equiposAlcanzables) {
+            for (Conexion conexion : grafoNoDirigido.edgesOf(equipoAlcanzable)) {
+                if(conexionesAlcanzables.contains(conexion)) continue;
+                conexionesAlcanzables.add(conexion);
+            }
+        }
+
+        // Imprimir los equipos alcanzables
+        imprimirEquiposAlcanzables(equipo, equiposAlcanzables);
+
+        return conexionesAlcanzables;
+    }
+
+    /**
+     * Imprime los equipos alcanzables desde un equipo dado.
+     *
+     * @param equipo El equipo desde el cual se comenzó la búsqueda.
+     * @param equiposAlcanzables El conjunto de equipos alcanzables.
+     */
+    private void imprimirEquiposAlcanzables(Equipo equipo, Set<Equipo> equiposAlcanzables) {
+        logger.info("Equipos alcanzables desde " + equipo.getCodigo() + ": ");
+        for (Equipo eq : equiposAlcanzables) {
+            logger.info(eq);
+        }
+    }
+
 
     /**
      * Imprime los vértices y aristas del grafo no dirigido.

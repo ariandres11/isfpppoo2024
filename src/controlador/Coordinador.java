@@ -9,8 +9,7 @@ import negocio.roles.RoleContext;
 import negocio.roles.RoleStrategy;
 import negocio.roles.concrete_role_strategies.UserRoleStrategy;
 
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Coordinador {
     private Red red;
@@ -105,6 +104,10 @@ public class Coordinador {
 
     public Map<String, Boolean> pingIPS (int dirRed1, int dirRed2, int dirHost1p1, int dirHost1p2, int dirHost2p1, int dirHost2p2) {
         return calculo.pingEntreIPs(dirRed1,dirRed2,dirHost1p1,dirHost1p2,dirHost2p1,dirHost2p2);
+    }
+
+    public List<Conexion> detectarProblemas(Equipo equipo){
+        return calculo.encontrarEquiposAlcanzables(equipo);
     }
 
     public boolean ping(Equipo equipo){

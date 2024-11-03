@@ -44,9 +44,11 @@ public class Interfaz extends JFrame {
         this.setVisible(true);
         //Por defecto el rol del usuario es user
         coordinador.setRoleStrategy(new UserRoleStrategy());
+        //Mostrar titulo
         mostrarMenu();
         agregarPanelSuperior();
     }
+
 
     /**
      * Obtiene el coordinador de la interfaz.
@@ -167,13 +169,20 @@ public class Interfaz extends JFrame {
                 System.out.println("Conexión inválida: " + conexion);
             }
         }
-        JOptionPane.showMessageDialog(this, resultado.toString(), "Resultado del Recorrido", JOptionPane.INFORMATION_MESSAGE);
-        panelGrafo1 = new PanelGrafo(recorrido, coordinador.listarEquipos()).getPanelGrafo();
+        if(resultado.isEmpty()){
+            JOptionPane.showMessageDialog(this, "No se encontraron conexiones", "Resultado del Recorrido", JOptionPane.INFORMATION_MESSAGE);
+
+        }else{
+            JOptionPane.showMessageDialog(this, resultado.toString(), "Resultado del Recorrido", JOptionPane.INFORMATION_MESSAGE);
+        }
+        if(panelGrafo1 != null){
+            panelGrafo1.setVisible(false);
+            remove(panelGrafo1);
+        }
+        panelGrafo1 = new PanelGrafo(recorrido, coordinador).getPanelGrafo();
         panelGrafo1.setVisible(true);
         add(panelGrafo1);
 
-        this.revalidate();
-        this.repaint();
     }
 
     public void resultadoPingEquipo(boolean ping) {

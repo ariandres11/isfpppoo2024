@@ -1,2 +1,3 @@
 PC01;SWH2;FOM;1G;1G;false;
 SWH1;SWH2;C5e;100M;1G;true;
+SWH1;SWH3;C5e;100M;1G;true;

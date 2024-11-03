@@ -18,7 +18,6 @@ public class PanelMenu extends JPanel {
     JButton JBConexiones = new JButton("Mostrar Conexiones");
     JButton JBPingEquipo = new JButton("Ping Equipo");
     JButton JBPingIP = new JButton("Ping a rango de IP");
-    JButton JBPingEquipoAEquipo = new JButton("Ping Equipo/Equipo");
     JButton JBMapaActual = new JButton("Mostrar Mapa Actual");
     JButton JBDetectarProblemas = new JButton("Detectar Problemas");
 
@@ -29,23 +28,30 @@ public class PanelMenu extends JPanel {
         JBConexiones.addActionListener(new ManejadorBotonesMenu());
         JBPingEquipo.addActionListener(new ManejadorBotonesMenu());
         JBPingIP.addActionListener(new ManejadorBotonesMenu());
-        JBPingEquipoAEquipo.addActionListener(new ManejadorBotonesMenu());
         JBMapaActual.addActionListener(new ManejadorBotonesMenu());
         JBDetectarProblemas.addActionListener(new ManejadorBotonesMenu());
+
+        // Definir tamaños preferidos
+        Dimension buttonSize = new Dimension(200, 100);
+        JBConexiones.setPreferredSize(buttonSize);
+        JBPingEquipo.setPreferredSize(buttonSize);
+        JBPingIP.setPreferredSize(buttonSize);
+        JBMapaActual.setPreferredSize(buttonSize);
+        JBDetectarProblemas.setPreferredSize(buttonSize);
+
+        // Usar un LayoutManager que respete los tamaños preferidos
+        setLayout(new FlowLayout());
 
         // Agregar botones al panel
         this.add(JBConexiones);
         this.add(JBPingEquipo);
         this.add(JBPingIP);
-        this.add(JBPingEquipoAEquipo);
         this.add(JBMapaActual);
         this.add(JBDetectarProblemas);
-
 
         this.revalidate();
         this.repaint();
     }
-
 
     /**
      * Clase interna que maneja los eventos de acción de los botones del menú.
@@ -55,27 +61,26 @@ public class PanelMenu extends JPanel {
         @Override
         public void actionPerformed(ActionEvent e) {
             if (e.getSource() == JBConexiones) {
-                Equipo equipoOrigen = interfaz.elegirEquipo(coordinador.listarEquipos(), " origen");
-                Equipo equipoDestino = interfaz.elegirEquipo(coordinador.listarEquipos(), " destino");
+                coordinador.cargarDatos();
+                Equipo equipoOrigen = interfaz.elegirEquipo(coordinador.listarEquipos(), "origen");
+                Equipo equipoDestino = interfaz.elegirEquipo(coordinador.listarEquipos(), "destino");
                 coordinador.cargarDatos();
                 ArrayList<Conexion> recorrido = (ArrayList<Conexion>) coordinador.calcularMasRapido(equipoOrigen, equipoDestino);
                 interfaz.mostrarConexiones(recorrido);
             } else if (e.getSource() == JBPingEquipo) {
-                Equipo equipo = interfaz.elegirEquipo(coordinador.listarEquipos(), "l que se quiere saber el ping");
+                Equipo equipo = interfaz.elegirEquipo(coordinador.listarEquipos(), "el que se quiere saber el ping");
                 coordinador.cargarDatos();
                 interfaz.resultadoPingEquipo(coordinador.ping(equipo));
-                // Implementar funcionalidad para hacer ping a un equipo
             } else if (e.getSource() == JBPingIP) {
                 interfaz.mostrarSeleccionDeIPs();
-                // Implementar funcionalidad para hacer ping de un equipo a otro
-            } else if (e.getSource() == JBPingEquipoAEquipo) {
-                // Implementar funcionalidad para hacer ping a una IP
             } else if (e.getSource() == JBMapaActual) {
-                // Implementar funcionalidad para mostrar el mapa actual
+                // Implementar la acción
             } else if (e.getSource() == JBDetectarProblemas) {
-                // Implementar funcionalidad para detectar problemas
+                Equipo equipo = interfaz.elegirEquipo(coordinador.listarEquipos(), "el que se quiere conocer los problemas");
+                coordinador.cargarDatos();
+                ArrayList<Conexion> recorrido = (ArrayList<Conexion>) coordinador.detectarProblemas(equipo);
+                interfaz.mostrarConexiones(recorrido);
             }
         }
     }
-
 }

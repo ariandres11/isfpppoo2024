@@ -34,7 +34,7 @@ public class AplicacionConsultas {
         coordinador.setRed(red);
 
         //Debug para confirmar que el coordinador pasa las conexiones y equipos correctamente
-        logger.debug("Conexiones: " + coordinador.listarConexiones().size() + " Equipos: " + coordinador.listarEquipos().size());
+        //logger.debug("Conexiones: " + coordinador.listarConexiones().size() + " Equipos: " + coordinador.listarEquipos().size());
 
         calculo.cargarDatos(coordinador.listarConexiones(), coordinador.listarEquipos());
     }

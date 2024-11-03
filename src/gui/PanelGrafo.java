@@ -3,10 +3,12 @@ package gui;
 import com.mxgraph.layout.mxCircleLayout;
 import com.mxgraph.swing.mxGraphComponent;
 import com.mxgraph.view.mxGraph;
+import controlador.Coordinador;
 import modelo.Conexion;
 import modelo.Equipo;
 
 import javax.swing.*;
+import java.awt.*;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.List;
@@ -18,10 +20,12 @@ public class PanelGrafo extends JPanel {
     private List<Conexion> listaConexiones;
     private List<Equipo> listaEquipos;
     private ResourceBundle resourceBundle;
+    private Coordinador coordinador;
 
-    public PanelGrafo(List<Conexion> listaConexiones, List<Equipo> listaEquipos) {
+    public PanelGrafo(List<Conexion> listaConexiones, Coordinador coordinador) {
+        this.coordinador = coordinador;
         this.listaConexiones = listaConexiones;
-        this.listaEquipos = listaEquipos;
+        this.listaEquipos = coordinador.listarEquipos();
         this.resourceBundle = ResourceBundle.getBundle("iconosTipoEquipo");
     }
 
@@ -105,6 +109,7 @@ public class PanelGrafo extends JPanel {
             JPanel panelNuevo = new JPanel();
             mxGraphComponent graphComponent = new mxGraphComponent(mxGrafo);
             panelNuevo.add(graphComponent);
+            //Añadir label
             panelNuevo.setVisible(true);
             panelNuevo.setSize(500, 500);
 
@@ -119,4 +124,5 @@ public class PanelGrafo extends JPanel {
             return null;
         }
     }
+
 }
