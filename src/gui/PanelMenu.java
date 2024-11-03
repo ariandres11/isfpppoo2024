@@ -11,6 +11,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import static controlador.Constantes.FUENTE_OPCIONES;
+
 public class PanelMenu extends JPanel {
     private Interfaz interfaz;
     private Coordinador coordinador;
@@ -32,7 +34,13 @@ public class PanelMenu extends JPanel {
         JBDetectarProblemas.addActionListener(new ManejadorBotonesMenu());
 
         // Definir tamaños preferidos
-        Dimension buttonSize = new Dimension(200, 100);
+        Dimension buttonSize = new Dimension(250, 80);
+        JBConexiones.setFont(FUENTE_OPCIONES);
+        JBPingEquipo.setFont(FUENTE_OPCIONES);
+        JBPingIP.setFont(FUENTE_OPCIONES);
+        JBMapaActual.setFont(FUENTE_OPCIONES);
+        JBDetectarProblemas.setFont(FUENTE_OPCIONES);
+
         JBConexiones.setPreferredSize(buttonSize);
         JBPingEquipo.setPreferredSize(buttonSize);
         JBPingIP.setPreferredSize(buttonSize);
@@ -72,7 +80,7 @@ public class PanelMenu extends JPanel {
                 coordinador.cargarDatos();
                 interfaz.resultadoPingEquipo(coordinador.ping(equipo));
             } else if (e.getSource() == JBPingIP) {
-                interfaz.mostrarSeleccionDeIPs();
+                interfaz.seleccionarIPs();
             } else if (e.getSource() == JBMapaActual) {
                 // Implementar la acción
             } else if (e.getSource() == JBDetectarProblemas) {

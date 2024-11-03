@@ -12,6 +12,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import static controlador.Constantes.FUENTE_OPCIONES;
+
 public class PanelOpcionesSuperior extends JPanel {
 
     private Interfaz interfaz;
@@ -35,9 +37,13 @@ public class PanelOpcionesSuperior extends JPanel {
 
         // Primer panel (Título)
         JPanel panelSup = new JPanel();
-        JLTitulo.setFont(new Font("Arial", Font.BOLD, 40));
+        JLTitulo.setFont(FUENTE_OPCIONES);
         panelSup.add(JLTitulo);
         this.add(panelSup, BorderLayout.NORTH);
+
+
+        JBDatosRed.setFont(FUENTE_OPCIONES);
+        JBCambiarRol.setFont(FUENTE_OPCIONES);
 
         // Segundo panel (Botones)
         JPanel panelInf = new JPanel();

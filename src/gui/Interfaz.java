@@ -9,10 +9,10 @@ import negocio.roles.concrete_role_strategies.UserRoleStrategy;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
+
+import static controlador.Constantes.FUENTE_CONSULTAS;
 
 /**
  * La clase Interfaz es una ventana principal que representa
@@ -20,8 +20,8 @@ import java.util.stream.Collectors;
  */
 public class Interfaz extends JFrame {
     private Coordinador coordinador;
-    private final int MAX_ANCHO = 1000;
-    private final int MAX_ALTO = 700;
+    private final int MAX_ANCHO = 1400;
+    private final int MAX_ALTO = 800;
     private JPanel panelMenu;
     private JPanel panelGrafo1;
     private JPanel panelOpcionesSuperior;
@@ -215,93 +215,130 @@ public class Interfaz extends JFrame {
         this.repaint();
     }
 
-    public void mostrarSeleccionDeIPs() {
-        // Obtener la lista de todas las IPs
-        List<String> ips = coordinador.listaIPs();
+    public void seleccionarIPs() {
+        // Crear campos de texto para la primera IP
+        JTextField digitoRed1 = new JTextField(3);
+        JTextField digitoRed2 = new JTextField(3);
+        JTextField digitoHost1 = new JTextField(3);
+        JTextField digitoHost2 = new JTextField(3);
 
-        if (ips.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "No hay direcciones IP disponibles.", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
+        // Crear campos de texto para la segunda IP
+        JTextField digitoHost3 = new JTextField(3);
+        JTextField digitoHost4 = new JTextField(3);
+
+        // Aumentar el tamaño de fuente
+        digitoRed1.setFont(FUENTE_CONSULTAS);
+        digitoRed2.setFont(FUENTE_CONSULTAS);
+        digitoHost1.setFont(FUENTE_CONSULTAS);
+        digitoHost2.setFont(FUENTE_CONSULTAS);
+        digitoHost3.setFont(FUENTE_CONSULTAS);
+        digitoHost4.setFont(FUENTE_CONSULTAS);
+
+        // Configurar el panel con un diseño de cuadrícula
+        JPanel panel = new JPanel(new GridBagLayout());
+        GridBagConstraints constraints = new GridBagConstraints();
+
+        // Configurar el título y los campos de texto para la primera IP
+        constraints.gridx = 0;
+        constraints.gridy = 0;
+        constraints.gridwidth = 4;
+        constraints.anchor = GridBagConstraints.WEST;
+        JLabel tituloInicio = new JLabel("Dirección IP de inicio:");
+        tituloInicio.setFont(FUENTE_CONSULTAS);
+        panel.add(tituloInicio, constraints);
+
+        constraints.gridwidth = 1;
+        constraints.gridy = 1;
+        JLabel labelRed1 = new JLabel("Red 1:");
+        labelRed1.setFont(FUENTE_CONSULTAS);
+        panel.add(labelRed1, constraints);
+        constraints.gridx = 1;
+        panel.add(digitoRed1, constraints);
+        constraints.gridx = 2;
+        JLabel labelRed2 = new JLabel("Red 2:");
+        labelRed2.setFont(FUENTE_CONSULTAS);
+        panel.add(labelRed2, constraints);
+        constraints.gridx = 3;
+        panel.add(digitoRed2, constraints);
+
+        constraints.gridy = 2;
+        constraints.gridx = 0;
+        JLabel labelHost1 = new JLabel("Host 1:");
+        labelHost1.setFont(FUENTE_CONSULTAS);
+        panel.add(labelHost1, constraints);
+        constraints.gridx = 1;
+        panel.add(digitoHost1, constraints);
+        constraints.gridx = 2;
+        JLabel labelHost2 = new JLabel("Host 2:");
+        labelHost2.setFont(FUENTE_CONSULTAS);
+        panel.add(labelHost2, constraints);
+        constraints.gridx = 3;
+        panel.add(digitoHost2, constraints);
+
+        // Configurar el título y los campos de texto para la segunda IP
+        constraints.gridy = 3;
+        constraints.gridx = 0;
+        constraints.gridwidth = 4;
+        JLabel tituloFin = new JLabel("Dirección IP de fin:");
+        tituloFin.setFont(FUENTE_CONSULTAS);
+        panel.add(tituloFin, constraints);
+
+        constraints.gridy = 4;
+        constraints.gridwidth = 1;
+        constraints.gridx = 0;
+        JLabel labelHost3 = new JLabel("Host 3:");
+        labelHost3.setFont(FUENTE_CONSULTAS);
+        panel.add(labelHost3, constraints);
+        constraints.gridx = 1;
+        panel.add(digitoHost3, constraints);
+        constraints.gridx = 2;
+        JLabel labelHost4 = new JLabel("Host 4:");
+        labelHost4.setFont(FUENTE_CONSULTAS);
+        panel.add(labelHost4, constraints);
+        constraints.gridx = 3;
+        panel.add(digitoHost4, constraints);
+
+        panel.setPreferredSize(new Dimension(600, 200));
+
+        // Mostrar el cuadro de diálogo
+        int result = JOptionPane.showConfirmDialog(null, panel,
+                "Por favor, introduzca las direcciones IP", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+        if (result == JOptionPane.OK_OPTION) {
+            // Obtener y validar los valores ingresados
+            try {
+                int red1 = Integer.parseInt(digitoRed1.getText());
+                int red2 = Integer.parseInt(digitoRed2.getText());
+                int host1 = Integer.parseInt(digitoHost1.getText());
+                int host2 = Integer.parseInt(digitoHost2.getText());
+                int host3 = Integer.parseInt(digitoHost3.getText());
+                int host4 = Integer.parseInt(digitoHost4.getText());
+
+                // Validar los segmentos de IP (0-255)
+                if (red1 < 0 || red1 > 255 || red2 < 0 || red2 > 255 ||
+                        host1 < 0 || host1 > 255 || host2 < 0 || host2 > 255 ||
+                        host3 < 0 || host3 > 255 || host4 < 0 || host4 > 255) {
+                    throw new NumberFormatException();
+                }
+
+                // Llamar al método de ping con las IPs ingresadas
+                Map<String, Boolean> resultadosPing = coordinador.pingIPS(red1, red2, host1, host2, host3, host4);
+
+                // Mostrar los resultados del ping
+                StringBuilder resultados = new StringBuilder();
+                for (Map.Entry<String, Boolean> entry : resultadosPing.entrySet()) {
+                    String ip = entry.getKey();
+                    Boolean respuesta = entry.getValue();
+                    resultados.append(ip).append(": ").append(respuesta ? "activo" : "inactivo").append("\n");
+                }
+                // Mostrar los resultados en un cuadro de diálogo
+                JOptionPane.showMessageDialog(null, resultados.toString(), "Resultados del rango de IP", JOptionPane.INFORMATION_MESSAGE);
+
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "Por favor, introduzca valores válidos para las direcciones IP.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
         }
-
-        // Convertir la lista a un array
-        String[] ipArray = ips.toArray(new String[0]);
-
-        // Mostrar un cuadro de diálogo para que el usuario elija la IP de inicio
-        String ipInicio = (String) JOptionPane.showInputDialog(
-                null,
-                "Seleccione la IP:",
-                "Elegir IP de inicio",
-                JOptionPane.QUESTION_MESSAGE,
-                null,
-                ipArray, // Array de opciones
-                ipArray[0] // Valor predeterminado
-        );
-
-        // Verificar si el usuario canceló la selección
-        if (ipInicio == null) {
-            JOptionPane.showMessageDialog(null, "Selección cancelada.", "Información", JOptionPane.INFORMATION_MESSAGE);
-            return;
-        }
-        // Obtener los primeros tres segmentos de la IP de inicio seleccionada para determinar la red
-        String redInicio = ipInicio.substring(0, ipInicio.lastIndexOf('.'));
-
-        // Filtrar las IPs para obtener solo aquellas en la misma red
-        List<String> ipsMismaRed = Arrays.stream(ipArray)
-                .filter(ip -> ip.startsWith(redInicio + "."))
-                .collect(Collectors.toList());  //convierte a la lista
-
-        // Convertir la lista filtrada en un array para usar en JOptionPane
-        String[] opcionesIpsMismaRed = ipsMismaRed.toArray(new String[0]);
-
-        // Verificar si existen IPs en la misma red
-        if (opcionesIpsMismaRed.length == 0) {
-            JOptionPane.showMessageDialog(null, "No hay IPs disponibles en la misma red.", "Información", JOptionPane.INFORMATION_MESSAGE);
-            return;
-        }
-
-        // Mostrar un cuadro de diálogo para que el usuario elija la IP de fin
-        String ipFin = (String) JOptionPane.showInputDialog(
-                null,
-                "Seleccione la IP:",
-                "Elegir IP de fin",
-                JOptionPane.QUESTION_MESSAGE,
-                null,
-                opcionesIpsMismaRed, // Array de opciones
-                opcionesIpsMismaRed[0] // Valor predeterminado
-        );
-
-        // Verificar si el usuario canceló la selección
-        if (ipFin == null) {
-            JOptionPane.showMessageDialog(null, "Selección cancelada.", "Información", JOptionPane.INFORMATION_MESSAGE);
-            return;
-        }
-
-        // Dividir ambas IPs en segmentos y convertirlos a enteros
-        int[] segmentosInicio = Arrays.stream(ipInicio.split("\\."))
-                .mapToInt(Integer::parseInt)
-                .toArray();
-        int[] segmentosFin = Arrays.stream(ipFin.split("\\."))
-                .mapToInt(Integer::parseInt)
-                .toArray();
-
-        // Llama al metodo pingEntreIPS con los seis enteros
-        Map<String, Boolean> resultadosPing = coordinador.pingIPS(segmentosInicio[0], segmentosInicio[1], segmentosInicio[2], segmentosInicio[3],
-                segmentosFin[2], segmentosFin[3]);
-
-        // Mostrar los resultados del ping
-        StringBuilder resultados = new StringBuilder();
-        for (Map.Entry<String, Boolean> entry : resultadosPing.entrySet()) {
-            String ip = entry.getKey();
-            Boolean respuesta = entry.getValue();
-            resultados.append(ip).append(": ").append(respuesta ? "true" : "false").append("\n");
-        }
-        // Mostrar los resultados en un cuadro de diálogo
-        JOptionPane.showMessageDialog(null, resultados.toString(), "Resultados del rango de IP", JOptionPane.INFORMATION_MESSAGE);
-
-        this.revalidate();
-        this.repaint();
     }
+
 
     public void advertencia(String mensaje){
         JOptionPane.showMessageDialog(null, mensaje, "Advertencia: ", JOptionPane.WARNING_MESSAGE);

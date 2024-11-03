@@ -1,5 +1,7 @@
 package controlador;
 
+import java.awt.*;
+
 /**
  * La clase Constantes define una serie de constantes utilizadas en la aplicación.
  */
@@ -29,4 +31,8 @@ public class Constantes {
      * Constante para detectar problemas.
      */
     public final static int DETECTAR_PROBLEMAS = 4;
+
+    public static final Font FUENTE_CONSULTAS = new Font("Arial", Font.BOLD, 20);
+
+    public static final Font FUENTE_OPCIONES = new Font("Arial", Font.BOLD, 20);
 }
