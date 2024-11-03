@@ -46,5 +46,6 @@
     </orderEntry>
     <orderEntry type="library" name="postgresql-9.4.1208.jre6" level="project" />
     <orderEntry type="library" name="java" level="project" />
+    <orderEntry type="library" exported="" name="ai.h2o.genmodel.ext.jgrapht" level="project" />
   </component>
 </module>
