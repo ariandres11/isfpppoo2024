@@ -1,5 +1,7 @@
 package modelo;
 
+import java.util.Objects;
+
 /**
  * La clase TipoEquipo representa un tipo de equipo en la red,
  * incluyendo su código y descripción.
@@ -56,5 +58,13 @@ public class TipoEquipo {
                 "codigo='" + codigo + '\'' +
                 ", descripcion='" + descripcion + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        TipoEquipo that = (TipoEquipo) o;
+        return Objects.equals(codigo, that.codigo);
     }
 }

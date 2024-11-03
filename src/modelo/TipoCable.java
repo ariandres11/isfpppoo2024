@@ -1,5 +1,7 @@
 package modelo;
 
+import java.util.Objects;
+
 /**
  * La clase TipoCable representa un tipo de cable en la red,
  * incluyendo su código, descripción y velocidad de transmisión.
@@ -76,5 +78,13 @@ public class TipoCable {
                 ", descripcion='" + descripcion + '\'' +
                 ", velocidad=" + velocidad +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        TipoCable tipoCable = (TipoCable) o;
+        return Objects.equals(codigo, tipoCable.codigo);
     }
 }

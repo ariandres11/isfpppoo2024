@@ -1,5 +1,7 @@
 package modelo;
 
+import java.util.Objects;
+
 /**
  * La clase TipoPuerto representa un tipo de puerto en la red,
  * incluyendo su código, descripción y velocidad.
@@ -76,5 +78,13 @@ public class TipoPuerto {
                 ", descripcion='" + descripcion + '\'' +
                 ", velocidad=" + velocidad +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        TipoPuerto that = (TipoPuerto) o;
+        return Objects.equals(codigo, that.codigo);
     }
 }

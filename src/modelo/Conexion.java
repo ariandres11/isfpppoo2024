@@ -124,7 +124,6 @@ public class Conexion {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Conexion conexion = (Conexion) o;
-        return isEstado() == conexion.isEstado() && getEquipo1().getCodigo() == conexion.getEquipo1().getCodigo() && getEquipo2().getCodigo() == conexion.getEquipo2().getCodigo() && getTipoCable().equals(conexion.getTipoCable()) && getTipoPuertoEquipo1().equals(conexion.getTipoPuertoEquipo1()) && getTipoPuertoEquipo2().equals(conexion.getTipoPuertoEquipo2());
+        return Objects.equals(equipo1, conexion.equipo1) && Objects.equals(equipo2, conexion.equipo2) && Objects.equals(tipoCable, conexion.tipoCable) && Objects.equals(tipoPuertoEquipo1, conexion.tipoPuertoEquipo1) && Objects.equals(tipoPuertoEquipo2, conexion.tipoPuertoEquipo2);
     }
-
 }

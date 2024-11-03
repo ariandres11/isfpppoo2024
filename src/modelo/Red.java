@@ -116,6 +116,43 @@ public class Red {
 
     }
 
+    /**
+     * Agrega un nuevo tipo de puerto a la red.
+     * @param tipoPuerto El tipo de puerto a agregar.
+     * @return El tipo de puerto agregado.
+     */
+    public TipoPuerto agregarTipoPuerto(TipoPuerto tipoPuerto) throws TipoPuertoRepetidoException {
+        if(this.tipoPuertoService.buscarTodos().contains(tipoPuerto))
+            throw new TipoPuertoRepetidoException("Este tipo de equipo ya existe.");
+
+        this.tipoPuertoService.insertar(tipoPuerto);
+        return tipoPuerto;
+    }
+    /**
+     * Agrega un nuevo tipo de equipo a la red.
+     * @param tipoEquipo El tipo de equipo a agregar.
+     * @return El tipo de equipo agregado.
+     */
+    public TipoEquipo agregarTipoEquipo(TipoEquipo tipoEquipo) throws TipoEquipoRepetidoException {
+        if(this.tipoEquipoService.buscarTodos().contains(tipoEquipo))
+            throw new TipoEquipoRepetidoException("Este tipo de equipo ya existe.");
+
+        this.tipoEquipoService.insertar(tipoEquipo);
+        return tipoEquipo;
+    }
+    /**
+     * Agrega un nuevo tipo de cable a la red.
+     * @param tipoCable El tipo de cable a agregar.
+     * @return El tipo de cable agregado.
+     */
+    public TipoCable agregarTipoCable(TipoCable tipoCable) throws TipoCableRepetidoException {
+        if(this.tipoCableService.buscarTodos().contains(tipoCable))
+            throw new TipoCableRepetidoException("Este tipo de cable ya existe");
+
+        this.tipoCableService.insertar(tipoCable);
+        return tipoCable;
+    }
+
     // Métodos para borrar elementos de la red
 
     /**
@@ -136,9 +173,17 @@ public class Red {
      *
      * @param ubicacion La ubicación a eliminar.
      */
-    public void borrarUbicacion(Ubicacion ubicacion) throws UbicacionNoExistenteException {
+    public void borrarUbicacion(Ubicacion ubicacion) throws UbicacionNoExistenteException ,
+                                                            UbicacionEnUsoException {
         if (!this.ubicaciones.contains(ubicacion))
             throw new UbicacionNoExistenteException("Esta ubicacion no existe en la red.");
+
+        for(Equipo equipo : equipos) {
+            if(equipo.getUbicacion().equals(ubicacion))
+                throw new UbicacionEnUsoException("Existen equipos en la ubicacion: " + ubicacion.getCodigo() +
+                        "(" + ubicacion.getDescripcion() +
+                        "). Elimine aquellos equipos antes de continuar.");
+        }
 
         this.ubicaciones.remove(ubicacion);
         this.ubicacionService.borrar(ubicacion);
@@ -155,6 +200,52 @@ public class Red {
 
         this.conexiones.remove(conexion);
         this.conexionService.borrar(conexion);
+    }
+    public void borrarTipoPuerto(TipoPuerto tipoPuerto) throws TipoPuertoNoExistenteException,
+                                                                TipoPuertoEnUsoException {
+        if(!this.tipoPuertoService.buscarTodos().contains(tipoPuerto))
+            throw new TipoPuertoNoExistenteException("Este tipo de puerto no existe en la red.");
+
+        for (Equipo equipo : equipos) {
+            for(TipoPuerto tipoPuerto1 : equipo.getTipoPuertos()) {
+                if(tipoPuerto1.equals(tipoPuerto1))
+                    throw new TipoPuertoEnUsoException("Existen equipos que poseen el tipo de puerto: " +
+                            tipoPuerto.getCodigo() + "(" + tipoPuerto.getDescripcion() +
+                            "). Elimine aquellos equipos antes de continuar." );
+            }
+        }
+
+        this.tipoPuertoService.borrar(tipoPuerto);
+    }
+
+    public void borrarTipoEquipo(TipoEquipo tipoEquipo) throws TipoEquipoNoExistenteException,
+                                                                TipoEquipoEnUsoException{
+        if(!this.tipoEquipoService.buscarTodos().contains(tipoEquipo))
+            throw new TipoEquipoNoExistenteException("Este tipo de equipo no existe en la red");
+
+        for (Equipo equipo : equipos) {
+            if (equipo.getTipoEquipo().equals(tipoEquipo))
+                throw new TipoEquipoEnUsoException("Existen equipos que poseen el tipo de equipo: " +
+                        tipoEquipo.getCodigo() + "(" + tipoEquipo.getDescripcion() +
+                        "). Elimine aquellos equipos antes de continuar");
+        }
+
+        this.tipoEquipoService.borrar(tipoEquipo);
+    }
+
+    public void borrarTipoCable(TipoCable tipoCable) throws TipoCableNoExistenteException,
+                                                            TipoCableEnUsoException{
+        if(!this.tipoCableService.buscarTodos().contains(tipoCable))
+            throw new TipoCableNoExistenteException("Este tipo de cable no existe en la red.");
+
+        for (Conexion conexion : conexiones) {
+            if(conexion.getTipoCable().equals(tipoCable))
+                throw new TipoCableEnUsoException("Existen conexiones que poseen el tipo de cable: " +
+                        tipoCable.getCodigo() + "(" + tipoCable.getDescripcion() +
+                        "). Elimine aquellas conexiones antes de continuar.");
+        }
+
+        this.tipoCableService.borrar(tipoCable);
     }
 
     // Métodos para modificar elementos de la red

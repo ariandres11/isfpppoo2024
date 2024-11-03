@@ -53,6 +53,13 @@ public class Coordinador {
     public void borrarUbicacion(Ubicacion ubicacion){
         red.borrarUbicacion(ubicacion);
     }
+
+    public void borrarTipoPuerto(TipoPuerto tipoPuerto) { red.borrarTipoPuerto(tipoPuerto); }
+
+    public void borrarTipoEquipo(TipoEquipo tipoEquipo) { red.borrarTipoEquipo(tipoEquipo); }
+
+    public void borrarTipoCable(TipoCable tipoCable) { red.borrarTipoCable(tipoCable); }
+
     public List<Conexion> listarConexiones() {
         return red.getConexiones();
     }
@@ -64,6 +71,7 @@ public class Coordinador {
     public List<Ubicacion> listarUbicaciones() {
         return red.getUbicaciones();
     }
+
     public List<TipoPuerto> listarTipoPuertos() { return red.getTipoPuertos(); }
 
     public List<TipoCable> listarTipoCables() { return red.getTipoCables(); }
