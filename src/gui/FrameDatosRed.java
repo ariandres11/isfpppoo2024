@@ -437,30 +437,23 @@ public class FrameDatosRed extends JDialog {
 
                     JButton JBAgregarConexion = new JButton("Agregar");
                     JBAgregarConexion.addActionListener(e3 -> {
-                        String codigoEquipo1 = JCBEquipo1.getSelectedItem().toString();
-                        String codigoEquipo2 = JCBEquipo2.getSelectedItem().toString();
-                        String codigoPuerto1 = JCBPuerto1.getSelectedItem().toString();
-                        String codigoPuerto2 = JCBPuerto2.getSelectedItem().toString();
-                        String codigoTipoCable = JCBTipoCable.getSelectedItem().toString();
+                        String codigoEquipo1 = JCBEquipo1.getItemAt(JCBEquipo1.getSelectedIndex());
+                        String codigoEquipo2 = JCBEquipo2.getItemAt(JCBEquipo2.getSelectedIndex());
+                        String codigoPuerto1 = JCBPuerto1.getItemAt(JCBPuerto1.getSelectedIndex());
+                        String codigoPuerto2 = JCBPuerto2.getItemAt(JCBPuerto2.getSelectedIndex());
+                        String codigoTipoCable = JCBTipoCable.getItemAt(JCBTipoCable.getSelectedIndex());
 
-                        Equipo equipo1 = new Equipo();
-                        Equipo equipo2 = new Equipo();
-                        TipoPuerto puerto1 = new TipoPuerto();
-                        TipoPuerto puerto2 = new TipoPuerto();
-                        TipoCable cable1 = new TipoCable();
-
-                        equipo1 = coordinador.buscarEquipo(codigoEquipo1);
-                        equipo2 = coordinador.buscarEquipo(codigoEquipo2);
-                        puerto1 = coordinador.buscarTipoPuerto(codigoPuerto1);
-                        puerto2 = coordinador.buscarTipoPuerto(codigoPuerto2);
-                        cable1 = coordinador.buscarTipoCable(codigoTipoCable);
+                        Equipo equipo1 = coordinador.buscarEquipo(codigoEquipo1);
+                        Equipo equipo2 = coordinador.buscarEquipo(codigoEquipo2);
+                        TipoPuerto puerto1 = coordinador.buscarTipoPuerto(codigoPuerto1);
+                        TipoPuerto puerto2 = coordinador.buscarTipoPuerto(codigoPuerto2);
+                        TipoCable cable1 = coordinador.buscarTipoCable(codigoTipoCable);
 
                         Conexion conexion = new Conexion(equipo1, equipo2, cable1, puerto1, puerto2, false );
 
                         coordinador.agregarConexion(conexion);
                         actualizarTablaConexiones();
                         JOptionPane.showMessageDialog(this,"Conexión agregada exitosamente.");
-
                         this.dispose();
                     });
 
