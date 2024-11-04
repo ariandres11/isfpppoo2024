@@ -255,7 +255,7 @@ public class Equipo {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Equipo equipo = (Equipo) o;
-        return getCodigo() == equipo.getCodigo();
+        return codigo.equals(equipo.getCodigo());
     }
 
 }

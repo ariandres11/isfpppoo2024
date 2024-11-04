@@ -85,6 +85,6 @@ public class TipoPuerto {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         TipoPuerto that = (TipoPuerto) o;
-        return Objects.equals(codigo, that.codigo);
+        return codigo.equals(that.getCodigo());
     }
 }
