@@ -5,6 +5,8 @@ import excepciones.*;
 import modelo.*;
 
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.ArrayList;
@@ -217,7 +219,7 @@ public class FrameDatosRed extends JDialog {
     }
 
     public void agregarBotones() {
-        final Dimension DIMENSION_JTF = new Dimension(70,20);
+        final Dimension DIMENSION_JTF = new Dimension(80,20);
         JPanel JPBotones = new JPanel();
         JBAgregar = new JButton("Agregar");
         JBModificar = new JButton("Modificar");
@@ -232,7 +234,7 @@ public class FrameDatosRed extends JDialog {
             switch(tituloTabla){
                 case "Equipos":
                     JDialog JDAgregarEquipo = new JDialog();
-                    JDAgregarEquipo.setSize(450,400);
+                    JDAgregarEquipo.setSize(540,480);
                     JDAgregarEquipo.setResizable(false);
                     setTitle("Agregar Equipo");
 
@@ -240,42 +242,47 @@ public class FrameDatosRed extends JDialog {
                     List<TipoPuerto> tipoPuertos = new ArrayList<TipoPuerto>();
                     List<Integer> puertosCantidad = new ArrayList<Integer>();
 
+                    final int JL_X_COORD = 20;
+                    final int JL_Y_COORD = 15;
+                    final int WIDTH = 120;
+                    final int HEIGHT = 20;
+
                     JLabel JLCodigo = new JLabel("Codigo (*):");
+                    JLCodigo.setBounds(JL_X_COORD,JL_Y_COORD,WIDTH,HEIGHT);
                     JLabel JLDescripcion = new JLabel("Descripción:");
+                    JLDescripcion.setBounds(JL_X_COORD,JL_Y_COORD*3,WIDTH,HEIGHT);
                     JLabel JLMarca = new JLabel("Marca: ");
+                    JLMarca.setBounds(JL_X_COORD,JL_Y_COORD*5,WIDTH,HEIGHT);
                     JLabel JLModelo = new JLabel("Modelo: ");
-                    JLabel JLDireccionesIP = new JLabel("DireccionesIP: ");
-                    JLabel JLTipoPuerto = new JLabel("Tipo de Puerto/Cantidad (*): ");
+                    JLModelo.setBounds(JL_X_COORD,JL_Y_COORD*7,WIDTH,HEIGHT);
                     JLabel JLTipoEquipo = new JLabel("Tipo de Equipo: ");
+                    JLTipoEquipo.setBounds(JL_X_COORD,JL_Y_COORD*9,WIDTH,HEIGHT);
                     JLabel JLUbicacion = new JLabel("Ubicación: ");
+                    JLUbicacion.setBounds(JL_X_COORD,JL_Y_COORD*11,WIDTH,HEIGHT);
                     JLabel JLEstado = new JLabel("Estado (*): ");
+                    JLEstado.setBounds(JL_X_COORD,JL_Y_COORD*13,WIDTH,HEIGHT);
 
                     JTextField JTFCodigo = new JTextField();
-                    JTFCodigo.setPreferredSize(DIMENSION_JTF);
+                    JTFCodigo.setBounds(JL_X_COORD*6,JL_Y_COORD,WIDTH,HEIGHT);
                     JTextField JTFDescripcion = new JTextField();
-                    JTFDescripcion.setPreferredSize(DIMENSION_JTF);
+                    JTFDescripcion.setBounds(JL_X_COORD*6,JL_Y_COORD*3,WIDTH,HEIGHT);
                     JTextField JTFMarca = new JTextField();
-                    JTFMarca.setPreferredSize(DIMENSION_JTF);
+                    JTFMarca.setBounds(JL_X_COORD*6,JL_Y_COORD*5,WIDTH,HEIGHT);
                     JTextField JTFModelo = new JTextField();
-                    JTFModelo.setPreferredSize(DIMENSION_JTF);
-                    JTextField JTFPuertosAgregados = new JTextField();
-                    JTFPuertosAgregados.setPreferredSize(new Dimension(350,100));
-                    JTFPuertosAgregados.enableInputMethods(false);
-                    JTextField JTFPuertoCantidad = new JTextField();
-                    JTFPuertoCantidad.setPreferredSize(DIMENSION_JTF);
-                    JTextField JTFDireccionIP = new JTextField();
-                    JTFDireccionIP.setPreferredSize(DIMENSION_JTF);
-                    JTextField JTFDireccionesIPAgregadas = new JTextField();
-                    JTFDireccionesIPAgregadas.setPreferredSize(new Dimension(350,100));
-                    JTFDireccionesIPAgregadas.enableInputMethods(false);
+                    JTFModelo.setBounds(JL_X_COORD*6,JL_Y_COORD*7,WIDTH,HEIGHT);
 
-                    JComboBox<String> JCBPuertos = new JComboBox<String>();
+
                     JComboBox<String> JCBTipoEquipo = new JComboBox<String>();
+                    JCBTipoEquipo.setBounds(JL_X_COORD*6,JL_Y_COORD*9,WIDTH/2,HEIGHT);
                     JComboBox<String> JCBUbicacion = new JComboBox<String>();
-
-                    for (TipoPuerto puerto : coordinador.listarTipoPuertos()) {
-                        JCBPuertos.addItem(puerto.getCodigo());
-                    }
+                    JCBUbicacion.setBounds(JL_X_COORD*6,JL_Y_COORD*11,WIDTH/2,HEIGHT);
+                    JToggleButton JTBEstado = new JToggleButton();
+                    JTBEstado.setBounds(JL_X_COORD*6,JL_Y_COORD*13,WIDTH,HEIGHT);
+                    JTBEstado.setText("Inactivo");
+                    JTBEstado.addChangeListener(e2 -> {
+                        if( JTBEstado.isSelected() ) JTBEstado.setText("Activo");
+                        else JTBEstado.setText("Inactivo");
+                    });
 
                     for (TipoEquipo equipo : coordinador.listarTipoEquipos()) {
                         JCBTipoEquipo.addItem(equipo.getCodigo());
@@ -285,36 +292,78 @@ public class FrameDatosRed extends JDialog {
                         JCBUbicacion.addItem(ubicacion.getCodigo());
                     }
 
-                    JToggleButton JTBEstado = new JToggleButton();
-                    JTBEstado.setText("Activo");
+                    JLabel JLTipoPuerto = new JLabel("Tipo de Puerto/Cantidad (*): ");
+                    JLTipoPuerto.setBounds(JL_X_COORD*13,JL_Y_COORD,WIDTH*2,HEIGHT);
+                    JTextField JTFPuertoCantidad = new JTextField();
+                    JTFPuertoCantidad.setBounds(JL_X_COORD*17,JL_Y_COORD*3,WIDTH/2,HEIGHT);
+
+                    JComboBox<String> JCBPuertos = new JComboBox<String>();
+                    JCBPuertos.setBounds(JL_X_COORD*13,JL_Y_COORD*3,WIDTH/2,HEIGHT);
+
+                    for (TipoPuerto puerto : coordinador.listarTipoPuertos()) {
+                        JCBPuertos.addItem(puerto.getCodigo());
+                    }
+
+                    JTextArea JTAPuertosAgregados = new JTextArea();
+                    JTAPuertosAgregados.setBounds(JL_X_COORD*13,JL_Y_COORD*5,WIDTH*2,HEIGHT*7);
+                    JTAPuertosAgregados.setLineWrap(true);
+                    JTAPuertosAgregados.setWrapStyleWord(true);
+                    JTAPuertosAgregados.setEditable(false);
 
                     JButton JBAgregarPuerto = new JButton("+");
-                    JButton JBAgregarDireccionIP = new JButton("+");
-                    JButton JBAgregarEquipo = new JButton("Agregar");
-
+                    JBAgregarPuerto.setBounds(JL_X_COORD*21,JL_Y_COORD*3,WIDTH/2,HEIGHT);
                     JBAgregarPuerto.addActionListener(e4 -> {
 
                         TipoPuerto tipoPuerto = new TipoPuerto();
 
                         tipoPuerto = coordinador.buscarTipoPuerto(JCBPuertos.getItemAt(
-                                                                    JCBPuertos.getSelectedIndex()));
+                                JCBPuertos.getSelectedIndex()));
 
-                        tipoPuertos.add(tipoPuerto);
-                        puertosCantidad.add(Integer.parseInt(JTFPuertoCantidad.getText()));
+                        // verifica que se ingrese un puerto valido
+                        if (!tipoPuertos.contains(tipoPuerto) && JTFPuertoCantidad.getText().matches("[0-9]+")) {
+                            tipoPuertos.add(tipoPuerto);
+                            puertosCantidad.add(Integer.parseInt(JTFPuertoCantidad.getText()));
 
-                        JTFPuertosAgregados.setText(JTFPuertosAgregados.getText() +
-                                JCBPuertos.getItemAt(JCBPuertos.getSelectedIndex()) +
-                                "," + JTFPuertoCantidad.getText() + ";");
+                            JTAPuertosAgregados.setText(JTAPuertosAgregados.getText() +
+                                    JCBPuertos.getItemAt(JCBPuertos.getSelectedIndex()) +
+                                    "," + JTFPuertoCantidad.getText() + "; ");
+                        } else {
+                            JOptionPane.showMessageDialog(JDAgregarEquipo, "Puerto repetido/ cantidad de " +
+                                                            "puertos invalida. Por favor, vuelva a ingresar los datos.");
+                        }
                     });
 
+                    JLabel JLDireccionesIP = new JLabel("DireccionesIP: ");
+                    JLDireccionesIP.setBounds(JL_X_COORD*13,JL_Y_COORD*15,WIDTH,HEIGHT);
+                    JTextField JTFDireccionIP = new JTextField();
+                    JTFDireccionIP.setBounds(JL_X_COORD*13,JL_Y_COORD*17,WIDTH,HEIGHT);
+
+                    JTextArea JTADireccionesIPAgregadas = new JTextArea();
+                    JTADireccionesIPAgregadas.setBounds(JL_X_COORD*13,JL_Y_COORD*19,WIDTH*2,HEIGHT*7);
+                    JTADireccionesIPAgregadas.setLineWrap(true);
+                    JTADireccionesIPAgregadas.setWrapStyleWord(true);
+                    JTADireccionesIPAgregadas.setEditable(false);
+
+                    JButton JBAgregarDireccionIP = new JButton("+");
+                    JBAgregarDireccionIP.setBounds(JL_X_COORD*21,JL_Y_COORD*17,WIDTH/2,HEIGHT);
                     JBAgregarDireccionIP.addActionListener(e5 -> {
 
-                        direccionesIP.add(JTFDireccionIP.getText());
+                        String direccionIP = JTFDireccionIP.getText();
 
-                        JTFDireccionesIPAgregadas.setText(JTFDireccionesIPAgregadas.getText() +
-                                JTFDireccionIP.getText() + ", ");
+                        // verifica si ya se ingreso la direccion IP + si posee el formato correcto
+                        if(!direccionesIP.contains(direccionIP) && coordinador.verificarIP(direccionIP)) {
+                            direccionesIP.add(direccionIP);
+
+                            JTADireccionesIPAgregadas.setText(JTADireccionesIPAgregadas.getText() +
+                                    direccionIP + ", ");
+                        } else {
+                            JOptionPane.showMessageDialog(JDAgregarEquipo, "Direccion IP repetida/ con formato " +
+                                                            "erroneo. Por favor, vuelva a ingresar una direccion IP");
+                        }
                     });
 
+                    JButton JBAgregarEquipo = new JButton("Agregar");
+                    JBAgregarEquipo.setBounds(JL_X_COORD*3,JL_Y_COORD*20,WIDTH,HEIGHT*2);
                     JBAgregarEquipo.addActionListener(e6 -> {
                         String codigoEquipo = JTFCodigo.getText();
                         String descripcionEquipo = JTFDescripcion.getText();
@@ -324,28 +373,39 @@ public class FrameDatosRed extends JDialog {
                         TipoEquipo tipoEquipo = coordinador.buscarTipoEquipo(JCBTipoEquipo.getItemAt(JCBTipoEquipo.getSelectedIndex()));
                         boolean estadoEquipo = JTBEstado.isSelected();
 
-                        Equipo equipoNuevo = new Equipo(codigoEquipo, descripcionEquipo, marcaEquipo, modeloEquipo,
-                                puertosCantidad.getFirst(), tipoPuertos.getFirst(),
-                                ubicacionEquipo, tipoEquipo, estadoEquipo);
+                        // verifica que la lista de puertos no este vacia + que el codigo del equipo no sea repetido ni
+                        // que sea vacio
+                        if (!tipoPuertos.isEmpty() && !codigoEquipo.isEmpty() &&
+                                !coordinador.listarEquipoCodigos().contains(codigoEquipo)) {
 
+                            Equipo equipoNuevo = new Equipo(codigoEquipo, descripcionEquipo, marcaEquipo, modeloEquipo,
+                                    puertosCantidad.getFirst(), tipoPuertos.getFirst(),
+                                    ubicacionEquipo, tipoEquipo, estadoEquipo);
 
-                        if(tipoPuertos.size() > 1) {
-                            for (int i=1 ; i < tipoPuertos.size() ; i++) {
-                                equipoNuevo.agregarPuerto(puertosCantidad.get(i), tipoPuertos.get(i));
+                            if (tipoPuertos.size() > 1) {
+                                for (int i = 1; i < tipoPuertos.size(); i++) {
+                                    equipoNuevo.agregarPuerto(puertosCantidad.get(i), tipoPuertos.get(i));
+                                }
                             }
-                        }
 
-                        try {
-                            coordinador.agregarEquipo(equipoNuevo);
-                            actualizarTablaEquipos();
-                            JOptionPane.showMessageDialog(this, "Equipo agregado exitosamente.");
-                            JDAgregarEquipo.dispose();
-                        } catch (EquipoRepetidoException EREe){
-                            JOptionPane.showMessageDialog(this, EREe.getMessage());
+                            equipoNuevo.setDireccionesIP(direccionesIP);
+
+                            try {
+                                coordinador.agregarEquipo(equipoNuevo);
+                                actualizarTablaEquipos();
+                                JOptionPane.showMessageDialog(JDAgregarEquipo, "Equipo agregado exitosamente.");
+                                JDAgregarEquipo.dispose();
+                            } catch (EquipoRepetidoException EREe) {
+                                JOptionPane.showMessageDialog(JDAgregarEquipo, EREe.getMessage());
+                            }
+                        } else {
+                            JOptionPane.showMessageDialog(JDAgregarEquipo, "No se pudo agregar el equipo nuevo, " +
+                                                            "verifique los datos ingresados.");
                         }
                     });
 
                     JPanel JPAgregarEquipo = new JPanel();
+                    JPAgregarEquipo.setLayout(null);
 
                     JPAgregarEquipo.add(JLCodigo);
                     JPAgregarEquipo.add(JTFCodigo);
@@ -372,12 +432,12 @@ public class FrameDatosRed extends JDialog {
                     JPAgregarEquipo.add(JCBPuertos);
                     JPAgregarEquipo.add(JTFPuertoCantidad);
                     JPAgregarEquipo.add(JBAgregarPuerto);
-                    JPAgregarEquipo.add(JTFPuertosAgregados);
+                    JPAgregarEquipo.add(JTAPuertosAgregados);
 
                     JPAgregarEquipo.add(JLDireccionesIP);
                     JPAgregarEquipo.add(JTFDireccionIP);
                     JPAgregarEquipo.add(JBAgregarDireccionIP);
-                    JPAgregarEquipo.add(JTFDireccionesIPAgregadas);
+                    JPAgregarEquipo.add(JTADireccionesIPAgregadas);
 
                     JPAgregarEquipo.add(JBAgregarEquipo);
 

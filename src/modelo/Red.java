@@ -367,6 +367,13 @@ public class Red {
         return null;
     }
 
+    public List<String> getEquiposCodigos() {
+        List<String> equiposCodigos = new ArrayList<String >();
+        for(Equipo equipo : getEquipos())
+            equiposCodigos.add(equipo.getCodigo());
+        return equiposCodigos;
+    }
+
 
     public List<Ubicacion> getUbicaciones() {
         return ubicaciones;

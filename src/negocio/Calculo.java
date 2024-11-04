@@ -389,7 +389,15 @@ public class Calculo {
                 (ip & 0xFF);
     }
 
+    public boolean verificarIP(String direccionIP) {
+        String regex = "(\\d{1,2}|(0|1)\\d{2}|2[0-4]\\d|25[0-5])";
+        String patron = regex + "\\."
+                + regex + "\\."
+                + regex + "\\."
+                + regex;
 
+        return direccionIP.matches(patron);
+    }
 
 
 }

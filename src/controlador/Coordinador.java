@@ -87,6 +87,8 @@ public class Coordinador {
         return calculo.listarIps(red.getEquipos());
     }
 
+    public List<String> listarEquipoCodigos () { return red.getEquiposCodigos(); }
+
 
     public Equipo buscarEquipo(String codigoEquipo) { return red.buscarEquipo(codigoEquipo); }
 
@@ -132,5 +134,5 @@ public class Coordinador {
         return calculo.ping(equipo);
     }
 
-
+    public boolean verificarIP(String direccionIP) { return calculo.verificarIP(direccionIP); }
 }
