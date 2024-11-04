@@ -65,6 +65,6 @@ public class TipoEquipo {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         TipoEquipo that = (TipoEquipo) o;
-        return Objects.equals(codigo, that.codigo);
+        return codigo.equals(that.getCodigo());
     }
 }

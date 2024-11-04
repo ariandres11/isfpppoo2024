@@ -85,6 +85,6 @@ public class TipoCable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         TipoCable tipoCable = (TipoCable) o;
-        return Objects.equals(codigo, tipoCable.codigo);
+        return codigo.equals(tipoCable.getCodigo());
     }
 }

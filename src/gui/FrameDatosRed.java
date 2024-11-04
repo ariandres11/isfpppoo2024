@@ -50,9 +50,9 @@ public class FrameDatosRed extends JDialog {
         JTOpciones.addTab("Equipos", JTEquipos);
         JTOpciones.addTab("Conexiones", JTConexiones);
         JTOpciones.addTab("Ubicaciones", JTUbicaciones);
-        JTOpciones.addTab("Tipos de equipo", JTTipoEquipo);
-        JTOpciones.addTab("Tipos de puerto", JTTipoPuerto);
-        JTOpciones.addTab("Tipos de cable", JTTipoCable);
+        JTOpciones.addTab("Tipos de Equipo", JTTipoEquipo);
+        JTOpciones.addTab("Tipos de Puerto", JTTipoPuerto);
+        JTOpciones.addTab("Tipos de Cable", JTTipoCable);
 
         // Desabilita el boton modificar si se seleccionar ver los datos de las conexiones
         JTOpciones.addChangeListener(e -> {
