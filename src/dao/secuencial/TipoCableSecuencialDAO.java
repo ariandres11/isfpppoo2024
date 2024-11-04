@@ -17,7 +17,7 @@ public class TipoCableSecuencialDAO implements TipoCableDAO {
     private List<TipoCable> listaTiposCable;
     private String nombre;
     private boolean actualizar;
-    private static final Logger logger = Logger.getLogger(UbicacionSecuencialDAO.class);
+    private static final Logger logger = Logger.getLogger(TipoCableSecuencialDAO.class);
 
 
     /**

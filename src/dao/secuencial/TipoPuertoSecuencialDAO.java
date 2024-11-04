@@ -18,7 +18,7 @@ public class TipoPuertoSecuencialDAO implements TipoPuertoDAO {
     private List<TipoPuerto> listaTiposPuerto;
     private String nombre;
     private boolean actualizar;
-    private static final Logger logger = Logger.getLogger(UbicacionSecuencialDAO.class);
+    private static final Logger logger = Logger.getLogger(TipoPuertoSecuencialDAO.class);
 
 
     /**

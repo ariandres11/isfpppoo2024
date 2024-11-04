@@ -16,11 +16,16 @@ public class Coordinador {
     private Calculo calculo;
     private Interfaz interfaz;
     private RoleContext roleContext;
+    private String modo = "Sim";
 
     public Coordinador() {
         this.roleContext = new RoleContext();
         //Por defecto siempre empezará en usuario
         this.roleContext.setRoleStrategy(new UserRoleStrategy());
+    }
+
+    public void setModo(String modo){
+        this.modo = modo;
     }
 
     public void setRed(Red red) { this.red = red; }
@@ -111,7 +116,12 @@ public class Coordinador {
     }
 
     public Map<String, Boolean> pingIPS (int dirRed1, int dirRed2, int dirHost1p1, int dirHost1p2, int dirHost2p1, int dirHost2p2) {
-        return calculo.pingEntreIPs(dirRed1,dirRed2,dirHost1p1,dirHost1p2,dirHost2p1,dirHost2p2);
+        if(modo == "Prod"){
+            return calculo.pingRangoIPs(dirRed1,dirRed2,dirHost1p1,dirHost1p2,dirHost2p1,dirHost2p2);
+        }else{
+            return calculo.pingEntreIPs(dirRed1,dirRed2,dirHost1p1,dirHost1p2,dirHost2p1,dirHost2p2);
+        }
+
     }
 
     public List<Conexion> detectarProblemas(Equipo equipo){

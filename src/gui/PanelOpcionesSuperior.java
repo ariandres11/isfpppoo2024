@@ -23,6 +23,8 @@ public class PanelOpcionesSuperior extends JPanel {
 
     private JButton JBCambiarRol = new JButton("Cambiar rol");
     private JButton JBDatosRed = new JButton("Administrar datos de Red");
+    private JButton JBCambiarModo = new JButton("Cambiar modo");
+
     private JLabel JLTitulo = new JLabel("Red de computadoras");
 
     public PanelOpcionesSuperior(Interfaz interfaz, RoleContext roleContext) {
@@ -32,6 +34,7 @@ public class PanelOpcionesSuperior extends JPanel {
 
         JBCambiarRol.addActionListener(new ManejadorBotonesSuperiores());
         JBDatosRed.addActionListener(new ManejadorBotonesSuperiores());
+        JBCambiarModo.addActionListener(new ManejadorBotonesSuperiores());
 
         setLayout(new BorderLayout());
 
@@ -44,11 +47,14 @@ public class PanelOpcionesSuperior extends JPanel {
 
         JBDatosRed.setFont(FUENTE_OPCIONES);
         JBCambiarRol.setFont(FUENTE_OPCIONES);
+        JBCambiarModo.setFont(FUENTE_OPCIONES);
 
         // Segundo panel (Botones)
         JPanel panelInf = new JPanel();
         panelInf.add(JBCambiarRol);
         panelInf.add(JBDatosRed);
+        panelInf.add(JBCambiarModo);
+
         this.add(panelInf, BorderLayout.CENTER);
         JBDatosRed.setVisible(false);
 
@@ -101,6 +107,24 @@ public class PanelOpcionesSuperior extends JPanel {
                     logger.setLevel(Level.INFO);
                     roleContext.mostrarOpciones(PanelOpcionesSuperior.this);
                 }
+            }
+            if (e.getSource() == JBCambiarModo){
+                String[] opciones = {"Produccion", "Simulación"};
+                String rolSeleccionado = (String) JOptionPane.showInputDialog(
+                        null,
+                        "Selecciona el modo:",
+                        "Cambio de Modo",
+                        JOptionPane.QUESTION_MESSAGE,
+                        null,
+                        opciones,
+                        opciones[0]
+                );
+                if ("Produccion".equals(rolSeleccionado)) {
+                    coordinador.setModo("Prod");
+                } else {
+                    coordinador.setModo("Sim");
+                }
+
             }
         }
     }

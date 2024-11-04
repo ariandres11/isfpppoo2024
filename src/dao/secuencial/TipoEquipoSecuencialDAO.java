@@ -17,7 +17,7 @@ public class TipoEquipoSecuencialDAO implements TipoEquipoDAO {
     private List<TipoEquipo> listaTiposEquipo;
     private String nombre;
     private boolean actualizar;
-    private static final Logger logger = Logger.getLogger(UbicacionSecuencialDAO.class);
+    private static final Logger logger = Logger.getLogger(TipoEquipoSecuencialDAO.class);
 
     /**
      * Constructor de la clase TipoEquipoSecuencialDAO.
