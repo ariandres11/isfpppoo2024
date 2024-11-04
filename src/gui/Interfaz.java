@@ -44,6 +44,8 @@ public class Interfaz extends JFrame {
         this.setVisible(true);
         //Por defecto el rol del usuario es user
         coordinador.setRoleStrategy(new UserRoleStrategy());
+        panelGrafo1 = new JPanel();
+        add(panelGrafo1, BorderLayout.CENTER);
         //Mostrar titulo
         mostrarMenu();
         agregarPanelSuperior();
@@ -156,6 +158,7 @@ public class Interfaz extends JFrame {
     public void mostrarConexiones(List<Conexion> recorrido) {
         StringBuilder resultado = new StringBuilder();
 
+        coordinador.cargarDatos();
         for (Conexion conexion : recorrido) {
             if (conexion.getEquipo1() != null && conexion.getEquipo2() != null) {
                 resultado.append("De ")
