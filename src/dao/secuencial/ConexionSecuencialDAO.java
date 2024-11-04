@@ -99,11 +99,11 @@ public class ConexionSecuencialDAO implements ConexionDAO {
             outFile = new Formatter(file);
             for (Conexion conexion : list) {
                 outFile.format("%s;%s;%s;%s;%s;%s\n",
-                        conexion.getEquipo1(),
-                        conexion.getEquipo2(),
-                        conexion.getTipoCable(),
-                        conexion.getTipoPuertoEquipo1(),
-                        conexion.getTipoPuertoEquipo2(),
+                        conexion.getEquipo1Codigo(),
+                        conexion.getEquipo2Codigo(),
+                        conexion.getTipoCableCodigo(),
+                        conexion.getTipoPuertoEquipo1().getCodigo(),
+                        conexion.getTipoPuertoEquipo2().getCodigo(),
                         conexion.isEstado());
             }
         } catch (FileNotFoundException fileNotFoundException) {

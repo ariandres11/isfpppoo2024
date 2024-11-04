@@ -5,6 +5,7 @@ import servicio.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * La clase Red representa una red de computadoras,
@@ -280,7 +281,7 @@ public class Red {
      */
     public Equipo buscarEquipo(String codigoEquipo) {
         for(Equipo equipo : getEquipos()) {
-            if (equipo.getCodigo() == codigoEquipo) {
+            if (Objects.equals(equipo.getCodigo(), codigoEquipo)) {
                 return equipo;
             }
         }
@@ -298,9 +299,9 @@ public class Red {
     public Conexion buscarConexion(String codigoEquipo1, String codigoEquipo2, String codigoCable) {
 
         for (Conexion conexion : getConexiones()) {
-            if (conexion.getEquipo1Codigo() == codigoEquipo1 &&
-                conexion.getEquipo2Codigo() == codigoEquipo2 &&
-                conexion.getTipoCableCodigo() == codigoCable) {
+            if (Objects.equals(conexion.getEquipo1Codigo(), codigoEquipo1) &&
+                    Objects.equals(conexion.getEquipo2Codigo(), codigoEquipo2) &&
+                    Objects.equals(conexion.getTipoCableCodigo(), codigoCable)) {
                 return conexion;
             }
         }
@@ -315,7 +316,7 @@ public class Red {
      */
     public Ubicacion buscarUbicacion (String codigoUbicacion) {
         for (Ubicacion ubicacion : getUbicaciones()) {
-            if( ubicacion.getCodigo() == codigoUbicacion) {
+            if(Objects.equals(ubicacion.getCodigo(), codigoUbicacion)) {
                 return ubicacion;
             }
         }
@@ -330,7 +331,7 @@ public class Red {
      */
     public TipoEquipo buscarTipoEquipo (String codigoTipoEquipo) {
         for(TipoEquipo tipoEquipo : tipoEquipoService.buscarTodos()) {
-            if(tipoEquipo.getCodigo() == codigoTipoEquipo) {
+            if(Objects.equals(tipoEquipo.getCodigo(), codigoTipoEquipo)) {
                 return tipoEquipo;
             }
         }
@@ -345,7 +346,7 @@ public class Red {
      */
     public TipoPuerto buscarTipoPuerto (String codigoTipoPuerto) {
         for (TipoPuerto tipoPuerto : tipoPuertoService.buscarTodos()) {
-            if(tipoPuerto.getCodigo() == codigoTipoPuerto) {
+            if(Objects.equals(tipoPuerto.getCodigo(), codigoTipoPuerto)) {
                 return tipoPuerto;
             }
         }
@@ -360,7 +361,7 @@ public class Red {
      */
     public TipoCable buscarTipoCable (String codigoTipoCable) {
         for (TipoCable tipoCable : tipoCableService.buscarTodos()) {
-            if (tipoCable.getCodigo() == codigoTipoCable) {
+            if (Objects.equals(tipoCable.getCodigo(), codigoTipoCable)) {
                 return tipoCable;
             }
         }
