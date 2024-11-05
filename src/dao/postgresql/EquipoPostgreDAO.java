@@ -13,6 +13,7 @@ public class EquipoPostgreDAO implements EquipoDAO {
     private Hashtable<String, TipoPuerto> tablaTiposPuerto;
     private Hashtable<String, TipoEquipo> tablaTiposEquipo;
     private Hashtable<String, Ubicacion> tablaUbicaciones;
+    private Hashtable<String, Equipo> tablaConexiones;
 
     public EquipoPostgreDAO() {
         tablaTiposPuerto = cargarTiposPuerto();
@@ -73,6 +74,26 @@ public class EquipoPostgreDAO implements EquipoDAO {
 
     @Override
     public void borrar(Equipo equipo) {
+
+        //Primero deletear los puertos y ips relacionados al puerto
+        String sqlIPs = "DELETE FROM ari_ips WHERE equipo = ?";
+        try (PreparedStatement psIPs = BDConexion.getConnection().prepareStatement(sqlIPs)) {
+            psIPs.setString(1, equipo.getCodigo());
+            psIPs.executeUpdate();
+        } catch (SQLException ex) {
+            logger.error("Error al borrar ips de equipo", ex);
+            throw new RuntimeException(ex);
+        }
+
+        String sqlPuertos = "DELETE FROM ari_equipos_puertos WHERE equipo_codigo = ?";
+        try (PreparedStatement psPuertos = BDConexion.getConnection().prepareStatement(sqlPuertos)) {
+            psPuertos.setString(1, equipo.getCodigo());
+            psPuertos.executeUpdate();
+        } catch (SQLException ex) {
+            logger.error("Error al borrar puertos de equipo", ex);
+            throw new RuntimeException(ex);
+        }
+
         String sqlEquipo = "DELETE FROM ari_equipos WHERE codigo = ?";
         try (PreparedStatement psEquipo = BDConexion.getConnection().prepareStatement(sqlEquipo)) {
             psEquipo.setString(1, equipo.getCodigo());
