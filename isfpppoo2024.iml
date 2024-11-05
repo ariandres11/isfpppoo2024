@@ -47,5 +47,15 @@
     <orderEntry type="library" name="postgresql-9.4.1208.jre6" level="project" />
     <orderEntry type="library" name="java" level="project" />
     <orderEntry type="library" exported="" name="ai.h2o.genmodel.ext.jgrapht" level="project" />
+    <orderEntry type="module-library" exported="">
+      <library type="repository">
+        <properties maven-id="org.postgresql:postgresql:9.4.1208.jre6" />
+        <CLASSES>
+          <root url="jar://$MAVEN_REPOSITORY$/org/postgresql/postgresql/9.4.1208.jre6/postgresql-9.4.1208.jre6.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
   </component>
 </module>
