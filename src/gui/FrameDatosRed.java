@@ -774,7 +774,7 @@ public class FrameDatosRed extends JDialog {
                                     coordinador.borrarEquipo(equipo);
                                     actualizarTablaEquipos();
                                     JOptionPane.showMessageDialog(this, "Equipo eliminado exitosamente.");
-                                } catch (EquipoNoExistenteException ENEEe) {
+                                } catch (EquipoNoExistenteException | EquipoEnUsoException ENEEe) {
                                     JOptionPane.showMessageDialog(this, ENEEe.getMessage());
                                 }
                             }

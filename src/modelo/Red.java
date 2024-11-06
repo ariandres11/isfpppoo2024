@@ -164,6 +164,10 @@ public class Red {
     public void borrarEquipo(Equipo equipo) throws EquipoNoExistenteException {
         if (!this.equipos.contains(equipo))
             throw new EquipoNoExistenteException("Este equipo no existe en la red.");
+        for(Conexion conexion : conexiones) {
+            if(conexion.getEquipo1().equals(equipo) || conexion.getEquipo2().equals(equipo))
+                throw new EquipoEnUsoException("Existen conexiones con este equipo. Elimine las conexiones antes de continuar.");
+        }
 
         this.equipos.remove(equipo);
         this.equipoService.borrar(equipo);
