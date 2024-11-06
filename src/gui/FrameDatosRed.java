@@ -588,6 +588,50 @@ public class FrameDatosRed extends JDialog {
 
                     break;
                 case "Tipos de Equipo":
+
+                    JDialog JDAgregarTipoEquipo = new JDialog();
+                    JDAgregarTipoEquipo.setSize(300,100);
+                    JDAgregarTipoEquipo.setResizable(false);
+                    JDAgregarTipoEquipo.setTitle("Agregar Ubicacion");
+
+                    JLabel JLCodigoTipoEquipo = new JLabel("Codigo: ");
+                    JLabel JLDescripcionTipoEquipo = new JLabel("Descripcion: ");
+
+                    JTextField JTFCodigoTipoEquipo = new JTextField();
+                    JTFCodigoTipoEquipo.setPreferredSize(new Dimension(70,20));
+                    JTextField JTFDescripcionTipoEquipo = new JTextField();
+                    JTFDescripcionTipoEquipo.setPreferredSize(new Dimension(70,20));
+
+                    JButton JBAgregarTipoEquipo = new JButton("Agregar");
+                    JBAgregarTipoEquipo.addActionListener(e1 -> {
+                        String codigoTipoEquipo = JTFCodigoTipoEquipo.getText();
+                        String descripcionTipoEquipo = JTFDescripcionTipoEquipo.getText();
+
+                        TipoEquipo tipoEquipo = new TipoEquipo();
+                        tipoEquipo.setCodigo(codigoTipoEquipo);
+                        tipoEquipo.setDescripcion(descripcionTipoEquipo);
+
+                        try {
+                            //coordinador.agregarTipoEquipo(tipoEquipo);
+                            actualizarTablaTipoEquipos();
+                            JOptionPane.showMessageDialog(JDAgregarTipoEquipo, "Tipo de equipo agregado correctamente.");
+                            JDAgregarTipoEquipo.dispose();
+                        } catch (TipoEquipoRepetidoException TER) {
+                            JOptionPane.showMessageDialog(this, TER.getMessage());
+                        }
+                    });
+
+                    JPanel JPAgregarTipoEquipo = new JPanel();
+                    JPAgregarTipoEquipo.add(JLCodigoTipoEquipo);
+                    JPAgregarTipoEquipo.add(JTFCodigoTipoEquipo);
+                    JPAgregarTipoEquipo.add(JLDescripcionTipoEquipo);
+                    JPAgregarTipoEquipo.add(JTFDescripcionTipoEquipo);
+                    JPAgregarTipoEquipo.add(JBAgregarTipoEquipo);
+
+                    JDAgregarTipoEquipo.add(JPAgregarTipoEquipo);
+                    JDAgregarTipoEquipo.setModalityType(ModalityType.APPLICATION_MODAL);
+                    JDAgregarTipoEquipo.setVisible(true);
+
                     break;
                 case "Tipos de Puerto":
                     break;

@@ -149,7 +149,6 @@ public class Red {
     public TipoCable agregarTipoCable(TipoCable tipoCable) throws TipoCableRepetidoException {
         if(this.tipoCableService.buscarTodos().contains(tipoCable))
             throw new TipoCableRepetidoException("Este tipo de cable ya existe");
-
         this.tipoCableService.insertar(tipoCable);
         return tipoCable;
     }
