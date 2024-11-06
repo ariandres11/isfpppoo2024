@@ -42,6 +42,11 @@ public class Coordinador {
     public void agregarConexion(Conexion conexion){
         red.agregarConexion(conexion);
     }
+    public void agregarTipoEquipo (TipoEquipo tipoEquipo) {red.agregarTipoEquipo(tipoEquipo); }
+
+    public void agregarTipoPuerto (TipoPuerto tipoPuerto) {red.agregarTipoPuerto(tipoPuerto); }
+
+    public void agregarTipoCable (TipoCable tipoCable) {red.agregarTipoCable(tipoCable); }
 
     public void agregarUbicacion(Ubicacion ubicacion){
         red.agregarUbicacion(ubicacion);

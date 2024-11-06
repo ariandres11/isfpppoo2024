@@ -110,6 +110,7 @@ public class Interfaz extends JFrame {
         }
     }
 
+
     /**
      * Permite al usuario elegir un equipo de una lista.
      *

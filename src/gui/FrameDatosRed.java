@@ -392,6 +392,7 @@ public class FrameDatosRed extends JDialog {
 
                             try {
                                 coordinador.agregarEquipo(equipoNuevo);
+                                coordinador.cargarDatos();
                                 actualizarTablaEquipos();
                                 JOptionPane.showMessageDialog(JDAgregarEquipo, "Equipo agregado exitosamente.");
                                 JDAgregarEquipo.dispose();
@@ -519,6 +520,7 @@ public class FrameDatosRed extends JDialog {
 
                         try {
                             coordinador.agregarConexion(conexion);
+                            coordinador.cargarDatos();
                             actualizarTablaConexiones();
                             JOptionPane.showMessageDialog(this, "Conexión agregada exitosamente.");
                             JDAgregarConexion.dispose();
@@ -592,7 +594,7 @@ public class FrameDatosRed extends JDialog {
                     JDialog JDAgregarTipoEquipo = new JDialog();
                     JDAgregarTipoEquipo.setSize(300,100);
                     JDAgregarTipoEquipo.setResizable(false);
-                    JDAgregarTipoEquipo.setTitle("Agregar Ubicacion");
+                    JDAgregarTipoEquipo.setTitle("Agregar Tipo de Equipo");
 
                     JLabel JLCodigoTipoEquipo = new JLabel("Codigo: ");
                     JLabel JLDescripcionTipoEquipo = new JLabel("Descripcion: ");
@@ -612,7 +614,7 @@ public class FrameDatosRed extends JDialog {
                         tipoEquipo.setDescripcion(descripcionTipoEquipo);
 
                         try {
-                            //coordinador.agregarTipoEquipo(tipoEquipo);
+                            coordinador.agregarTipoEquipo(tipoEquipo);
                             actualizarTablaTipoEquipos();
                             JOptionPane.showMessageDialog(JDAgregarTipoEquipo, "Tipo de equipo agregado correctamente.");
                             JDAgregarTipoEquipo.dispose();
@@ -634,8 +636,106 @@ public class FrameDatosRed extends JDialog {
 
                     break;
                 case "Tipos de Puerto":
+
+                    JDialog JDAgregarTipoPuerto = new JDialog();
+                    JDAgregarTipoPuerto.setSize(300,100);
+                    JDAgregarTipoPuerto.setResizable(false);
+                    JDAgregarTipoPuerto.setTitle("Agregar Tipo de Puerto");
+
+                    JLabel JLCodigoTipoPuerto = new JLabel("Codigo: ");
+                    JLabel JLDescripcionTipoPuerto = new JLabel("Descripcion: ");
+                    JLabel JLVelocidadTipoPuerto = new JLabel("Velocidad: ");
+                    JTextField JTFCodigoTipoPuerto = new JTextField();
+                    JTFCodigoTipoPuerto.setPreferredSize(new Dimension(70,20));
+                    JTextField JTFDescripcionTipoPuerto = new JTextField();
+                    JTFDescripcionTipoPuerto.setPreferredSize(new Dimension(70,20));
+                    JTextField JTFVelocidadTipoPuerto = new JTextField();
+                    JTFVelocidadTipoPuerto.setPreferredSize(new Dimension(70,20));
+
+                    JButton JBAgregarTipoPuerto = new JButton("Agregar");
+                    JBAgregarTipoPuerto.addActionListener(e1 -> {
+                        String codigoTipoPuerto = JTFCodigoTipoPuerto.getText();
+                        String descripcionTipoPuerto = JTFDescripcionTipoPuerto.getText();
+                        int velocidadTipoPuerto = Integer.parseInt(JTFVelocidadTipoPuerto.getText());
+
+                        TipoPuerto tipoPuerto = new TipoPuerto();
+                        tipoPuerto.setCodigo(codigoTipoPuerto);
+                        tipoPuerto.setDescripcion(descripcionTipoPuerto);
+                        tipoPuerto.setVelocidad(velocidadTipoPuerto);
+
+                        try {
+                            coordinador.agregarTipoPuerto(tipoPuerto);
+                            actualizarTablaTipoPuertos();
+                            JOptionPane.showMessageDialog(JDAgregarTipoPuerto, "Tipo de Puerto agregado correctamente.");
+                            JDAgregarTipoPuerto.dispose();
+                        } catch (TipoPuertoRepetidoException TPR) {
+                            JOptionPane.showMessageDialog(this, TPR.getMessage());
+                        }
+                    });
+
+                    JPanel JPAgregarTipoPuerto = new JPanel();
+                    JPAgregarTipoPuerto.add(JLCodigoTipoPuerto);
+                    JPAgregarTipoPuerto.add(JTFCodigoTipoPuerto);
+                    JPAgregarTipoPuerto.add(JLDescripcionTipoPuerto);
+                    JPAgregarTipoPuerto.add(JTFDescripcionTipoPuerto);
+                    JBAgregarTipoPuerto.add(JLVelocidadTipoPuerto);
+                    JPAgregarTipoPuerto.add(JTFVelocidadTipoPuerto);
+                    JPAgregarTipoPuerto.add(JBAgregarTipoPuerto);
+                    JDAgregarTipoPuerto.add(JPAgregarTipoPuerto);
+                    JDAgregarTipoPuerto.setModalityType(ModalityType.APPLICATION_MODAL);
+                    JDAgregarTipoPuerto.setVisible(true);
+
                     break;
                 case "Tipos de Cable":
+                    JDialog JDAgregarTipoCable = new JDialog();
+                    JDAgregarTipoCable.setSize(300,100);
+                    JDAgregarTipoCable.setResizable(false);
+                    JDAgregarTipoCable.setTitle("Agregar Tipo de Cable");
+
+                    JLabel JLCodigoTipoCable = new JLabel("Codigo: ");
+                    JLabel JLDescripcionTipoCable = new JLabel("Descripcion: ");
+                    JLabel JLVelocidadTipoCable = new JLabel("Velocidad: ");
+
+                    JTextField JTFCodigoTipoCable = new JTextField();
+                    JTFCodigoTipoCable.setPreferredSize(new Dimension(70,20));
+                    JTextField JTFDescripcionTipoCable = new JTextField();
+                    JTFDescripcionTipoCable.setPreferredSize(new Dimension(70,20));
+                    JTextField JTFVelocidadTipoCable = new JTextField();
+                    JTFVelocidadTipoCable.setPreferredSize(new Dimension(70,20));
+
+                    JButton JBAgregarTipoCable= new JButton("Agregar");
+                    JBAgregarTipoCable.addActionListener(e1 -> {
+                        String codigoTipoCable = JTFCodigoTipoCable.getText();
+                        String descripcionTipoCable = JTFDescripcionTipoCable.getText();
+                        int velocidadTipoCable = Integer.parseInt(JTFVelocidadTipoCable.getText());
+
+                        TipoCable tipoCable = new TipoCable();
+                        tipoCable.setCodigo(codigoTipoCable);
+                        tipoCable.setDescripcion(descripcionTipoCable);
+                        tipoCable.setVelocidad(velocidadTipoCable);
+
+                        try {
+                            coordinador.agregarTipoCable(tipoCable);
+                            actualizarTablaTipoCables();
+                            JOptionPane.showMessageDialog(JDAgregarTipoCable, "Tipo de Cable agregado correctamente.");
+                            JDAgregarTipoCable.dispose();
+                        } catch (TipoCableRepetidoException TCR) {
+                            JOptionPane.showMessageDialog(this, TCR.getMessage());
+                        }
+                    });
+
+                    JPanel JPAgregarTipoCable = new JPanel();
+                    JPAgregarTipoCable.add(JLCodigoTipoCable);
+                    JPAgregarTipoCable.add(JTFCodigoTipoCable);
+                    JPAgregarTipoCable.add(JLDescripcionTipoCable);
+                    JPAgregarTipoCable.add(JTFDescripcionTipoCable);
+                    JPAgregarTipoCable.add(JBAgregarTipoCable);
+                    JBAgregarTipoCable.add(JLVelocidadTipoCable);
+                    JPAgregarTipoCable.add(JTFVelocidadTipoCable);
+
+                    JDAgregarTipoCable.add(JPAgregarTipoCable);
+                    JDAgregarTipoCable.setModalityType(ModalityType.APPLICATION_MODAL);
+                    JDAgregarTipoCable.setVisible(true);
                     break;
             }
         });
