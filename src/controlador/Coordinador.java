@@ -36,6 +36,7 @@ public class Coordinador {
     public void setRoleStrategy(RoleStrategy strategy) {
         this.roleContext.setRoleStrategy(strategy);
     }
+
     public void agregarEquipo(Equipo equipo){
         red.agregarEquipo(equipo);
     }
@@ -69,6 +70,14 @@ public class Coordinador {
     public void borrarTipoEquipo(TipoEquipo tipoEquipo) { red.borrarTipoEquipo(tipoEquipo); }
 
     public void borrarTipoCable(TipoCable tipoCable) { red.borrarTipoCable(tipoCable); }
+
+
+    public void modificarEquipo(Equipo equipo) { red.modificarEquipo(equipo); }
+
+    public void modificarUbicacion(Ubicacion ubicacion) { red.modificarUbicacion(ubicacion); }
+
+    public void modificarTipoEquipo(TipoEquipo tipoEquipo) { red.modificarTipoEquipo(tipoEquipo); }
+
 
     public List<Conexion> listarConexiones() {
         return red.getConexiones();

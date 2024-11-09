@@ -277,6 +277,15 @@ public class Red {
     }
 
     /**
+     * Modifica un tipo de equipo existente en la red.
+     *
+     * @param tipoEquipo Tipo de equipo a modificar.
+     */
+    public void modificarTipoEquipo (TipoEquipo tipoEquipo) {
+        tipoEquipoService.actualizar(tipoEquipo);
+    }
+
+    /**
      * Busca a un equipo de la red por su codigo.
      *
      * @param codigoEquipo Codigo del equipo a buscar.

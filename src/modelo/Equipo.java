@@ -118,6 +118,14 @@ public class Equipo {
         return  listaTipoPuertos;
     }
 
+    public List<Integer> getPuertosCantidades() {
+        List<Integer> listaPuertosCantidades = new ArrayList<>();
+
+        for (Puerto puerto : this.getPuertos()) { listaPuertosCantidades.add(puerto.getCantidad()); }
+
+        return listaPuertosCantidades;
+    }
+
     /**
      * Clase interna que representa un puerto en el equipo.
      */
