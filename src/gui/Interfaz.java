@@ -51,7 +51,6 @@ public class Interfaz extends JFrame {
         agregarPanelSuperior();
     }
 
-
     /**
      * Obtiene el coordinador de la interfaz.
      *
@@ -149,7 +148,6 @@ public class Interfaz extends JFrame {
         System.out.println("No se encontró el equipo.");
         return null; // En caso de que no se encuentre el equipo (no debería ocurrir)
     }
-
 
     /**
      * Muestra el resultado de un recorrido de conexiones.
@@ -341,6 +339,117 @@ public class Interfaz extends JFrame {
                 JOptionPane.showMessageDialog(null, "Por favor, introduzca valores válidos para las direcciones IP.", "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
+    }
+
+    public String seleccionarIP() {
+        // Crear campos de texto para la primera IP
+        JTextField digitoRed1 = new JTextField(3);
+        JTextField digitoRed2 = new JTextField(3);
+        JTextField digitoHost1 = new JTextField(3);
+        JTextField digitoHost2 = new JTextField(3);
+
+        // Crear campos de texto para la segunda IP
+
+        // Aumentar el tamaño de fuente
+        digitoRed1.setFont(FUENTE_CONSULTAS);
+        digitoRed2.setFont(FUENTE_CONSULTAS);
+        digitoHost1.setFont(FUENTE_CONSULTAS);
+        digitoHost2.setFont(FUENTE_CONSULTAS);
+
+        // Configurar el panel con un diseño de cuadrícula
+        JPanel panel = new JPanel(new GridBagLayout());
+        GridBagConstraints constraints = new GridBagConstraints();
+
+        // Configurar el título y los campos de texto para la primera IP
+        constraints.gridx = 0;
+        constraints.gridy = 0;
+        constraints.gridwidth = 4;
+        constraints.anchor = GridBagConstraints.WEST;
+        JLabel tituloInicio = new JLabel("Dirección IP de inicio:");
+        tituloInicio.setFont(FUENTE_CONSULTAS);
+        panel.add(tituloInicio, constraints);
+
+        constraints.gridwidth = 1;
+        constraints.gridy = 1;
+        JLabel labelRed1 = new JLabel("Red 1:");
+        labelRed1.setFont(FUENTE_CONSULTAS);
+        panel.add(labelRed1, constraints);
+        constraints.gridx = 1;
+        panel.add(digitoRed1, constraints);
+        constraints.gridx = 2;
+        JLabel labelRed2 = new JLabel("Red 2:");
+        labelRed2.setFont(FUENTE_CONSULTAS);
+        panel.add(labelRed2, constraints);
+        constraints.gridx = 3;
+        panel.add(digitoRed2, constraints);
+
+        constraints.gridy = 2;
+        constraints.gridx = 0;
+        JLabel labelHost1 = new JLabel("Host 1:");
+        labelHost1.setFont(FUENTE_CONSULTAS);
+        panel.add(labelHost1, constraints);
+        constraints.gridx = 1;
+        panel.add(digitoHost1, constraints);
+        constraints.gridx = 2;
+        JLabel labelHost2 = new JLabel("Host 2:");
+        labelHost2.setFont(FUENTE_CONSULTAS);
+        panel.add(labelHost2, constraints);
+        constraints.gridx = 3;
+        panel.add(digitoHost2, constraints);
+
+        // Configurar el título y los campos de texto para la segunda IP
+        constraints.gridy = 3;
+        constraints.gridx = 0;
+        constraints.gridwidth = 4;
+        JLabel tituloFin = new JLabel("Dirección IP de fin:");
+        tituloFin.setFont(FUENTE_CONSULTAS);
+        panel.add(tituloFin, constraints);
+
+        constraints.gridy = 4;
+        constraints.gridwidth = 1;
+        constraints.gridx = 0;
+        JLabel labelHost3 = new JLabel("Host 3:");
+        labelHost3.setFont(FUENTE_CONSULTAS);
+        panel.add(labelHost3, constraints);
+        constraints.gridx = 1;
+        constraints.gridx = 2;
+        JLabel labelHost4 = new JLabel("Host 4:");
+        labelHost4.setFont(FUENTE_CONSULTAS);
+        panel.add(labelHost4, constraints);
+        constraints.gridx = 3;
+
+        panel.setPreferredSize(new Dimension(600, 200));
+
+        String ip = "";
+
+        // Mostrar el cuadro de diálogo
+        int result = JOptionPane.showConfirmDialog(null, panel,
+                "Por favor, introduzca la dirección ip .", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+        if (result == JOptionPane.OK_OPTION) {
+            // Obtener y validar los valores ingresados
+            try {
+                int red1 = Integer.parseInt(digitoRed1.getText());
+                int red2 = Integer.parseInt(digitoRed2.getText());
+                int host1 = Integer.parseInt(digitoHost1.getText());
+                int host2 = Integer.parseInt(digitoHost2.getText());
+
+                ip = red1 + "." + red2 + "." + host1 + "." + host2;
+
+                // Validar los segmentos de IP (0-255)
+                if (red1 < 0 || red1 > 255 || red2 < 0 || red2 > 255 ||
+                        host1 < 0 || host1 > 255 || host2 < 0 || host2 > 255) {
+                    throw new NumberFormatException();
+                }
+
+                return ip;
+                // Mostrar los resultados del ping
+                // Mostrar los resultados en un cuadro de diálogo
+
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "Por favor, introduzca valores válidos para la dirección IP.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        return null;
     }
 
 

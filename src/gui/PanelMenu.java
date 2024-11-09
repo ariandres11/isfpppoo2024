@@ -83,6 +83,9 @@ public class PanelMenu extends JPanel {
                 interfaz.seleccionarIPs();
             } else if (e.getSource() == JBMapaActual) {
                 // Implementar la acción
+                coordinador.cargarDatos();
+                ArrayList<Conexion> recorrido = (ArrayList<Conexion>) coordinador.listarConexiones();
+                interfaz.mostrarConexiones(recorrido);
             } else if (e.getSource() == JBDetectarProblemas) {
                 Equipo equipo = interfaz.elegirEquipo(coordinador.listarEquipos(), "el que se quiere conocer los problemas");
                 coordinador.cargarDatos();

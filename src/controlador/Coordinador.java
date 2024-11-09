@@ -128,8 +128,21 @@ public class Coordinador {
         }else{
             return calculo.pingEntreIPs(dirRed1,dirRed2,dirHost1p1,dirHost1p2,dirHost2p1,dirHost2p2);
         }
-
     }
+
+    public boolean ping(){
+        if(Objects.equals(modo, "Prod")){
+            //Pedir la ip del equipo real
+            return  calculo.ping(interfaz.seleccionarIP());
+        }else{
+            //Seleccionar el equipo de la red
+            return calculo.ping(interfaz.elegirEquipo(listarEquipos(), "el que se quiere saber el ping"));
+        }
+    }
+
+   public void mostrarMapaActual(){
+       interfaz.mostrarConexiones(listarConexiones());
+   }
 
     public List<Conexion> detectarProblemas(Equipo equipo){
         return calculo.encontrarEquiposAlcanzables(equipo);
