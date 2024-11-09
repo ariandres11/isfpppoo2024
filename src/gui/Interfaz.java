@@ -401,22 +401,6 @@ public class Interfaz extends JFrame {
         constraints.gridy = 3;
         constraints.gridx = 0;
         constraints.gridwidth = 4;
-        JLabel tituloFin = new JLabel("Dirección IP de fin:");
-        tituloFin.setFont(FUENTE_CONSULTAS);
-        panel.add(tituloFin, constraints);
-
-        constraints.gridy = 4;
-        constraints.gridwidth = 1;
-        constraints.gridx = 0;
-        JLabel labelHost3 = new JLabel("Host 3:");
-        labelHost3.setFont(FUENTE_CONSULTAS);
-        panel.add(labelHost3, constraints);
-        constraints.gridx = 1;
-        constraints.gridx = 2;
-        JLabel labelHost4 = new JLabel("Host 4:");
-        labelHost4.setFont(FUENTE_CONSULTAS);
-        panel.add(labelHost4, constraints);
-        constraints.gridx = 3;
 
         panel.setPreferredSize(new Dimension(600, 200));
 

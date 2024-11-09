@@ -76,9 +76,7 @@ public class PanelMenu extends JPanel {
                 ArrayList<Conexion> recorrido = (ArrayList<Conexion>) coordinador.calcularMasRapido(equipoOrigen, equipoDestino);
                 interfaz.mostrarConexiones(recorrido);
             } else if (e.getSource() == JBPingEquipo) {
-                Equipo equipo = interfaz.elegirEquipo(coordinador.listarEquipos(), "el que se quiere saber el ping");
-                coordinador.cargarDatos();
-                interfaz.resultadoPingEquipo(coordinador.ping(equipo));
+                interfaz.resultadoPingEquipo(coordinador.ping());
             } else if (e.getSource() == JBPingIP) {
                 interfaz.seleccionarIPs();
             } else if (e.getSource() == JBMapaActual) {

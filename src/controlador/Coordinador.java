@@ -133,9 +133,11 @@ public class Coordinador {
     public boolean ping(){
         if(Objects.equals(modo, "Prod")){
             //Pedir la ip del equipo real
+            cargarDatos();
             return  calculo.ping(interfaz.seleccionarIP());
         }else{
             //Seleccionar el equipo de la red
+            cargarDatos();
             return calculo.ping(interfaz.elegirEquipo(listarEquipos(), "el que se quiere saber el ping"));
         }
     }
