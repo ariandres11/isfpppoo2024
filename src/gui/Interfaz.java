@@ -60,6 +60,14 @@ public class Interfaz extends JFrame {
         return coordinador;
     }
 
+    public JPanel getPanelMenu() {
+        return panelMenu;
+    }
+
+    public void setPanelMenu(JPanel panelMenu) {
+        this.panelMenu = panelMenu;
+    }
+
     /**
      * Establece el coordinador para la interfaz.
      *

@@ -32,7 +32,7 @@ public class Coordinador {
     public void setCalculo(Calculo calculo) { this.calculo = calculo; }
     public void setInterfaz(Interfaz interfaz) { this.interfaz = interfaz; interfaz.iniciar(this);}
     public PanelMenu crearPanelMenu() { return new PanelMenu(interfaz, roleContext); }
-    public PanelOpcionesSuperior crearPanelOpcionesSuperior() { return new PanelOpcionesSuperior(interfaz, roleContext); }
+    public PanelOpcionesSuperior crearPanelOpcionesSuperior() { return new PanelOpcionesSuperior(interfaz, roleContext, (PanelMenu) interfaz.getPanelMenu()); }
     public void setRoleStrategy(RoleStrategy strategy) {
         this.roleContext.setRoleStrategy(strategy);
     }

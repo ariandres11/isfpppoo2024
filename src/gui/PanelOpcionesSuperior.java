@@ -20,6 +20,7 @@ public class PanelOpcionesSuperior extends JPanel {
     private Coordinador coordinador;
     private RoleContext roleContext;
     private Logger logger = Logger.getLogger(PanelOpcionesSuperior.class);
+    private PanelMenu panelMenu;
 
     private JButton JBCambiarRol = new JButton("Cambiar rol");
     private JButton JBDatosRed = new JButton("Administrar datos de Red");
@@ -27,7 +28,8 @@ public class PanelOpcionesSuperior extends JPanel {
 
     private JLabel JLTitulo = new JLabel("Red de computadoras");
 
-    public PanelOpcionesSuperior(Interfaz interfaz, RoleContext roleContext) {
+    public PanelOpcionesSuperior(Interfaz interfaz, RoleContext roleContext, PanelMenu panelMenu) {
+        this.panelMenu = panelMenu;
         this.interfaz = interfaz;
         this.coordinador = interfaz.getCoordinador();
         this.roleContext = roleContext;
@@ -88,7 +90,7 @@ public class PanelOpcionesSuperior extends JPanel {
                 FrameDatosRed datosRed = new FrameDatosRed(coordinador);
             }
             if (e.getSource() == JBCambiarRol) {
-                String[] opciones = {"admin", "user"};
+                String[] opciones = {"Administrador", "Usuario"};
                 String rolSeleccionado = (String) JOptionPane.showInputDialog(
                         null,
                         "Selecciona el rol:",
@@ -98,7 +100,7 @@ public class PanelOpcionesSuperior extends JPanel {
                         opciones,
                         opciones[0]
                 );
-                if ("admin".equals(rolSeleccionado)) {
+                if ("Administrador".equals(rolSeleccionado)) {
                     coordinador.setRoleStrategy(new AdminRoleStrategy());
                     logger.setLevel(Level.DEBUG);
                     roleContext.mostrarOpciones(PanelOpcionesSuperior.this);
@@ -121,8 +123,14 @@ public class PanelOpcionesSuperior extends JPanel {
                 );
                 if ("Produccion".equals(rolSeleccionado)) {
                     coordinador.setModo("Prod");
+                    panelMenu.JBConexiones.setEnabled(false);
+                    panelMenu.JBMapaActual.setEnabled(false);
+                    panelMenu.JBDetectarProblemas.setEnabled(false);
                 } else {
                     coordinador.setModo("Sim");
+                    panelMenu.JBConexiones.setEnabled(true);
+                    panelMenu.JBMapaActual.setEnabled(true);
+                    panelMenu.JBDetectarProblemas.setEnabled(true);
                 }
 
             }

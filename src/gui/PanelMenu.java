@@ -61,6 +61,46 @@ public class PanelMenu extends JPanel {
         this.repaint();
     }
 
+    public JButton getJBConexiones() {
+        return JBConexiones;
+    }
+
+    public void setJBConexiones(JButton JBConexiones) {
+        this.JBConexiones = JBConexiones;
+    }
+
+    public JButton getJBPingEquipo() {
+        return JBPingEquipo;
+    }
+
+    public void setJBPingEquipo(JButton JBPingEquipo) {
+        this.JBPingEquipo = JBPingEquipo;
+    }
+
+    public JButton getJBPingIP() {
+        return JBPingIP;
+    }
+
+    public void setJBPingIP(JButton JBPingIP) {
+        this.JBPingIP = JBPingIP;
+    }
+
+    public JButton getJBMapaActual() {
+        return JBMapaActual;
+    }
+
+    public void setJBMapaActual(JButton JBMapaActual) {
+        this.JBMapaActual = JBMapaActual;
+    }
+
+    public JButton getJBDetectarProblemas() {
+        return JBDetectarProblemas;
+    }
+
+    public void setJBDetectarProblemas(JButton JBDetectarProblemas) {
+        this.JBDetectarProblemas = JBDetectarProblemas;
+    }
+
     /**
      * Clase interna que maneja los eventos de acción de los botones del menú.
      */
