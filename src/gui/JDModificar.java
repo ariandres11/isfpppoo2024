@@ -324,7 +324,7 @@ public class JDModificar extends JDialog {
             case "Ubicaciones":
                 int filaUbicacion = filaSeleccionada;
 
-                if( filaUbicacion != 1){
+                if( filaUbicacion != -1){
                     String codigoUbicacion = datosRed.getJTUbicaciones().getModel().
                             getValueAt(filaUbicacion, 0).toString();
 
@@ -426,132 +426,6 @@ public class JDModificar extends JDialog {
                     JOptionPane.showMessageDialog(this,"Por favor, seleccione una fila.");
                 }
                 break;
-            case "Tipos de Puerto":
-                /*
-                int filaTipoPuerto = filaSeleccionada;
-
-                if(filaTipoPuerto != -1) {
-                    String codigoTipoPuerto = datosRed.getJTTipoPuerto().getModel().
-                            getValueAt(filaTipoPuerto, 0).toString();
-
-                    TipoPuerto tipoPuerto = coordinador.buscarTipoPuerto(codigoTipoPuerto);
-
-                    setSize(300,100);
-                    setResizable(false);
-                    setTitle("Modificar Tipo de Puerto");
-
-                    JLabel JLCodigoTipoPuerto = new JLabel("Codigo: " + codigoTipoPuerto);
-                    JLabel JLDescripcionTipoPuerto = new JLabel("Descripcion: ");
-                    JLabel JLVelocidadTipoPuerto = new JLabel("Velocidad: ");
-
-                    JTextField JTFDescripcionTipoPuerto = new JTextField();
-                    JTFDescripcionTipoPuerto.setText(tipoPuerto.getDescripcion());
-                    JTFDescripcionTipoPuerto.setPreferredSize(new Dimension(70,20));
-                    JTextField JTFVelocidadTipoPuerto = new JTextField();
-                    JTFVelocidadTipoPuerto.setText(Integer.toString(tipoPuerto.getVelocidad()));
-                    JTFVelocidadTipoPuerto.setPreferredSize(new Dimension(70,20));
-
-                    JButton JBModificarTipoPuerto = new JButton("Modificar");
-                    JBModificarTipoPuerto.addActionListener(e1 -> {
-
-                        String descripcionTipoPuerto = JTFDescripcionTipoPuerto.getText();
-                        int velocidadTipoPuerto = Integer.parseInt(JTFVelocidadTipoPuerto.getText());
-
-                        tipoPuerto.setDescripcion(descripcionTipoPuerto);
-                        tipoPuerto.setVelocidad(velocidadTipoPuerto);
-
-                        try {
-                            coordinador.modificarTipoPuerto(tipoPuerto);
-                            coordinador.cargarDatos();
-                            datosRed.actualizarTablaTipoPuertos();
-                            JOptionPane.showMessageDialog(this, "Tipo de Puerto modificado correctamente.");
-                            dispose();
-                        } catch (TipoPuertoRepetidoException TPR) {
-                            JOptionPane.showMessageDialog(this, TPR.getMessage());
-                        }
-                    });
-
-                    JPanel JPModificarTipoPuerto = new JPanel();
-                    JPModificarTipoPuerto.add(JLCodigoTipoPuerto);
-                    JPModificarTipoPuerto.add(JLDescripcionTipoPuerto);
-                    JPModificarTipoPuerto.add(JTFDescripcionTipoPuerto);
-                    JPModificarTipoPuerto.add(JLVelocidadTipoPuerto);
-                    JPModificarTipoPuerto.add(JTFVelocidadTipoPuerto);
-                    JPModificarTipoPuerto.add(JBModificarTipoPuerto);
-
-                    add(JPModificarTipoPuerto);
-                    setModalityType(ModalityType.APPLICATION_MODAL);
-                    setVisible(true);
-                } else {
-                    JOptionPane.showMessageDialog(this,"Por favor, seleccione una fila.");
-                }
-                */
-
-                break;
-            case "Tipos de Cable":
-                /*
-                int filaTipoCable = filaSeleccionada;
-
-                if(filaTipoCable != -1) {
-
-                    String codigoTipoCable = datosRed.getJTTipoCable().getModel().
-                            getValueAt(filaTipoCable, 0).toString();
-
-                    TipoCable tipoCable = coordinador.buscarTipoCable(codigoTipoCable);
-
-                    setSize(300,100);
-                    setResizable(false);
-                    setTitle("Modificar Tipo de Cable");
-
-                    JLabel JLCodigoTipoCable = new JLabel("Codigo: " + codigoTipoCable);
-                    JLabel JLDescripcionTipoCable = new JLabel("Descripcion: ");
-                    JLabel JLVelocidadTipoCable = new JLabel("Velocidad: ");
-
-                    JTextField JTFDescripcionTipoCable = new JTextField();
-                    JTFDescripcionTipoCable.setText(tipoCable.getDescripcion());
-                    JTFDescripcionTipoCable.setPreferredSize(new Dimension(70,20));
-                    JTextField JTFVelocidadTipoCable = new JTextField();
-                    JTFVelocidadTipoCable.setText(Integer.toString(tipoCable.getVelocidad()));
-                    JTFVelocidadTipoCable.setPreferredSize(new Dimension(70,20));
-
-                    JButton JBModificarTipoCable= new JButton("Modificar");
-                    JBModificarTipoCable.addActionListener(e1 -> {
-                        String descripcionTipoCable = JTFDescripcionTipoCable.getText();
-                        int velocidadTipoCable = Integer.parseInt(JTFVelocidadTipoCable.getText());
-
-                        tipoCable.setDescripcion(descripcionTipoCable);
-                        tipoCable.setVelocidad(velocidadTipoCable);
-
-                        try {
-                            coordinador.modificarTipoCable(tipoCable);
-                            coordinador.cargarDatos();
-                            datosRed.actualizarTablaTipoCables();
-                            JOptionPane.showMessageDialog(this, "Tipo de Cable modificado correctamente.");
-                            dispose();
-                        } catch (TipoCableRepetidoException TCR) {
-                            JOptionPane.showMessageDialog(this, TCR.getMessage());
-                        }
-                    });
-
-                    JPanel JPModificarTipoCable = new JPanel();
-                    JPModificarTipoCable.add(JLCodigoTipoCable);
-                    JPModificarTipoCable.add(JLDescripcionTipoCable);
-                    JPModificarTipoCable.add(JTFDescripcionTipoCable);
-                    JPModificarTipoCable.add(JLVelocidadTipoCable);
-                    JPModificarTipoCable.add(JTFVelocidadTipoCable);
-                    JPModificarTipoCable.add(JBModificarTipoCable);
-
-                    add(JPModificarTipoCable);
-                    setModalityType(ModalityType.APPLICATION_MODAL);
-                    setVisible(true);
-
-                } else {
-                    JOptionPane.showMessageDialog(this,"Por favor, seleccione una fila.");
-                }
-                */
-
-                break;
-
         }
     }
 
