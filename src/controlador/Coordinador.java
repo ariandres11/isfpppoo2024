@@ -31,6 +31,8 @@ public class Coordinador {
     public void setRed(Red red) { this.red = red; }
     public void setCalculo(Calculo calculo) { this.calculo = calculo; }
     public void setInterfaz(Interfaz interfaz) { this.interfaz = interfaz; interfaz.iniciar(this);}
+    //public String getModo() { return modo; }
+
     public PanelMenu crearPanelMenu() { return new PanelMenu(interfaz, roleContext); }
     public PanelOpcionesSuperior crearPanelOpcionesSuperior() { return new PanelOpcionesSuperior(interfaz, roleContext, (PanelMenu) interfaz.getPanelMenu()); }
     public void setRoleStrategy(RoleStrategy strategy) {
@@ -150,6 +152,18 @@ public class Coordinador {
             return calculo.ping(interfaz.elegirEquipo(listarEquipos(), "el que se quiere saber el ping"));
         }
     }
+
+   /*
+    public boolean pingSimulacion (String ip) { return calculo.pingIP(ip); }
+
+    public boolean pingProduccion ( String ip) { return calculo.ping(ip); }
+
+    public long IpALong(int seg1, int seg2, int seg3, int seg4) {
+        return calculo.convertirIpALong( seg1, seg2, seg3, seg4);
+    }
+
+    public String longAIp (long ip) { return calculo.convertirLongAIp(ip); }
+    */
 
    public void mostrarMapaActual(){
        interfaz.mostrarConexiones(listarConexiones());
