@@ -3,8 +3,15 @@ package dao.postgresql;
 import conexion.BDConexion;
 import dao.UbicacionDAO;
 import modelo.Ubicacion;
-import java.sql.*;
-import java.util.*;
+
+import java.sql.Statement;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import java.util.List;
+import java.util.ArrayList;
+
 import org.apache.log4j.Logger;
 
 public class UbicacionPostgreDAO implements UbicacionDAO {

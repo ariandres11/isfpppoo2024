@@ -1,16 +1,27 @@
 package gui;
 
 import controlador.Coordinador;
-import excepciones.*;
-import modelo.*;
 
-import javax.swing.*;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
+import modelo.Equipo;
+import modelo.Conexion;
+import modelo.Ubicacion;
+import modelo.TipoEquipo;
+import modelo.TipoPuerto;
+import modelo.TipoCable;
+
+import javax.swing.JDialog;
+import javax.swing.JTabbedPane;
+import javax.swing.JButton;
+import javax.swing.JTable;
+import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
-import java.awt.*;
+import javax.swing.JPanel;
+import javax.swing.JOptionPane;
+
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 public class FrameDatosRed extends JDialog {

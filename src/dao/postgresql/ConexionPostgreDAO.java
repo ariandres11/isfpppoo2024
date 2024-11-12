@@ -2,10 +2,24 @@ package dao.postgresql;
 
 import conexion.BDConexion;
 import dao.ConexionDAO;
-import modelo.*;
+
+import modelo.Equipo;
+import modelo.Conexion;
+import modelo.TipoCable;
+import modelo.Ubicacion;
+import modelo.TipoEquipo;
+import modelo.TipoPuerto;
+
 import org.apache.log4j.Logger;
-import java.sql.*;
-import java.util.*;
+
+import java.sql.Statement;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import java.util.List;
+import java.util.Hashtable;
+import java.util.ArrayList;
 
 public class ConexionPostgreDAO implements ConexionDAO {
     private static final Logger logger = Logger.getLogger(ConexionPostgreDAO.class);

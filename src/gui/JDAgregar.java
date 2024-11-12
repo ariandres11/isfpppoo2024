@@ -1,11 +1,33 @@
 package gui;
 
 import controlador.Coordinador;
-import excepciones.*;
-import modelo.*;
 
-import javax.swing.*;
-import java.awt.*;
+import modelo.Equipo;
+import modelo.Conexion;
+import modelo.Ubicacion;
+import modelo.TipoEquipo;
+import modelo.TipoPuerto;
+import modelo.TipoCable;
+
+import excepciones.EquipoRepetidoException;
+import excepciones.UbicacionRepetidaException;
+import excepciones.ConexionRepetidaException;
+import excepciones.TipoEquipoRepetidoException;
+import excepciones.TipoPuertoRepetidoException;
+import excepciones.TipoCableRepetidoException;
+
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import javax.swing.JTextArea;
+import javax.swing.JComboBox;
+import javax.swing.JToggleButton;
+import javax.swing.JButton;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+
+import java.awt.Dimension;
+
 import java.util.ArrayList;
 import java.util.List;
 

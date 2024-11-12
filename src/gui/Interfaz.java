@@ -2,15 +2,26 @@ package gui;
 
 import controlador.Constantes;
 import controlador.Coordinador;
+
 import modelo.Conexion;
 import modelo.Equipo;
+
 import org.apache.log4j.Logger;
+
 import negocio.roles.concrete_role_strategies.UserRoleStrategy;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import javax.swing.JLabel;
+
+import java.awt.BorderLayout;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
+import java.awt.Dimension;
+
 import java.util.List;
-import java.util.Map;
 
 import static controlador.Constantes.FUENTE_CONSULTAS;
 

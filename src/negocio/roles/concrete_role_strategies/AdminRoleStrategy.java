@@ -1,6 +1,5 @@
 package negocio.roles.concrete_role_strategies;
 
-import dao.secuencial.UbicacionSecuencialDAO;
 import gui.PanelOpcionesSuperior;
 import negocio.roles.RoleStrategy;
 import org.apache.log4j.Logger;

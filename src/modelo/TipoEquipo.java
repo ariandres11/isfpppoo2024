@@ -1,6 +1,5 @@
 package modelo;
 
-import java.util.Objects;
 
 /**
  * La clase TipoEquipo representa un tipo de equipo en la red,

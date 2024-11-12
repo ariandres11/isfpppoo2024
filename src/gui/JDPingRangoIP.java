@@ -2,9 +2,20 @@ package gui;
 
 import controlador.Coordinador;
 
-import javax.swing.*;
-import java.awt.*;
-import java.util.Map;
+import javax.swing.JDialog;
+import javax.swing.JTextField;
+import javax.swing.JPanel;
+import javax.swing.JLabel;
+import javax.swing.JButton;
+import javax.swing.JTextArea;
+import javax.swing.JScrollPane;
+import javax.swing.ScrollPaneConstants;
+import javax.swing.JOptionPane;
+
+import java.awt.Dimension;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
+
 import java.util.Random;
 
 import static controlador.Constantes.FUENTE_CONSULTAS;
@@ -169,15 +180,8 @@ public class JDPingRangoIP extends JDialog {
                     throw new NumberFormatException();
                 }
 
-
-                /*
                 long startIp = coordinador.IpALong(red1, red2, host1, host2);
                 long endIp = coordinador.IpALong(red1, red2, host3, host4);
-                */
-
-
-                // Llamar al método de ping con las IPs ingresadas
-                Map<String, Boolean> resultadosPing = coordinador.pingIPS(red1, red2, host1, host2, host3, host4);
 
                 imprimirIPs = new Thread(() -> {
                     buscandoIPs.start();
@@ -187,24 +191,16 @@ public class JDPingRangoIP extends JDialog {
 
                     try {
 
-                        for (Map.Entry<String, Boolean> entry : resultadosPing.entrySet()) {
-                            Thread.sleep(random.nextLong(MAX_TIEMPO_PING) + 200);
-                            String ip = entry.getKey();
-                            Boolean respuesta = entry.getValue();
+                        long ipContador = startIp;
 
-                            textoIPs.append(ip + ": " + (respuesta ? "Activo" : "Inactivo") + "\n");
-                        }
-
-
-
-                        /*
                         if (coordinador.getModo() == "Prod") {
                             // produccion
                             //verifico el ping para cada ip del rango
-                            for (long ip = startIp; ip <= endIp; ip++) {
-                                String ipDir = coordinador.longAIp(ip);
+                            while (!Thread.currentThread().isInterrupted() && ipContador <= endIp) {
+                                String ipDir = coordinador.longAIp(ipContador);
                                 boolean resultadoPing = coordinador.pingProduccion(ipDir);
                                 textoIPs.append(ipDir + ": " + (resultadoPing ? "Activo" : "Inactivo") + "\n");
+                                ipContador++;
                             }
                         } else {
                             // simulacion
@@ -215,17 +211,15 @@ public class JDPingRangoIP extends JDialog {
                                 textoIPs.append(ipDir + ": " + (resultadoPing ? "Activo" : "Inactivo") + "\n");
                             }
                         }
-                        */
 
+                        if(Thread.currentThread().isInterrupted())
+                            throw new InterruptedException();
 
                         textoIPs.append("Ping a rango de IPs terminado.");
                         JBCancelar.setEnabled(false);
-                        buscandoIPs.interrupt();
 
                     } catch (InterruptedException iex) {
-                       //iex.printStackTrace();
                         textoIPs.append("Ping a rango de IPs cancelado.");
-                        buscandoIPs.interrupt();
                     }
 
                     digitoRed1.setEnabled(true);
@@ -267,6 +261,7 @@ public class JDPingRangoIP extends JDialog {
 
         JBCancelar.addActionListener(e -> {
             imprimirIPs.interrupt();
+            buscandoIPs.interrupt();
             digitoRed1.setEnabled(true);
             digitoRed2.setEnabled(true);
             digitoHost1.setEnabled(true);
@@ -279,10 +274,6 @@ public class JDPingRangoIP extends JDialog {
 
         add(panel);
         add(panelScroll);
-        // Mostrar el cuadro de diálogo
-
-
     }
-
 
 }

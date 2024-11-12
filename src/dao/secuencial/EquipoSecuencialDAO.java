@@ -1,14 +1,28 @@
 package dao.secuencial;
 
-import dao.*;
-import gui.Interfaz;
-import modelo.*;
+import dao.EquipoDAO;
+import dao.TipoEquipoDAO;
+import dao.TipoPuertoDAO;
+import dao.UbicacionDAO;
+
+import modelo.Equipo;
+import modelo.TipoPuerto;
+import modelo.TipoEquipo;
+import modelo.Ubicacion;
+
+import java.util.Map;
+import java.util.List;
+import java.util.Hashtable;
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.NoSuchElementException;
+import java.util.Formatter;
+import java.util.ResourceBundle;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.*;
-import org.apache.log4j.Logger;
 
+import org.apache.log4j.Logger;
 
 
 /**

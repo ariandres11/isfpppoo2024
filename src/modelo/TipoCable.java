@@ -1,7 +1,5 @@
 package modelo;
 
-import java.util.Objects;
-
 /**
  * La clase TipoCable representa un tipo de cable en la red,
  * incluyendo su código, descripción y velocidad de transmisión.

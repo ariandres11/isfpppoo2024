@@ -1,7 +1,35 @@
 package modelo;
 
-import excepciones.*;
-import servicio.*;
+import servicio.EquipoService;
+import servicio.EquipoServiceImp;
+import servicio.UbicacionService;
+import servicio.UbicacionServiceImp;
+import servicio.ConexionService;
+import servicio.ConexionServiceImp;
+import servicio.TipoEquipoService;
+import servicio.TipoEquipoServiceImp;
+import servicio.TipoPuertoService;
+import servicio.TipoPuertoServiceImp;
+import servicio.TipoCableService;
+import servicio.TipoCableServiceImp;
+
+import excepciones.EquipoRepetidoException;
+import excepciones.EquipoNoExistenteException;
+import excepciones.EquipoEnUsoException;
+import excepciones.ConexionRepetidaException;
+import excepciones.ConexionNoExistenteException;
+import excepciones.UbicacionRepetidaException;
+import excepciones.UbicacionNoExistenteException;
+import excepciones.UbicacionEnUsoException;
+import excepciones.TipoEquipoRepetidoException;
+import excepciones.TipoEquipoNoExistenteException;
+import excepciones.TipoEquipoEnUsoException;
+import excepciones.TipoPuertoRepetidoException;
+import excepciones.TipoPuertoNoExistenteException;
+import excepciones.TipoPuertoEnUsoException;
+import excepciones.TipoCableRepetidoException;
+import excepciones.TipoCableNoExistenteException;
+import excepciones.TipoCableEnUsoException;
 
 import java.util.ArrayList;
 import java.util.List;

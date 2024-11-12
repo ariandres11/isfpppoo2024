@@ -3,13 +3,24 @@ package controlador;
 import gui.Interfaz;
 import gui.PanelMenu;
 import gui.PanelOpcionesSuperior;
-import modelo.*;
+
+import modelo.Red;
+import modelo.Equipo;
+import modelo.Conexion;
+import modelo.Ubicacion;
+import modelo.TipoEquipo;
+import modelo.TipoPuerto;
+import modelo.TipoCable;
+
 import negocio.Calculo;
 import negocio.roles.RoleContext;
 import negocio.roles.RoleStrategy;
 import negocio.roles.concrete_role_strategies.UserRoleStrategy;
 
-import java.util.*;
+import java.util.List;
+import java.util.Map;
+
+import java.util.Objects;
 
 public class Coordinador {
     private Red red;
@@ -31,7 +42,7 @@ public class Coordinador {
     public void setRed(Red red) { this.red = red; }
     public void setCalculo(Calculo calculo) { this.calculo = calculo; }
     public void setInterfaz(Interfaz interfaz) { this.interfaz = interfaz; interfaz.iniciar(this);}
-    //public String getModo() { return modo; }
+    public String getModo() { return modo; }
 
     public PanelMenu crearPanelMenu() { return new PanelMenu(interfaz, roleContext); }
     public PanelOpcionesSuperior crearPanelOpcionesSuperior() { return new PanelOpcionesSuperior(interfaz, roleContext, (PanelMenu) interfaz.getPanelMenu()); }
@@ -153,7 +164,7 @@ public class Coordinador {
         }
     }
 
-   /*
+
     public boolean pingSimulacion (String ip) { return calculo.pingIP(ip); }
 
     public boolean pingProduccion ( String ip) { return calculo.ping(ip); }
@@ -163,7 +174,7 @@ public class Coordinador {
     }
 
     public String longAIp (long ip) { return calculo.convertirLongAIp(ip); }
-    */
+
 
    public void mostrarMapaActual(){
        interfaz.mostrarConexiones(listarConexiones());

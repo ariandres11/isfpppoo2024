@@ -1,6 +1,5 @@
 package modelo;
 
-import java.util.Objects;
 
 /**
  * La clase TipoPuerto representa un tipo de puerto en la red,

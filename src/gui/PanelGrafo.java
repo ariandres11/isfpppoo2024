@@ -7,8 +7,8 @@ import controlador.Coordinador;
 import modelo.Conexion;
 import modelo.Equipo;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JPanel;
+
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.List;

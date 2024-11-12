@@ -3,7 +3,12 @@ package modelo;
 import excepciones.DireccionIPRepetidaException;
 import excepciones.PuertoRepetidoException;
 
-import java.util.*;
+import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.ArrayList;
+
+
 
 /**
  * La clase Equipo representa un dispositivo en una red,

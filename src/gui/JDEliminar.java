@@ -1,10 +1,25 @@
 package gui;
 
 import controlador.Coordinador;
-import excepciones.*;
-import modelo.*;
 
-import javax.swing.*;
+import modelo.Equipo;
+import modelo.Conexion;
+import modelo.Ubicacion;
+import modelo.TipoEquipo;
+import modelo.TipoPuerto;
+import modelo.TipoCable;
+
+import excepciones.EquipoEnUsoException;
+import excepciones.EquipoNoExistenteException;
+import excepciones.UbicacionEnUsoException;
+import excepciones.UbicacionNoExistenteException;
+import excepciones.ConexionNoExistenteException;
+import excepciones.TipoEquipoEnUsoException;
+import excepciones.TipoPuertoEnUsoException;
+import excepciones.TipoCableEnUsoException;
+
+import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 
 public class JDEliminar extends JDialog {
 

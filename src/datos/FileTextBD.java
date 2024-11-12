@@ -1,12 +1,34 @@
 package datos;
 
-import dao.*;
-import dao.postgresql.*;
-import dao.secuencial.*;
-import modelo.*;
-import org.apache.log4j.Logger;
+import dao.EquipoDAO;
+import dao.UbicacionDAO;
+import dao.ConexionDAO;
+import dao.TipoEquipoDAO;
+import dao.TipoPuertoDAO;
+import dao.TipoCableDAO;
 
-import java.util.List;
+import dao.postgresql.TipoCablePostgreDAO;
+import dao.postgresql.TipoPuertoPostgreDAO;
+import dao.postgresql.TipoEquipoPostgreDAO;
+import dao.postgresql.EquipoPostgreDAO;
+import dao.postgresql.UbicacionPostgreDAO;
+import dao.postgresql.ConexionPostgreDAO;
+
+import dao.secuencial.EquipoSecuencialDAO;
+import dao.secuencial.UbicacionSecuencialDAO;
+import dao.secuencial.ConexionSecuencialDAO;
+import dao.secuencial.TipoCableSecuencialDAO;
+import dao.secuencial.TipoEquipoSecuencialDAO;
+import dao.secuencial.TipoPuertoSecuencialDAO;
+
+import modelo.Equipo;
+import modelo.Conexion;
+import modelo.Ubicacion;
+import modelo.TipoEquipo;
+import modelo.TipoPuerto;
+import modelo.TipoCable;
+
+import org.apache.log4j.Logger;
 
 public class FileTextBD {
     private static final Logger logger = Logger.getLogger(FileTextBD.class);

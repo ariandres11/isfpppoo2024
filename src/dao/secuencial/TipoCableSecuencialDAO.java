@@ -5,7 +5,17 @@ import modelo.TipoCable;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.*;
+
+import java.util.List;
+import java.util.Hashtable;
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.NoSuchElementException;
+import java.util.Formatter;
+import java.util.FormatterClosedException;
+import java.util.ResourceBundle;
+
+
 import org.apache.log4j.Logger;
 
 /**

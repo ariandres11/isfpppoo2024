@@ -1,6 +1,6 @@
 package controlador;
 
-import java.awt.*;
+import java.awt.Font;
 
 /**
  * La clase Constantes define una serie de constantes utilizadas en la aplicación.

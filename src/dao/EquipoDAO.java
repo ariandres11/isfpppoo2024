@@ -1,7 +1,9 @@
 package dao;
 
-import modelo.*;
-
+import modelo.Equipo;
+import modelo.Ubicacion;
+import modelo.TipoPuerto;
+import modelo.TipoEquipo;
 
 import java.util.Hashtable;
 import java.util.List;

@@ -9,11 +9,17 @@ import org.jgrapht.Graph;
 import org.jgrapht.GraphPath;
 import org.jgrapht.alg.connectivity.ConnectivityInspector;
 import org.jgrapht.alg.shortestpath.DijkstraShortestPath;
-import org.jgrapht.alg.spanning.KruskalMinimumSpanningTree;
 import org.jgrapht.graph.DefaultUndirectedWeightedGraph;
 
 import java.net.InetAddress;
-import java.util.*;
+
+import java.util.List;
+import java.util.TreeMap;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.Set;
+import java.util.HashSet;
 
 /**
  * La clase Calculo gestiona el grafo no dirigido que representa las conexiones entre equipos.
@@ -372,7 +378,7 @@ public class Calculo {
      * @param seg4 cuarto segmento de la dirección IP.
      * @return la dirección IP en formato long.
      */
-    private long convertirIpALong(int seg1, int seg2, int seg3, int seg4) {
+    public long convertirIpALong(int seg1, int seg2, int seg3, int seg4) {
         return ((long) seg1 << 24) | ((long) seg2 << 16) | ((long) seg3 << 8) | (long) seg4;
     }
 
@@ -382,7 +388,7 @@ public class Calculo {
      * @param ip La dirección IP en formato long.
      * @return La dirección IP en formato String (ej: "192.168.0.1").
      */
-    private String convertirLongAIp(long ip) {
+    public String convertirLongAIp(long ip) {
         return ((ip >> 24) & 0xFF) + "." +
                 ((ip >> 16) & 0xFF) + "." +
                 ((ip >> 8) & 0xFF) + "." +

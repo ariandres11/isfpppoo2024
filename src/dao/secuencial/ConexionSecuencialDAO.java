@@ -1,10 +1,27 @@
 package dao.secuencial;
 
-import dao.*;
-import modelo.*;
+import dao.ConexionDAO;
+import dao.EquipoDAO;
+import dao.TipoCableDAO;
+import dao.TipoPuertoDAO;
+
+import modelo.Conexion;
+import modelo.Equipo;
+import modelo.TipoCable;
+import modelo.TipoPuerto;
+
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.*;
+
+import java.util.List;
+import java.util.Hashtable;
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.Formatter;
+import java.util.FormatterClosedException;
+import java.util.NoSuchElementException;
+import java.util.ResourceBundle;
+
 import org.apache.log4j.Logger;
 
 /**

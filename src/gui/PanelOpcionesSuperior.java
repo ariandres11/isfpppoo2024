@@ -7,8 +7,12 @@ import negocio.roles.RoleContext;
 import negocio.roles.concrete_role_strategies.AdminRoleStrategy;
 import negocio.roles.concrete_role_strategies.UserRoleStrategy;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JLabel;
+import javax.swing.JButton;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+
+import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
