@@ -68,17 +68,29 @@ public class FrameDatosRed extends JDialog {
         return JTTipoCable;
     }
 
+    public JTable obtenerTablaSeleccionada(String tablaSeleccionada) {
+        switch (tablaSeleccionada) {
+            case "Equipos" : return getJTEquipos();
+            case "Conexiones" : return getJTConexiones();
+            case "Ubicaciones" : return getJTUbicaciones();
+            case "Tipos de Equipo" : return  getJTTipoEquipo();
+            case "Tipos de Puerto" : return getJTTipoPuerto();
+            case "Tipos de Cable" : return  getJTTipoCable();
+            default : return null;
+        }
+    }
+
     private void agregarOpciones () {
         JTOpciones = new JTabbedPane();
 
         crearTablas();
 
-        JTOpciones.addTab("Equipos", JTEquipos);
-        JTOpciones.addTab("Conexiones", JTConexiones);
-        JTOpciones.addTab("Ubicaciones", JTUbicaciones);
-        JTOpciones.addTab("Tipos de Equipo", JTTipoEquipo);
-        JTOpciones.addTab("Tipos de Puerto", JTTipoPuerto);
-        JTOpciones.addTab("Tipos de Cable", JTTipoCable);
+        JTOpciones.addTab("Equipos", new JScrollPane(JTEquipos));
+        JTOpciones.addTab("Conexiones", new JScrollPane(JTConexiones));
+        JTOpciones.addTab("Ubicaciones", new JScrollPane(JTUbicaciones));
+        JTOpciones.addTab("Tipos de Equipo", new JScrollPane(JTTipoEquipo));
+        JTOpciones.addTab("Tipos de Puerto", new JScrollPane(JTTipoPuerto));
+        JTOpciones.addTab("Tipos de Cable", new JScrollPane(JTTipoCable));
 
         // Desabilita el boton modificar si se seleccionar ver los datos de las conexiones
         JTOpciones.addChangeListener(e -> {
@@ -127,7 +139,6 @@ public class FrameDatosRed extends JDialog {
         modelo.addColumn("marca");
         modelo.addColumn("modelo");
         modelo.addColumn("estado");
-        modelo.addRow(new String[] {"Código", "Descripción", "Marca", "Modelo", "Estado"});
 
         Object[] fila = new Object[modelo.getColumnCount()];
         for (Equipo equipo : arrayEquipos) {
@@ -152,7 +163,6 @@ public class FrameDatosRed extends JDialog {
         modelo.addColumn("Puerto1");
         modelo.addColumn("Puerto2");
         modelo.addColumn("estado");
-        modelo.addRow(new String[] {"Equipo 1","Equipo 2","Cable", "Puerto 1", "Puerto 2", "Estado"});
 
         Object[] fila = new Object[modelo.getColumnCount()];
         for (Conexion conexion : arrayConexiones) {
@@ -174,7 +184,6 @@ public class FrameDatosRed extends JDialog {
         modelo = new DefaultTableModel();
         modelo.addColumn("codigo");
         modelo.addColumn("descripcion");
-        modelo.addRow(new String[] {"Código","Descripción"});
 
         Object[] fila = new Object[modelo.getColumnCount()];
         for (Ubicacion ubicacion : arrayUbicaciones) {
@@ -193,7 +202,6 @@ public class FrameDatosRed extends JDialog {
         modelo.addColumn("codigo");
         modelo.addColumn("descripcion");
         modelo.addColumn("velocidad");
-        modelo.addRow(new String[] {"Código","Descripción", "Velocidad(Mbps)"});
 
         Object[] fila = new Object[modelo.getColumnCount()];
         for(TipoPuerto tipoPuerto : arrayTiposPuerto){
@@ -211,7 +219,6 @@ public class FrameDatosRed extends JDialog {
         DefaultTableModel modelo = new DefaultTableModel();
         modelo.addColumn("codigo");
         modelo.addColumn("descripcion");
-        modelo.addRow(new String[] {"Código","Descripción"});
 
         Object[] fila = new Object[modelo.getColumnCount()];
         for(TipoEquipo tipoEquipo : arrayTiposEquipo){
@@ -230,7 +237,6 @@ public class FrameDatosRed extends JDialog {
         modelo.addColumn("codigo");
         modelo.addColumn("descripcion");
         modelo.addColumn("velocidad");
-        modelo.addRow(new String[] {"Código","Descripción", "Velocidad(Mbps)"});
 
         Object[] fila = new Object[modelo.getColumnCount()];
         for(TipoCable tipoCable : arrayTiposCable){
@@ -264,8 +270,8 @@ public class FrameDatosRed extends JDialog {
             String mensajeTitulo = "Modificar";
             int mensajeModo = JOptionPane.PLAIN_MESSAGE;
 
-            JTable tablaSeleccionada = (JTable) JTOpciones.getSelectedComponent();
             String tituloTabla = JTOpciones.getTitleAt(JTOpciones.getSelectedIndex());
+            JTable tablaSeleccionada = obtenerTablaSeleccionada(tituloTabla);
 
             JDModificar modificarElemento = new JDModificar(coordinador,this);
             modificarElemento.ventanaModificar(tituloTabla, tablaSeleccionada.getSelectedRow());
@@ -277,8 +283,8 @@ public class FrameDatosRed extends JDialog {
             String mensajeTitulo = "Eliminar";
             int mensajeModo = JOptionPane.PLAIN_MESSAGE;
 
-            JTable tablaSeleccionada = (JTable) JTOpciones.getSelectedComponent();
             String tituloTabla = JTOpciones.getTitleAt(JTOpciones.getSelectedIndex());
+            JTable tablaSeleccionada = obtenerTablaSeleccionada(tituloTabla);
 
             JDEliminar eliminarElemento = new JDEliminar(coordinador,this);
             eliminarElemento.ventanaEliminar(tituloTabla, tablaSeleccionada.getSelectedRow());
