@@ -95,7 +95,8 @@ public class PanelGrafo extends JPanel {
                     // Crear conexiones entre los vértices sin puntas de flecha
                     Object eq1 = vertexMap.get(conexion.getEquipo1().getCodigo());
                     Object eq2 = vertexMap.get(conexion.getEquipo2().getCodigo());
-                    String style = "edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=black;strokeWidth=2;fontSize=20;fontColor=black;backgroundColor=white;";
+                    String colorConexion = conexion.isEstado() ? "green" : "red";
+                    String style = "edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor="+colorConexion+";strokeWidth=2;fontSize=20;fontColor=black;backgroundColor=white;";
                     mxGrafo.insertEdge(parent, null, conexion.getTipoCable().getVelocidad(), eq1, eq2, style);
                 }
             } finally {

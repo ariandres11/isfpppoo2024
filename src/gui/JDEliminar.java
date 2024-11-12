@@ -66,7 +66,7 @@ public class JDEliminar extends JDialog {
                         coordinador.cargarDatos();
                         datosRed.actualizarTablaUbicaciones();
                         JOptionPane.showMessageDialog(this, "Ubicacion eliminada exitosamente.");
-                    } catch (UbicacionNoExistenteException UNEEe) {
+                    } catch (UbicacionNoExistenteException | UbicacionEnUsoException UNEEe) {
                         JOptionPane.showMessageDialog(this, UNEEe.getMessage());
                     }
                 }
