@@ -135,7 +135,7 @@ public class Interfaz extends JFrame {
         String seleccion = (String) JOptionPane.showInputDialog(
                 null,
                 "Seleccione un equipo:",
-                "Ingrese equipo de" + mensaje,
+                "Ingrese equipo de " + mensaje,
                 JOptionPane.QUESTION_MESSAGE,
                 null,
                 nombresEquipos,

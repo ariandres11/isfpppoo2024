@@ -288,7 +288,7 @@ public class JDAgregar extends JDialog {
                 break;
             case "Conexiones":
 
-                setSize(500,250);
+                setSize(500,150);
                 setResizable(false);
                 setTitle("Agregar Conexion");
 
@@ -297,6 +297,14 @@ public class JDAgregar extends JDialog {
                 JLabel JLPuerto1 = new JLabel("Puerto 1 (*): ");
                 JLabel JLPuerto2 = new JLabel("Puerto 2 (*): ");
                 JLabel JLTipoCable = new JLabel("Tipo de Cable (*): ");
+                JLabel JLEstado1 = new JLabel("Estado: ");
+
+                JToggleButton JTBEstado1 = new JToggleButton();
+                JTBEstado1.setText("Inactivo");
+                JTBEstado1.addChangeListener(e2 -> {
+                    if( JTBEstado1.isSelected() ) JTBEstado1.setText("Activo");
+                    else JTBEstado1.setText("Inactivo");
+                });
 
                 JComboBox<String> JCBEquipo1 = new JComboBox<String>();
                 JComboBox<String> JCBEquipo2 = new JComboBox<String>();
@@ -355,8 +363,9 @@ public class JDAgregar extends JDialog {
                     TipoPuerto puerto1 = coordinador.buscarTipoPuerto(codigoPuerto1);
                     TipoPuerto puerto2 = coordinador.buscarTipoPuerto(codigoPuerto2);
                     TipoCable cable1 = coordinador.buscarTipoCable(codigoTipoCable);
+                    boolean estadoConexion = JTBEstado1.isSelected();
 
-                    Conexion conexion = new Conexion(equipo1, equipo2, cable1, puerto1, puerto2, false );
+                    Conexion conexion = new Conexion(equipo1, equipo2, cable1, puerto1, puerto2, estadoConexion );
 
                     try {
                         coordinador.agregarConexion(conexion);
@@ -380,6 +389,8 @@ public class JDAgregar extends JDialog {
                 JPAgregarConexion.add(JCBPuerto2);
                 JPAgregarConexion.add(JLTipoCable);
                 JPAgregarConexion.add(JCBTipoCable);
+                JPAgregarConexion.add(JLEstado1);
+                JPAgregarConexion.add(JTBEstado1);
                 JPAgregarConexion.add(JBAgregarConexion);
 
                 add(JPAgregarConexion);
