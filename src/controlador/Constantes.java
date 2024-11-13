@@ -37,8 +37,8 @@ public class Constantes {
 
     public static final int JL_X_COORD = 20;
     public static final int JL_Y_COORD = 15;
-    public static final int WIDTH = 120;
-    public static final int HEIGHT = 20;
+    public static final int JL_WIDTH = 120;
+    public static final int JL_HEIGHT = 20;
 
     //////////////////////////////////////////////////
 

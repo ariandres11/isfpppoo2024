@@ -31,8 +31,8 @@ import java.util.List;
 
 import static controlador.Constantes.JL_X_COORD;
 import static controlador.Constantes.JL_Y_COORD;
-import static controlador.Constantes.WIDTH;
-import static controlador.Constantes.HEIGHT;
+import static controlador.Constantes.JL_WIDTH;
+import static controlador.Constantes.JL_HEIGHT;
 import static controlador.Constantes.AGREGAR_EQUIPO_MAX_ALTO;
 import static controlador.Constantes.AGREGAR_EQUIPO_MAX_ANCHO;
 import static controlador.Constantes.AGREGAR_CONEXION_MAX_ALTO;
@@ -73,36 +73,36 @@ public class JDAgregar extends JDialog {
 
 
                 JLabel JLCodigo = new JLabel("Codigo (*):");
-                JLCodigo.setBounds(JL_X_COORD,JL_Y_COORD,WIDTH,HEIGHT);
+                JLCodigo.setBounds(JL_X_COORD,JL_Y_COORD,JL_WIDTH, JL_HEIGHT);
                 JLabel JLDescripcion = new JLabel("Descripción:");
-                JLDescripcion.setBounds(JL_X_COORD,JL_Y_COORD*3,WIDTH,HEIGHT);
+                JLDescripcion.setBounds(JL_X_COORD,JL_Y_COORD*3,JL_WIDTH, JL_HEIGHT);
                 JLabel JLMarca = new JLabel("Marca: ");
-                JLMarca.setBounds(JL_X_COORD,JL_Y_COORD*5,WIDTH,HEIGHT);
+                JLMarca.setBounds(JL_X_COORD,JL_Y_COORD*5,JL_WIDTH, JL_HEIGHT);
                 JLabel JLModelo = new JLabel("Modelo: ");
-                JLModelo.setBounds(JL_X_COORD,JL_Y_COORD*7,WIDTH,HEIGHT);
+                JLModelo.setBounds(JL_X_COORD,JL_Y_COORD*7,JL_WIDTH, JL_HEIGHT);
                 JLabel JLTipoEquipo = new JLabel("Tipo de Equipo: ");
-                JLTipoEquipo.setBounds(JL_X_COORD,JL_Y_COORD*9,WIDTH,HEIGHT);
+                JLTipoEquipo.setBounds(JL_X_COORD,JL_Y_COORD*9,JL_WIDTH, JL_HEIGHT);
                 JLabel JLUbicacion = new JLabel("Ubicación: ");
-                JLUbicacion.setBounds(JL_X_COORD,JL_Y_COORD*11,WIDTH,HEIGHT);
+                JLUbicacion.setBounds(JL_X_COORD,JL_Y_COORD*11,JL_WIDTH, JL_HEIGHT);
                 JLabel JLEstado = new JLabel("Estado (*): ");
-                JLEstado.setBounds(JL_X_COORD,JL_Y_COORD*13,WIDTH,HEIGHT);
+                JLEstado.setBounds(JL_X_COORD,JL_Y_COORD*13,JL_WIDTH, JL_HEIGHT);
 
                 JTextField JTFCodigo = new JTextField();
-                JTFCodigo.setBounds(JL_X_COORD*6,JL_Y_COORD,WIDTH,HEIGHT);
+                JTFCodigo.setBounds(JL_X_COORD*6,JL_Y_COORD,JL_WIDTH, JL_HEIGHT);
                 JTextField JTFDescripcion = new JTextField();
-                JTFDescripcion.setBounds(JL_X_COORD*6,JL_Y_COORD*3,WIDTH,HEIGHT);
+                JTFDescripcion.setBounds(JL_X_COORD*6,JL_Y_COORD*3,JL_WIDTH, JL_HEIGHT);
                 JTextField JTFMarca = new JTextField();
-                JTFMarca.setBounds(JL_X_COORD*6,JL_Y_COORD*5,WIDTH,HEIGHT);
+                JTFMarca.setBounds(JL_X_COORD*6,JL_Y_COORD*5,JL_WIDTH, JL_HEIGHT);
                 JTextField JTFModelo = new JTextField();
-                JTFModelo.setBounds(JL_X_COORD*6,JL_Y_COORD*7,WIDTH,HEIGHT);
+                JTFModelo.setBounds(JL_X_COORD*6,JL_Y_COORD*7,JL_WIDTH, JL_HEIGHT);
 
 
                 JComboBox<String> JCBTipoEquipo = new JComboBox<String>();
-                JCBTipoEquipo.setBounds(JL_X_COORD*6,JL_Y_COORD*9,WIDTH/2,HEIGHT);
+                JCBTipoEquipo.setBounds(JL_X_COORD*6,JL_Y_COORD*9,JL_WIDTH/2, JL_HEIGHT);
                 JComboBox<String> JCBUbicacion = new JComboBox<String>();
-                JCBUbicacion.setBounds(JL_X_COORD*6,JL_Y_COORD*11,WIDTH/2,HEIGHT);
+                JCBUbicacion.setBounds(JL_X_COORD*6,JL_Y_COORD*11,JL_WIDTH/2, JL_HEIGHT);
                 JToggleButton JTBEstado = new JToggleButton();
-                JTBEstado.setBounds(JL_X_COORD*6,JL_Y_COORD*13,WIDTH,HEIGHT);
+                JTBEstado.setBounds(JL_X_COORD*6,JL_Y_COORD*13,JL_WIDTH, JL_HEIGHT);
                 JTBEstado.setText("Inactivo");
                 JTBEstado.addChangeListener(e2 -> {
                     if( JTBEstado.isSelected() ) JTBEstado.setText("Activo");
@@ -118,25 +118,25 @@ public class JDAgregar extends JDialog {
                 }
 
                 JLabel JLTipoPuerto = new JLabel("Tipo de Puerto/Cantidad (*): ");
-                JLTipoPuerto.setBounds(JL_X_COORD*13,JL_Y_COORD,WIDTH*2,HEIGHT);
+                JLTipoPuerto.setBounds(JL_X_COORD*13,JL_Y_COORD,JL_WIDTH*2, JL_HEIGHT);
                 JTextField JTFPuertoCantidad = new JTextField();
-                JTFPuertoCantidad.setBounds(JL_X_COORD*17,JL_Y_COORD*3,WIDTH/2,HEIGHT);
+                JTFPuertoCantidad.setBounds(JL_X_COORD*17,JL_Y_COORD*3,JL_WIDTH/2, JL_HEIGHT);
 
                 JComboBox<String> JCBPuertos = new JComboBox<>();
-                JCBPuertos.setBounds(JL_X_COORD*13,JL_Y_COORD*3,WIDTH/2,HEIGHT);
+                JCBPuertos.setBounds(JL_X_COORD*13,JL_Y_COORD*3,JL_WIDTH/2, JL_HEIGHT);
 
                 for (TipoPuerto puerto : coordinador.listarTipoPuertos()) {
                     JCBPuertos.addItem(puerto.getCodigo());
                 }
 
                 JTextArea JTAPuertosAgregados = new JTextArea();
-                JTAPuertosAgregados.setBounds(JL_X_COORD*13,JL_Y_COORD*5,WIDTH*2,HEIGHT*7);
+                JTAPuertosAgregados.setBounds(JL_X_COORD*13,JL_Y_COORD*5,JL_WIDTH*2, JL_HEIGHT*7);
                 JTAPuertosAgregados.setLineWrap(true);
                 JTAPuertosAgregados.setWrapStyleWord(true);
                 JTAPuertosAgregados.setEditable(false);
 
                 JButton JBAgregarPuerto = new JButton("+");
-                JBAgregarPuerto.setBounds(JL_X_COORD*20,JL_Y_COORD*3,WIDTH/2,HEIGHT);
+                JBAgregarPuerto.setBounds(JL_X_COORD*20,JL_Y_COORD*3,JL_WIDTH/2, JL_HEIGHT);
                 JBAgregarPuerto.addActionListener(e4 -> {
 
                     TipoPuerto tipoPuerto = new TipoPuerto();
@@ -159,7 +159,7 @@ public class JDAgregar extends JDialog {
                 });
 
                 JButton JBEliminarPuerto = new JButton("-");
-                JBEliminarPuerto.setBounds(JL_X_COORD*23,JL_Y_COORD*3,WIDTH/2,HEIGHT);
+                JBEliminarPuerto.setBounds(JL_X_COORD*23,JL_Y_COORD*3,JL_WIDTH/2, JL_HEIGHT);
                 JBEliminarPuerto.addActionListener(e -> {
                     TipoPuerto tipoPuerto = new TipoPuerto();
 
@@ -185,18 +185,18 @@ public class JDAgregar extends JDialog {
                     }
                 });
                 JLabel JLDireccionesIP = new JLabel("DireccionesIP: ");
-                JLDireccionesIP.setBounds(JL_X_COORD*13,JL_Y_COORD*15,WIDTH,HEIGHT);
+                JLDireccionesIP.setBounds(JL_X_COORD*13,JL_Y_COORD*15,JL_WIDTH, JL_HEIGHT);
                 JTextField JTFDireccionIP = new JTextField();
-                JTFDireccionIP.setBounds(JL_X_COORD*13,JL_Y_COORD*17,WIDTH,HEIGHT);
+                JTFDireccionIP.setBounds(JL_X_COORD*13,JL_Y_COORD*17,JL_WIDTH, JL_HEIGHT);
 
                 JTextArea JTADireccionesIPAgregadas = new JTextArea();
-                JTADireccionesIPAgregadas.setBounds(JL_X_COORD*13,JL_Y_COORD*19,WIDTH*2,HEIGHT*7);
+                JTADireccionesIPAgregadas.setBounds(JL_X_COORD*13,JL_Y_COORD*19,JL_WIDTH*2, JL_HEIGHT*7);
                 JTADireccionesIPAgregadas.setLineWrap(true);
                 JTADireccionesIPAgregadas.setWrapStyleWord(true);
                 JTADireccionesIPAgregadas.setEditable(false);
 
                 JButton JBAgregarDireccionIP = new JButton("+");
-                JBAgregarDireccionIP.setBounds(JL_X_COORD*20,JL_Y_COORD*17,WIDTH/2,HEIGHT);
+                JBAgregarDireccionIP.setBounds(JL_X_COORD*20,JL_Y_COORD*17,JL_WIDTH/2, JL_HEIGHT);
                 JBAgregarDireccionIP.addActionListener(e5 -> {
 
                     String direccionIP = JTFDireccionIP.getText();
@@ -214,7 +214,7 @@ public class JDAgregar extends JDialog {
                 });
 
                 JButton JBEliminarDireccionIP = new JButton("-");
-                JBEliminarDireccionIP.setBounds(JL_X_COORD*23,JL_Y_COORD*17,WIDTH/2,HEIGHT);
+                JBEliminarDireccionIP.setBounds(JL_X_COORD*23,JL_Y_COORD*17,JL_WIDTH/2, JL_HEIGHT);
                 JBEliminarDireccionIP.addActionListener(e -> {
                     String direccionIP = JTFDireccionIP.getText();
 
@@ -235,7 +235,7 @@ public class JDAgregar extends JDialog {
                 });
 
                 JButton JBAgregarEquipo = new JButton("Agregar");
-                JBAgregarEquipo.setBounds(JL_X_COORD*3,JL_Y_COORD*20,WIDTH,HEIGHT*2);
+                JBAgregarEquipo.setBounds(JL_X_COORD*3,JL_Y_COORD*20,JL_WIDTH, JL_HEIGHT*2);
                 JBAgregarEquipo.addActionListener(e6 -> {
                     String codigoEquipo = JTFCodigo.getText();
                     String descripcionEquipo = JTFDescripcion.getText();
