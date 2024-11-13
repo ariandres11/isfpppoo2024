@@ -18,7 +18,9 @@ import negocio.roles.RoleStrategy;
 import negocio.roles.concrete_role_strategies.UserRoleStrategy;
 
 import java.util.List;
-import java.util.Map;
+
+import static controlador.Constantes.COORDINADOR_MODO_PROD;
+import static controlador.Constantes.COORDINADOR_MODO_SIM;
 
 import java.util.Objects;
 
@@ -27,7 +29,7 @@ public class Coordinador {
     private Calculo calculo;
     private Interfaz interfaz;
     private RoleContext roleContext;
-    private String modo = "Sim";
+    private String modo = COORDINADOR_MODO_SIM;
 
     public Coordinador() {
         this.roleContext = new RoleContext();
@@ -110,10 +112,6 @@ public class Coordinador {
 
     public List<TipoEquipo> listarTipoEquipos() {return red.getTipoEquipos(); }
 
-    public List<String> listaIPs() {
-        return calculo.listarIps(red.getEquipos());
-    }
-
     public List<String> listarEquipoCodigos () { return red.getEquiposCodigos(); }
 
 
@@ -144,16 +142,8 @@ public class Coordinador {
         interfaz.advertencia(advertencia);
     }
 
-    public Map<String, Boolean> pingIPS (int dirRed1, int dirRed2, int dirHost1p1, int dirHost1p2, int dirHost2p1, int dirHost2p2) {
-        if(modo == "Prod"){
-            return calculo.pingRangoIPs(dirRed1,dirRed2,dirHost1p1,dirHost1p2,dirHost2p1,dirHost2p2);
-        }else{
-            return calculo.pingEntreIPs(dirRed1,dirRed2,dirHost1p1,dirHost1p2,dirHost2p1,dirHost2p2);
-        }
-    }
-
     public boolean ping(){
-        if(Objects.equals(modo, "Prod")){
+        if(Objects.equals(modo, COORDINADOR_MODO_PROD)){
             //Pedir la ip del equipo real
             cargarDatos();
             return  calculo.ping(interfaz.seleccionarIP());
@@ -163,7 +153,6 @@ public class Coordinador {
             return calculo.ping(interfaz.elegirEquipo(listarEquipos(), "el que se quiere saber el ping"));
         }
     }
-
 
     public boolean pingSimulacion (String ip) { return calculo.pingIP(ip); }
 
@@ -175,18 +164,10 @@ public class Coordinador {
 
     public String longAIp (long ip) { return calculo.convertirLongAIp(ip); }
 
-
-   public void mostrarMapaActual(){
-       interfaz.mostrarConexiones(listarConexiones());
-   }
-
     public List<Conexion> detectarProblemas(Equipo equipo){
         return calculo.encontrarEquiposAlcanzables(equipo);
     }
 
-    public boolean ping(Equipo equipo){
-        return calculo.ping(equipo);
-    }
 
     public boolean verificarIP(String direccionIP) { return calculo.verificarIP(direccionIP); }
 }

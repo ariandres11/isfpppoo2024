@@ -1,6 +1,10 @@
 package gui;
 
-import controlador.Constantes;
+import static controlador.Constantes.INTERFAZ_MAX_ALTO;
+import static controlador.Constantes.INTERFAZ_MAX_ANCHO;
+import static controlador.Constantes.PANELMENU_MAX_ALTO;
+import static controlador.Constantes.PANELMENU_MAX_ANCHO;
+
 import controlador.Coordinador;
 
 import modelo.Conexion;
@@ -31,8 +35,6 @@ import static controlador.Constantes.FUENTE_CONSULTAS;
  */
 public class Interfaz extends JFrame {
     private Coordinador coordinador;
-    private final int MAX_ANCHO = 1400;
-    private final int MAX_ALTO = 800;
     private JPanel panelMenu;
     private JPanel panelGrafo1;
     private JPanel panelOpcionesSuperior;
@@ -49,7 +51,7 @@ public class Interfaz extends JFrame {
         this.coordinador = coordinador;
         this.setTitle("Red de Computadoras");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setSize(MAX_ANCHO, MAX_ALTO);
+        this.setSize(INTERFAZ_MAX_ANCHO, INTERFAZ_MAX_ALTO);
         this.setLocationRelativeTo(null);
         this.setLayout(new BorderLayout());
         this.setVisible(true);
@@ -75,10 +77,6 @@ public class Interfaz extends JFrame {
         return panelMenu;
     }
 
-    public void setPanelMenu(JPanel panelMenu) {
-        this.panelMenu = panelMenu;
-    }
-
     /**
      * Establece el coordinador para la interfaz.
      *
@@ -87,47 +85,6 @@ public class Interfaz extends JFrame {
     public void setCoordinador(Coordinador coordinador) {
         this.coordinador = coordinador;
     }
-    /**
-     * Muestra un cuadro de diálogo para elegir una opción.
-     *
-     * @return El código de la opción seleccionada.
-     */
-    public int elegirOpcion() {
-        String[] opciones = {
-                "Mostrar Conexiones",
-                "Ping Equipo",
-                "Ping IP",
-                "Mapa Estado Actual",
-                "Detectar Problemas"
-        };
-
-        int seleccion = JOptionPane.showOptionDialog(
-                null,
-                "Seleccione una opción",
-                "Opciones",
-                JOptionPane.DEFAULT_OPTION,
-                JOptionPane.INFORMATION_MESSAGE,
-                null,
-                opciones,
-                opciones[0]
-        );
-
-        switch (seleccion) {
-            case 0:
-                return Constantes.MOSTRAR_CONEXIONES;
-            case 1:
-                return Constantes.PING_EQUIPO;
-            case 2:
-                return Constantes.PING_IP;
-            case 3:
-                return Constantes.MAPA_ESTADO_ACTUAL;
-            case 4:
-                return Constantes.DETECTAR_PROBLEMAS;
-            default:
-                return -1; // En caso de que no se seleccione ninguna opción
-        }
-    }
-
 
     /**
      * Permite al usuario elegir un equipo de una lista.
@@ -224,7 +181,7 @@ public class Interfaz extends JFrame {
             panelMenu = coordinador.crearPanelMenu();
             add(panelMenu, BorderLayout.SOUTH);
         }
-        panelMenu.setSize(800, 200);
+        panelMenu.setSize(PANELMENU_MAX_ANCHO, PANELMENU_MAX_ALTO);
         this.revalidate();
         this.repaint();
     }
@@ -300,14 +257,14 @@ public class Interfaz extends JFrame {
 
         panel.setPreferredSize(new Dimension(600, 200));
 
-        String ip = "";
-
         // Mostrar el cuadro de diálogo
         int result = JOptionPane.showConfirmDialog(null, panel,
                 "Por favor, introduzca la dirección ip .", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
         if (result == JOptionPane.OK_OPTION) {
             // Obtener y validar los valores ingresados
             try {
+                String ip = "";
+
                 int red1 = Integer.parseInt(digitoRed1.getText());
                 int red2 = Integer.parseInt(digitoRed2.getText());
                 int host1 = Integer.parseInt(digitoHost1.getText());
@@ -331,7 +288,6 @@ public class Interfaz extends JFrame {
         }
         return null;
     }
-
 
     public void advertencia(String mensaje){
         JOptionPane.showMessageDialog(null, mensaje, "Advertencia: ", JOptionPane.WARNING_MESSAGE);

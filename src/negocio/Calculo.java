@@ -103,7 +103,6 @@ public class Calculo {
             } else {
                 logger.debug("El equipo 1, el equipo 2, o ambos son nulos ");
             }
-            //logger.debug(conexion);
         }
         //Agregar equipos aislados
         for (Equipo equipo : equipos) {

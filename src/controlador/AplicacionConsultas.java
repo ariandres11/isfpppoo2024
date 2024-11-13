@@ -15,7 +15,7 @@ public class AplicacionConsultas {
     public static void main(String[] args) {
         AplicacionConsultas aplicacionConsultas = new AplicacionConsultas();
         aplicacionConsultas.iniciar();
-     //aplicacionConsultas.consultar(Constantes.MOSTRAR_CONEXIONES);
+
     }
 
     /**
@@ -32,9 +32,6 @@ public class AplicacionConsultas {
         coordinador.setCalculo(calculo);
         calculo.setCoordinador(coordinador);
         coordinador.setRed(red);
-
-        //Debug para confirmar que el coordinador pasa las conexiones y equipos correctamente
-        //logger.debug("Conexiones: " + coordinador.listarConexiones().size() + " Equipos: " + coordinador.listarEquipos().size());
 
         calculo.cargarDatos(coordinador.listarConexiones(), coordinador.listarEquipos());
     }

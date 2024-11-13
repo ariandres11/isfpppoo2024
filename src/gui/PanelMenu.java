@@ -121,7 +121,6 @@ public class PanelMenu extends JPanel {
             } else if (e.getSource() == JBPingEquipo) {
                 interfaz.resultadoPingEquipo(coordinador.ping());
             } else if (e.getSource() == JBPingIP) {
-                //interfaz.seleccionarIPs();
                 JDPingRangoIP ventanaRangoIP = new JDPingRangoIP(interfaz, coordinador);
             } else if (e.getSource() == JBMapaActual) {
                 // Implementar la acción

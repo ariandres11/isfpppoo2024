@@ -64,7 +64,6 @@ public class PanelOpcionesSuperior extends JPanel {
         this.add(panelInf, BorderLayout.CENTER);
         JBDatosRed.setVisible(false);
 
-        //roleContext.mostrarOpciones(this);
         this.revalidate();
         this.repaint();
     }

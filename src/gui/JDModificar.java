@@ -20,15 +20,21 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import java.awt.Dimension;
+
 
 import java.util.List;
 
+import static controlador.Constantes.JL_X_COORD;
+import static controlador.Constantes.JL_Y_COORD;
+import static controlador.Constantes.AGREGAR_EQUIPO_MAX_ALTO;
+import static controlador.Constantes.AGREGAR_EQUIPO_MAX_ANCHO;
+import static controlador.Constantes.AGREGAR_UBICACION_MAX_ALTO;
+import static controlador.Constantes.AGREGAR_UBICACION_MAX_ANCHO;
+import static controlador.Constantes.AGREGAR_TIPOEQUIPO_MAX_ALTO;
+import static controlador.Constantes.AGREGAR_TIPOEQUIPO_MAX_ANCHO;
+import static controlador.Constantes.JTF_DIMENSIONES;
+
 public class JDModificar extends JDialog {
-    final int JL_X_COORD = 20;
-    final int JL_Y_COORD = 15;
-    final int WIDTH = 120;
-    final int HEIGHT = 20;
 
     private Coordinador coordinador;
     private FrameDatosRed datosRed;
@@ -49,7 +55,7 @@ public class JDModificar extends JDialog {
 
                     Equipo equipo = coordinador.buscarEquipo(codigoEquipo);
 
-                    setSize(540,480);
+                    setSize(AGREGAR_EQUIPO_MAX_ANCHO,AGREGAR_EQUIPO_MAX_ALTO);
                     setResizable(false);
                     setTitle("Modificar Equipo");
 
@@ -85,9 +91,9 @@ public class JDModificar extends JDialog {
                     JTFModelo.setBounds(JL_X_COORD*6,JL_Y_COORD*7,WIDTH,HEIGHT);
 
 
-                    JComboBox<String> JCBTipoEquipo = new JComboBox<String>();
+                    JComboBox<String> JCBTipoEquipo = new JComboBox<>();
                     JCBTipoEquipo.setBounds(JL_X_COORD*6,JL_Y_COORD*9,WIDTH/2,HEIGHT);
-                    JComboBox<String> JCBUbicacion = new JComboBox<String>();
+                    JComboBox<String> JCBUbicacion = new JComboBox<>();
                     JCBUbicacion.setBounds(JL_X_COORD*6,JL_Y_COORD*11,WIDTH/2,HEIGHT);
                     JToggleButton JTBEstado = new JToggleButton();
 
@@ -140,10 +146,8 @@ public class JDModificar extends JDialog {
                     JBAgregarPuerto.setBounds(JL_X_COORD*20,JL_Y_COORD*3,WIDTH/2,HEIGHT);
                     JBAgregarPuerto.addActionListener(e4 -> {
 
-                        TipoPuerto tipoPuerto = new TipoPuerto();
-
-                        tipoPuerto = coordinador.buscarTipoPuerto(JCBPuertos.getItemAt(
-                                JCBPuertos.getSelectedIndex()));
+                        TipoPuerto tipoPuerto = coordinador.buscarTipoPuerto(JCBPuertos.getItemAt(
+                                                                JCBPuertos.getSelectedIndex()));
 
                         // verifica que se ingrese un puerto valido
                         if (!tipoPuertos.contains(tipoPuerto) && JTFPuertoCantidad.getText().matches("[0-9]+")) {
@@ -162,10 +166,10 @@ public class JDModificar extends JDialog {
                     JButton JBEliminarPuerto = new JButton("-");
                     JBEliminarPuerto.setBounds(JL_X_COORD*23,JL_Y_COORD*3,WIDTH/2,HEIGHT);
                     JBEliminarPuerto.addActionListener(e -> {
-                        TipoPuerto tipoPuerto = new TipoPuerto();
 
-                        tipoPuerto = coordinador.buscarTipoPuerto(JCBPuertos.getItemAt(
-                                JCBPuertos.getSelectedIndex()));
+                        TipoPuerto tipoPuerto = coordinador.buscarTipoPuerto(JCBPuertos.getItemAt(
+                                                                JCBPuertos.getSelectedIndex()));
+
                         // verifica que el Puerto a eliminar exista en la lista de puertos agregados
                         if (tipoPuertos.contains(tipoPuerto) && puertosCantidad.contains(
                                 Integer.parseInt(JTFPuertoCantidad.getText()))) {
@@ -342,7 +346,7 @@ public class JDModificar extends JDialog {
 
                     Ubicacion ubicacion = coordinador.buscarUbicacion(codigoUbicacion);
 
-                    setSize(300,100);
+                    setSize(AGREGAR_UBICACION_MAX_ANCHO,AGREGAR_UBICACION_MAX_ALTO);
                     setResizable(false);
                     setTitle("Modificar Ubicacion");
 
@@ -350,7 +354,7 @@ public class JDModificar extends JDialog {
                     JLabel JLDescripcion = new JLabel("Descripcion: ");
 
                     JTextField JTFDescripcionUbicacion = new JTextField();
-                    JTFDescripcionUbicacion.setPreferredSize(new Dimension(70,20));
+                    JTFDescripcionUbicacion.setPreferredSize(JTF_DIMENSIONES);
                     JTFDescripcionUbicacion.setText(ubicacion.getDescripcion());
 
                     JButton JBModificarUbicacion = new JButton("Modificar");
@@ -396,7 +400,7 @@ public class JDModificar extends JDialog {
 
                     TipoEquipo tipoEquipo = coordinador.buscarTipoEquipo(codigoTipoEquipo);
 
-                    setSize(300,100);
+                    setSize(AGREGAR_TIPOEQUIPO_MAX_ANCHO,AGREGAR_TIPOEQUIPO_MAX_ALTO);
                     setResizable(false);
                     setTitle("Modificar Tipo de Equipo");
 
@@ -405,7 +409,7 @@ public class JDModificar extends JDialog {
 
                     JTextField JTFDescripcionTipoEquipo = new JTextField();
                     JTFDescripcionTipoEquipo.setText(tipoEquipo.getDescripcion());
-                    JTFDescripcionTipoEquipo.setPreferredSize(new Dimension(70,20));
+                    JTFDescripcionTipoEquipo.setPreferredSize(JTF_DIMENSIONES);
 
                     JButton JBModificarTipoEquipo = new JButton("Modificar");
                     JBModificarTipoEquipo.addActionListener(e1 -> {

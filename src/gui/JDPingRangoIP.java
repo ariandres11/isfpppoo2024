@@ -12,9 +12,13 @@ import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.JOptionPane;
 
-import java.awt.Dimension;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
+
+import static controlador.Constantes.MAX_TIEMPO_PING;
+import static controlador.Constantes.RANGOIP_DIMENSIONES;
+import static controlador.Constantes.JTF_COLUMNAS;
+import static controlador.Constantes.COORDINADOR_MODO_PROD;
 
 import java.util.Random;
 
@@ -27,8 +31,7 @@ public class JDPingRangoIP extends JDialog {
     private Thread imprimirIPs;
     private Thread buscandoIPs;
     private Random random = new Random();
-    private final long MAX_TIEMPO_PING = 500;
-    
+
     public JDPingRangoIP (Interfaz interfaz, Coordinador coordinador) {
         this.interfaz = interfaz;
         this.coordinador = coordinador;
@@ -36,7 +39,7 @@ public class JDPingRangoIP extends JDialog {
         setTitle("Introduzca las direcciones IP");
         setLayout(null);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        setSize(new Dimension(600, 400));
+        setSize(RANGOIP_DIMENSIONES);
         setResizable(false);
         setModalityType(ModalityType.APPLICATION_MODAL);
         setVisible(true);
@@ -44,14 +47,14 @@ public class JDPingRangoIP extends JDialog {
 
     public void inicializar() {
         // Crear campos de texto para la primera IP
-        JTextField digitoRed1 = new JTextField(3);
-        JTextField digitoRed2 = new JTextField(3);
-        JTextField digitoHost1 = new JTextField(3);
-        JTextField digitoHost2 = new JTextField(3);
+        JTextField digitoRed1 = new JTextField(JTF_COLUMNAS);
+        JTextField digitoRed2 = new JTextField(JTF_COLUMNAS);
+        JTextField digitoHost1 = new JTextField(JTF_COLUMNAS);
+        JTextField digitoHost2 = new JTextField(JTF_COLUMNAS);
 
         // Crear campos de texto para la segunda IP
-        JTextField digitoHost3 = new JTextField(3);
-        JTextField digitoHost4 = new JTextField(3);
+        JTextField digitoHost3 = new JTextField(JTF_COLUMNAS);
+        JTextField digitoHost4 = new JTextField(JTF_COLUMNAS);
 
         // Aumentar el tamaño de fuente
         digitoRed1.setFont(FUENTE_CONSULTAS);
@@ -193,7 +196,7 @@ public class JDPingRangoIP extends JDialog {
 
                         long ipContador = startIp;
 
-                        if (coordinador.getModo() == "Prod") {
+                        if (coordinador.getModo() == COORDINADOR_MODO_PROD ) {
                             // produccion
                             //verifico el ping para cada ip del rango
                             while (!Thread.currentThread().isInterrupted() && ipContador <= endIp) {

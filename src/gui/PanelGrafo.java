@@ -16,6 +16,15 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
+import static controlador.Constantes.PANELGRAFO_MAX_ALTO;
+import static controlador.Constantes.PANELGRAFO_MAX_ANCHO;
+import static controlador.Constantes.GRAFO_EQUIPO_ACTIVO_COLOR;
+import static controlador.Constantes.GRAFO_EQUIPO_INACTIVO_COLOR;
+import static controlador.Constantes.GRAFO_EQUIPO_ACTIVO;
+import static controlador.Constantes.GRAFO_EQUIPO_INACTIVO;
+import static controlador.Constantes.GRAFO_CONEXION_ACTIVO_COLOR;
+import static controlador.Constantes.GRAFO_CONEXION_INACTIVO_COLOR;
+
 public class PanelGrafo extends JPanel {
     private List<Conexion> listaConexiones;
     private List<Equipo> listaEquipos;
@@ -32,8 +41,8 @@ public class PanelGrafo extends JPanel {
     private String getVertexStyle(mxGraph mxGraph, Equipo equipo) {
         String tipoEquipoCodigo = equipo.getTipoEquipo().getCodigo();
         String imagePath = resourceBundle.getString(tipoEquipoCodigo);
-        String colorBorde = equipo.isEstado() ? "green" : "red";
-        String estado = equipo.isEstado() ? "ACTIVO" : "INACTIVO";
+        String colorBorde = equipo.isEstado() ? GRAFO_EQUIPO_ACTIVO_COLOR : GRAFO_EQUIPO_INACTIVO_COLOR;
+        String estado = equipo.isEstado() ? GRAFO_EQUIPO_ACTIVO : GRAFO_EQUIPO_INACTIVO;
         Map<String, Object> style = new Hashtable<>();
 
         if (imagePath != null) {
@@ -95,7 +104,7 @@ public class PanelGrafo extends JPanel {
                     // Crear conexiones entre los vértices sin puntas de flecha
                     Object eq1 = vertexMap.get(conexion.getEquipo1().getCodigo());
                     Object eq2 = vertexMap.get(conexion.getEquipo2().getCodigo());
-                    String colorConexion = conexion.isEstado() ? "green" : "red";
+                    String colorConexion = conexion.isEstado() ? GRAFO_CONEXION_ACTIVO_COLOR : GRAFO_CONEXION_INACTIVO_COLOR;
                     String style = "edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor="+colorConexion+";strokeWidth=2;fontSize=20;fontColor=black;backgroundColor=white;";
                     mxGrafo.insertEdge(parent, null, conexion.getTipoCable().getVelocidad(), eq1, eq2, style);
                 }
@@ -112,7 +121,7 @@ public class PanelGrafo extends JPanel {
             panelNuevo.add(graphComponent);
             //Añadir label
             panelNuevo.setVisible(true);
-            panelNuevo.setSize(500, 500);
+            panelNuevo.setSize(PANELGRAFO_MAX_ANCHO, PANELGRAFO_MAX_ALTO);
 
             mxCircleLayout layout = new mxCircleLayout(mxGrafo);
             layout.execute(parent);

@@ -1,36 +1,74 @@
 package controlador;
 
 import java.awt.Font;
+import java.awt.Dimension;
 
 /**
  * La clase Constantes define una serie de constantes utilizadas en la aplicación.
  */
 public class Constantes {
 
-    /**
-     * Constante para mostrar conexiones.
-     */
-    public final static int MOSTRAR_CONEXIONES = 0;
+    ///////////////////////
+    public static final int INTERFAZ_MAX_ANCHO = 1400;
+    public static final int INTERFAZ_MAX_ALTO = 800;
 
-    /**
-     * Constante para hacer ping a un equipo.
-     */
-    public final static int PING_EQUIPO = 1;
+    public static final int PANELMENU_MAX_ANCHO = 800;
+    public static final int PANELMENU_MAX_ALTO = 200;
 
-    /**
-     * Constante para hacer ping a una dirección IP.
-     */
-    public final static int PING_IP = 2;
+    public static final int AGREGAR_EQUIPO_MAX_ANCHO = 540;
+    public static final int AGREGAR_EQUIPO_MAX_ALTO = 480;
 
-    /**
-     * Constante para mostrar el mapa del estado actual.
-     */
-    public final static int MAPA_ESTADO_ACTUAL = 3;
+    public static final int AGREGAR_CONEXION_MAX_ANCHO = 500;
+    public static final int AGREGAR_CONEXION_MAX_ALTO = 150;
 
-    /**
-     * Constante para detectar problemas.
-     */
-    public final static int DETECTAR_PROBLEMAS = 4;
+    public static final int AGREGAR_UBICACION_MAX_ANCHO = 300;
+    public static final int AGREGAR_UBICACION_MAX_ALTO = 100;
+
+    public static final int AGREGAR_TIPOEQUIPO_MAX_ANCHO = 300;
+    public static final int AGREGAR_TIPOEQUIPO_MAX_ALTO = 100;
+
+    public static final int AGREGAR_TIPOPUERTO_MAX_ANCHO = 300;
+    public static final int AGREGAR_TIPOPUERTO_MAX_ALTO = 100;
+
+    public static final int AGREGAR_TIPOCABLE_MAX_ANCHO = 300;
+    public static final int AGREGAR_TIPOCABLE_MAX_ALTO = 100;
+
+    public static final Dimension JTF_DIMENSIONES = new Dimension(70,20);
+
+    public static final int JL_X_COORD = 20;
+    public static final int JL_Y_COORD = 15;
+    public static final int WIDTH = 120;
+    public static final int HEIGHT = 20;
+
+    //////////////////////////////////////////////////
+
+    public static final int JTF_COLUMNAS = 3;
+    public static final long MAX_TIEMPO_PING = 500;
+    public static final Dimension RANGOIP_DIMENSIONES = new Dimension(600, 400);
+
+    /////////////////////////////////////////////////////
+
+    public static final int PANELGRAFO_MAX_ANCHO = 500;
+    public static final int PANELGRAFO_MAX_ALTO = 500;
+
+    public static final String GRAFO_EQUIPO_ACTIVO_COLOR = "green";
+    public static final String GRAFO_EQUIPO_INACTIVO_COLOR = "red";
+    public static final String GRAFO_EQUIPO_ACTIVO = "ACTIVO";
+    public static final String GRAFO_EQUIPO_INACTIVO = "INACTIVO";
+
+    public static final String GRAFO_CONEXION_ACTIVO_COLOR = "green";
+    public static final String GRAFO_CONEXION_INACTIVO_COLOR = "red";
+
+    ///////////////////////////////////////////////
+
+    public static final String COORDINADOR_MODO_PROD = "Prod";
+    public static final String COORDINADOR_MODO_SIM = "Sim";
+
+    ///////////////////////////////////////////////
+    public static final int DATOSRED_MAX_ANCHO = 850;
+    public static final int DATOSRED_MAX_ALTO = 500;
+
+    ///////////////////////////////////////////
 
     public static final Font FUENTE_CONSULTAS = new Font("Arial", Font.BOLD, 20);
 

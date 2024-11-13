@@ -16,19 +16,18 @@ import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JPanel;
-import javax.swing.JOptionPane;
 
 import java.awt.BorderLayout;
-import java.awt.Dimension;
 
 import java.util.ArrayList;
 import java.util.Objects;
 
+import static controlador.Constantes.DATOSRED_MAX_ALTO;
+import static controlador.Constantes.DATOSRED_MAX_ANCHO;
+
 public class FrameDatosRed extends JDialog {
 
     private Coordinador coordinador;
-    private static final int MAX_ANCHO = 850;
-    private static final int MAX_ALTO = 500;
     private JTabbedPane JTOpciones;
     private JButton JBAgregar;
     private JButton JBModificar;
@@ -45,8 +44,7 @@ public class FrameDatosRed extends JDialog {
         this.coordinador = coordinador;
 
         this.setTitle("Datos de Red: ");
-        //this.setDefaultCloseOperation(JDialog.EXIT_ON_CLOSE);
-        this.setSize(MAX_ANCHO, MAX_ALTO);
+        this.setSize(DATOSRED_MAX_ANCHO, DATOSRED_MAX_ALTO);
         this.setLocationRelativeTo(null);
         this.setLayout(new BorderLayout());
         this.agregarOpciones();
@@ -167,7 +165,6 @@ public class FrameDatosRed extends JDialog {
         ArrayList<Conexion> arrayConexiones = (ArrayList<Conexion>) coordinador.listarConexiones();
 
         DefaultTableModel modelo = new DefaultTableModel();
-        modelo = new DefaultTableModel();
         modelo.addColumn("Equipo 1");
         modelo.addColumn("Equipo 2");
         modelo.addColumn("Cable");
@@ -192,7 +189,6 @@ public class FrameDatosRed extends JDialog {
         ArrayList<Ubicacion> arrayUbicaciones = (ArrayList<Ubicacion>) coordinador.listarUbicaciones();
 
         DefaultTableModel modelo = new DefaultTableModel();
-        modelo = new DefaultTableModel();
         modelo.addColumn("codigo");
         modelo.addColumn("descripcion");
 
@@ -209,7 +205,6 @@ public class FrameDatosRed extends JDialog {
         ArrayList<TipoPuerto> arrayTiposPuerto = (ArrayList<TipoPuerto>) coordinador.listarTipoPuertos();
 
         DefaultTableModel modelo = new DefaultTableModel();
-        modelo = new DefaultTableModel();
         modelo.addColumn("codigo");
         modelo.addColumn("descripcion");
         modelo.addColumn("velocidad");
@@ -244,7 +239,6 @@ public class FrameDatosRed extends JDialog {
         ArrayList<TipoCable> arrayTiposCable = (ArrayList<TipoCable>) coordinador.listarTipoCables();
 
         DefaultTableModel modelo = new DefaultTableModel();
-        modelo = new DefaultTableModel();
         modelo.addColumn("codigo");
         modelo.addColumn("descripcion");
         modelo.addColumn("velocidad");
@@ -260,27 +254,19 @@ public class FrameDatosRed extends JDialog {
     }
 
     public void agregarBotones() {
-        final Dimension DIMENSION_JTF = new Dimension(80,20);
         JPanel JPBotones = new JPanel();
         JBAgregar = new JButton("Agregar");
         JBModificar = new JButton("Modificar");
         JBAEliminar = new JButton("Eliminar");
 
         JBAgregar.addActionListener(e -> {
-            String mensajeTitulo = "Agregar";
-            int mensajeModo = JOptionPane.PLAIN_MESSAGE;
-
             JDAgregar agregarElemento = new JDAgregar(coordinador, this);
             agregarElemento.ventanaAgregar(JTOpciones.getTitleAt(JTOpciones.getSelectedIndex()));
-
         });
 
         //Modificar
 
         JBModificar.addActionListener(e -> {
-            String mensajeTitulo = "Modificar";
-            int mensajeModo = JOptionPane.PLAIN_MESSAGE;
-
             String tituloTabla = JTOpciones.getTitleAt(JTOpciones.getSelectedIndex());
             JTable tablaSeleccionada = obtenerTablaSeleccionada(tituloTabla);
 
@@ -291,9 +277,6 @@ public class FrameDatosRed extends JDialog {
         //Eliminar
 
         JBAEliminar.addActionListener(e -> {
-            String mensajeTitulo = "Eliminar";
-            int mensajeModo = JOptionPane.PLAIN_MESSAGE;
-
             String tituloTabla = JTOpciones.getTitleAt(JTOpciones.getSelectedIndex());
             JTable tablaSeleccionada = obtenerTablaSeleccionada(tituloTabla);
 

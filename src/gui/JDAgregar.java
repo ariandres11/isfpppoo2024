@@ -26,16 +26,29 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import java.awt.Dimension;
-
 import java.util.ArrayList;
 import java.util.List;
 
+import static controlador.Constantes.JL_X_COORD;
+import static controlador.Constantes.JL_Y_COORD;
+import static controlador.Constantes.WIDTH;
+import static controlador.Constantes.HEIGHT;
+import static controlador.Constantes.AGREGAR_EQUIPO_MAX_ALTO;
+import static controlador.Constantes.AGREGAR_EQUIPO_MAX_ANCHO;
+import static controlador.Constantes.AGREGAR_CONEXION_MAX_ALTO;
+import static controlador.Constantes.AGREGAR_CONEXION_MAX_ANCHO;
+import static controlador.Constantes.AGREGAR_UBICACION_MAX_ALTO;
+import static controlador.Constantes.AGREGAR_UBICACION_MAX_ANCHO;
+import static controlador.Constantes.AGREGAR_TIPOEQUIPO_MAX_ALTO;
+import static controlador.Constantes.AGREGAR_TIPOEQUIPO_MAX_ANCHO;
+import static controlador.Constantes.AGREGAR_TIPOPUERTO_MAX_ALTO;
+import static controlador.Constantes.AGREGAR_TIPOPUERTO_MAX_ANCHO;
+import static controlador.Constantes.AGREGAR_TIPOCABLE_MAX_ALTO;
+import static controlador.Constantes.AGREGAR_TIPOCABLE_MAX_ANCHO;
+
+import static controlador.Constantes.JTF_DIMENSIONES;
+
 public class JDAgregar extends JDialog {
-    final int JL_X_COORD = 20;
-    final int JL_Y_COORD = 15;
-    final int WIDTH = 120;
-    final int HEIGHT = 20;
 
     private Coordinador coordinador;
     private FrameDatosRed datosRed;
@@ -50,13 +63,13 @@ public class JDAgregar extends JDialog {
         switch(tituloTabla){
             case "Equipos":
                 //JDialog JDAgregarEquipo = new JDialog();
-                setSize(540,480);
+                setSize(AGREGAR_EQUIPO_MAX_ANCHO,AGREGAR_EQUIPO_MAX_ALTO);
                 setResizable(false);
                 setTitle("Agregar Equipo");
 
-                List<String> direccionesIP = new ArrayList<String>();
-                List<TipoPuerto> tipoPuertos = new ArrayList<TipoPuerto>();
-                List<Integer> puertosCantidad = new ArrayList<Integer>();
+                List<String> direccionesIP = new ArrayList<>();
+                List<TipoPuerto> tipoPuertos = new ArrayList<>();
+                List<Integer> puertosCantidad = new ArrayList<>();
 
 
                 JLabel JLCodigo = new JLabel("Codigo (*):");
@@ -109,7 +122,7 @@ public class JDAgregar extends JDialog {
                 JTextField JTFPuertoCantidad = new JTextField();
                 JTFPuertoCantidad.setBounds(JL_X_COORD*17,JL_Y_COORD*3,WIDTH/2,HEIGHT);
 
-                JComboBox<String> JCBPuertos = new JComboBox<String>();
+                JComboBox<String> JCBPuertos = new JComboBox<>();
                 JCBPuertos.setBounds(JL_X_COORD*13,JL_Y_COORD*3,WIDTH/2,HEIGHT);
 
                 for (TipoPuerto puerto : coordinador.listarTipoPuertos()) {
@@ -310,7 +323,7 @@ public class JDAgregar extends JDialog {
                 break;
             case "Conexiones":
 
-                setSize(500,150);
+                setSize(AGREGAR_CONEXION_MAX_ANCHO,AGREGAR_CONEXION_MAX_ALTO);
                 setResizable(false);
                 setTitle("Agregar Conexion");
 
@@ -328,11 +341,11 @@ public class JDAgregar extends JDialog {
                     else JTBEstado1.setText("Inactivo");
                 });
 
-                JComboBox<String> JCBEquipo1 = new JComboBox<String>();
-                JComboBox<String> JCBEquipo2 = new JComboBox<String>();
-                JComboBox<String> JCBPuerto1 = new JComboBox<String>();
-                JComboBox<String> JCBPuerto2 = new JComboBox<String>();
-                JComboBox<String> JCBTipoCable = new JComboBox<String>();
+                JComboBox<String> JCBEquipo1 = new JComboBox<>();
+                JComboBox<String> JCBEquipo2 = new JComboBox<>();
+                JComboBox<String> JCBPuerto1 = new JComboBox<>();
+                JComboBox<String> JCBPuerto2 = new JComboBox<>();
+                JComboBox<String> JCBTipoCable = new JComboBox<>();
 
                 JCBEquipo1.addItemListener(e14 -> {
                     JCBPuerto1.removeAllItems();
@@ -420,7 +433,7 @@ public class JDAgregar extends JDialog {
                 setVisible(true);
                 break;
             case "Ubicaciones":
-                setSize(300,100);
+                setSize(AGREGAR_UBICACION_MAX_ANCHO,AGREGAR_UBICACION_MAX_ALTO);
                 setResizable(false);
                 setTitle("Agregar Ubicacion");
 
@@ -428,9 +441,9 @@ public class JDAgregar extends JDialog {
                 JLabel JLDescripcionUbicacion = new JLabel("Descripcion: ");
 
                 JTextField JTFCodigoUbicacion = new JTextField();
-                JTFCodigoUbicacion.setPreferredSize(new Dimension(70,20));
+                JTFCodigoUbicacion.setPreferredSize(JTF_DIMENSIONES);
                 JTextField JTFDescripcionUbicacion = new JTextField();
-                JTFDescripcionUbicacion.setPreferredSize(new Dimension(70,20));
+                JTFDescripcionUbicacion.setPreferredSize(JTF_DIMENSIONES);
 
                 JButton JBAgregarUbicacion = new JButton("Agregar");
                 JBAgregarUbicacion.addActionListener(e1 -> {
@@ -463,7 +476,7 @@ public class JDAgregar extends JDialog {
                 break;
             case "Tipos de Equipo":
 
-                setSize(300,100);
+                setSize(AGREGAR_TIPOEQUIPO_MAX_ANCHO, AGREGAR_TIPOEQUIPO_MAX_ALTO);
                 setResizable(false);
                 setTitle("Agregar Tipo de Equipo");
 
@@ -471,9 +484,9 @@ public class JDAgregar extends JDialog {
                 JLabel JLDescripcionTipoEquipo = new JLabel("Descripcion: ");
 
                 JTextField JTFCodigoTipoEquipo = new JTextField();
-                JTFCodigoTipoEquipo.setPreferredSize(new Dimension(70,20));
+                JTFCodigoTipoEquipo.setPreferredSize(JTF_DIMENSIONES);
                 JTextField JTFDescripcionTipoEquipo = new JTextField();
-                JTFDescripcionTipoEquipo.setPreferredSize(new Dimension(70,20));
+                JTFDescripcionTipoEquipo.setPreferredSize(JTF_DIMENSIONES);
 
                 JButton JBAgregarTipoEquipo = new JButton("Agregar");
                 JBAgregarTipoEquipo.addActionListener(e1 -> {
@@ -509,7 +522,7 @@ public class JDAgregar extends JDialog {
             case "Tipos de Puerto":
 
 
-                setSize(300,100);
+                setSize(AGREGAR_TIPOPUERTO_MAX_ANCHO, AGREGAR_TIPOPUERTO_MAX_ALTO);
                 setResizable(false);
                 setTitle("Agregar Tipo de Puerto");
 
@@ -517,11 +530,11 @@ public class JDAgregar extends JDialog {
                 JLabel JLDescripcionTipoPuerto = new JLabel("Descripcion: ");
                 JLabel JLVelocidadTipoPuerto = new JLabel("Velocidad: ");
                 JTextField JTFCodigoTipoPuerto = new JTextField();
-                JTFCodigoTipoPuerto.setPreferredSize(new Dimension(70,20));
+                JTFCodigoTipoPuerto.setPreferredSize(JTF_DIMENSIONES);
                 JTextField JTFDescripcionTipoPuerto = new JTextField();
-                JTFDescripcionTipoPuerto.setPreferredSize(new Dimension(70,20));
+                JTFDescripcionTipoPuerto.setPreferredSize(JTF_DIMENSIONES);
                 JTextField JTFVelocidadTipoPuerto = new JTextField();
-                JTFVelocidadTipoPuerto.setPreferredSize(new Dimension(70,20));
+                JTFVelocidadTipoPuerto.setPreferredSize(JTF_DIMENSIONES);
 
                 JButton JBAgregarTipoPuerto = new JButton("Agregar");
                 JBAgregarTipoPuerto.addActionListener(e1 -> {
@@ -560,7 +573,7 @@ public class JDAgregar extends JDialog {
                 break;
             case "Tipos de Cable":
 
-                setSize(300,100);
+                setSize(AGREGAR_TIPOCABLE_MAX_ANCHO,AGREGAR_TIPOCABLE_MAX_ALTO);
                 setResizable(false);
                 setTitle("Agregar Tipo de Cable");
 
@@ -569,11 +582,11 @@ public class JDAgregar extends JDialog {
                 JLabel JLVelocidadTipoCable = new JLabel("Velocidad: ");
 
                 JTextField JTFCodigoTipoCable = new JTextField();
-                JTFCodigoTipoCable.setPreferredSize(new Dimension(70,20));
+                JTFCodigoTipoCable.setPreferredSize(JTF_DIMENSIONES);
                 JTextField JTFDescripcionTipoCable = new JTextField();
-                JTFDescripcionTipoCable.setPreferredSize(new Dimension(70,20));
+                JTFDescripcionTipoCable.setPreferredSize(JTF_DIMENSIONES);
                 JTextField JTFVelocidadTipoCable = new JTextField();
-                JTFVelocidadTipoCable.setPreferredSize(new Dimension(70,20));
+                JTFVelocidadTipoCable.setPreferredSize(JTF_DIMENSIONES);
 
                 JButton JBAgregarTipoCable= new JButton("Agregar");
                 JBAgregarTipoCable.addActionListener(e1 -> {
